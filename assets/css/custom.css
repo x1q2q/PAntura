@@ -1,0 +1,43 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ *
+ */
+
+/*# sourceMappingURL=custom.css.map */
+.sld-up{
+  animation: slideDown .55s ease-out !important;
+}
+@keyframes slideDown{
+  from{
+    opacity: 0.3;
+    transform: translateY(-55px);
+  }to{
+    transform: translateY(0px);
+  }
+}
+
+.fade{
+  animation: fade .55s ease-in !important;
+}
+@keyframes fade{
+  from{
+    transform: translateY(40px);
+    opacity: 0.2;
+  }to{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+textarea.form-control {
+  height: auto!important; }
+
+  .card .card-header {
+    border-width: 2px;
+    border-bottom-color: #f2f2f2!important;
+  }
+  .dataTables_length select {
+    padding: 12px 25px!important;
+  }
