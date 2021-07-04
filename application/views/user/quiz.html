@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PANTURA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="../../../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/vendor/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="../../../assets/vendor/jqvmap/dist/jqvmap.min.css">
+    <link rel="stylesheet" href="../../../assets/vendor/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="../../../assets/vendor/owlcarousel2/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../../assets/vendor/owlcarousel2/dist/assets/owl.theme.default.min.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/components.css">
+  </head>
+
+  <body class="bg-primary-black">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg bg-primary d-flex justify-content-between navbar-user"
+    >
+      <a
+        class="navbar-brand btn-white px-3 lengkung-15 text-primary py-2"
+        href="#"
+        >Kembali</a
+      >
+      <ion-icon
+        name="expand-outline"
+        id="fullscreenbtn"
+        class="text-white"
+        style="width: 40px; height: 40px"
+        onclick="toggleFullScreen()"
+      ></ion-icon>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Main -->
+    <main>
+      <div class="container">
+        <section>
+          <div class="row mt-5">
+            <div class="col">
+              <div class="progress mb-3">
+                <div
+                  class="progress-bar progress-bar-user"
+                  role="progressbar"
+                  id="progressbar"
+                  data-width="50%"
+                  aria-valuenow="50"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 50%"
+                >
+                  50%
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="row d-flex align-items-star justify-content-between">
+            <div class="col">
+              <div class="card lengkung-20 bg-primary">
+                <div class="card-header d-inline">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                      <img
+                        src="../../../assets/img/img_soal_placeholder.png"
+                        alt="image soal"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-lg-7 col-md-6 col-sm-12 mt-5">
+                      <p class="font-20">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Veniam sit minima sapiente eius harum deleniti
+                        velit maxime ab accusamus quos nesciunt dolorem hic,
+                        dolore nemo quas ducimus molestiae, corporis odio.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center mb-3">
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                      <button
+                        class="
+                          btn btn-info
+                          d-block
+                          w-100
+                          font-20
+                          lengkung-20
+                          white-space
+                        "
+                        style="min-height: 120px"
+                      >
+                        SUCI DALAM PERKATAAN DAN PERBUATAN
+                      </button>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                      <button
+                        class="
+                          btn btn-danger
+                          d-block
+                          w-100
+                          font-20
+                          lengkung-20
+                          white-space
+                        "
+                        style="min-height: 120px"
+                      >
+                        SUCI DALAM PERKATAAN DAN PERBUATAN
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                      <button
+                        class="
+                          btn btn-warning
+                          d-block
+                          w-100
+                          font-20
+                          lengkung-20
+                          white-space
+                        "
+                        style="min-height: 120px"
+                      >
+                        SUCI DALAM PERKATAAN DAN PERBUATAN
+                      </button>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-3">
+                      <button
+                        class="
+                          btn btn-dark
+                          d-block
+                          w-100
+                          font-20
+                          lengkung-20
+                          white-space
+                        "
+                        style="min-height: 120px"
+                      >
+                        SUCI DALAM PERKATAAN DAN PERBUATAN
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="mb-5">
+          <div class="row">
+            <div class="col">
+              <a
+                href="#"
+                class="btn btn-success d-block w-100 py-3 font-32 lengkung-15"
+                >Kirim</a
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Main -->
+
+    <!-- General JS Scripts -->
+    <script src="../../../assets/vendor/jquery.min.js"></script>
+    <script src="../../../assets/vendor/popper.js"></script>
+    <script src="../../../assets/vendor/tooltip.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../assets/vendor/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../../../assets/vendor/moment.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="../../../assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+    <script src="../../../assets/vendor/jquery.sparkline.min.js"></script>
+    <script src="../../../assets/vendor/chart.min.js"></script>
+    <script src="../../../assets/vendor/owlcarousel2/dist/owl.carousel.min.js"></script>
+    <script src="../../../assets/vendor/summernote/summernote-bs4.js"></script>
+    <script src="../../../assets/vendor/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="../../../assets/js/page/index.js"></script>
+
+    <!-- Template JS File -->
+    <script src="../../../assets/js/scripts.js"></script>
+    <script src="../../../assets/js/custom.js"></script>
+
+    <script>
+        function progressBar() {
+          var progress = 1,
+            timer,
+            percent;
+          var bar = document.getElementById("progressbar");
+          var loop = function loop(progress) {
+            if (progress === 60) {
+              clearTimeout(timer);
+            } else {
+              percent = progress * 1;
+              bar.style.width = percent + "px";
+              bar.textContent = percent + "%";
+              timer = setTimeout(loop, 1000, ++progress);
+            }
+          };
+          loop(progress);
+        }
+  
+        progressBar();
+        
+        const btnfull = document.getElementById("fullscreenbtn");
+        function toggleFullScreen() {
+          if (
+            (document.fullScreenElement && document.fullScreenElement !== null) ||
+            (!document.mozFullScreen && !document.webkitIsFullScreen)
+          ) {
+            if (document.documentElement.requestFullScreen) {
+              btnfull.setAttribute("name", "contract-outline");
+              document.documentElement.requestFullScreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+              btnfull.setAttribute("name", "contract-outline");
+              document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullScreen) {
+              btnfull.setAttribute("name", "contract-outline");
+              document.documentElement.webkitRequestFullScreen(
+                Element.ALLOW_KEYBOARD_INPUT
+              );
+            }
+          } else {
+            if (document.cancelFullScreen) {
+              btnfull.setAttribute("name", "expand-outline");
+              document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+              btnfull.setAttribute("name", "expand-outline");
+              document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+              btnfull.setAttribute("name", "expand-outline");
+              document.webkitCancelFullScreen();
+            }
+          }
+        }
+      </script>
+  </body>
+</html>
