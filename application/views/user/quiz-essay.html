@@ -55,7 +55,7 @@
             <div class="col">
               <div class="progress mb-3">
                 <div
-                  class="progress-bar progress-bar-user"
+                  class="progress-bar"
                   role="progressbar"
                   id="progressbar"
                   data-width="50%"
@@ -65,6 +65,91 @@
                   style="width: 50%"
                 >
                   50%
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="row">
+            <div class="col mt-5">
+              <div class="card text-center lengkung-20">
+                  <div class="card-header d-inline pt-5"
+                      style="background-image: url('../../../assets/img/PIC1.jpg'); min-height: 217px; background-position: center; background-size: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                      <h1 class="text-white text-shadow">POS1 <br> DASA DHARMA</h1>
+                      <p class="text-white text-shadow">DEPAN LAPANGAN</p>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </section>
+        <section>
+          <div class="row d-flex align-items-star justify-content-between">
+            <div class="col">
+              <div class="card lengkung-20 bg-primary">
+                <div class="card-header d-inline">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                      <img
+                        src="../../../assets/img/img_soal_placeholder.png"
+                        alt="image soal"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-lg-7 col-md-6 col-sm-12 mt-5">
+                      <p class="font-20">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Veniam sit minima sapiente eius harum deleniti
+                        velit maxime ab accusamus quos nesciunt dolorem hic,
+                        dolore nemo quas ducimus molestiae, corporis odio.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <textarea class="form-control lengkung-15" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="row d-flex align-items-star justify-content-between">
+            <div class="col">
+              <div class="card lengkung-20 bg-primary">
+                <div class="card-header d-inline">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                      <img
+                        src="../../../assets/img/img_soal_placeholder.png"
+                        alt="image soal"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="col-lg-7 col-md-6 col-sm-12 mt-5">
+                      <p class="font-20">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Veniam sit minima sapiente eius harum deleniti
+                        velit maxime ab accusamus quos nesciunt dolorem hic,
+                        dolore nemo quas ducimus molestiae, corporis odio.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <textarea class="form-control lengkung-15" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -122,82 +207,100 @@
     <!-- Main -->
 
     <!-- General JS Scripts -->
-    <script src="../../../assets/vendor/jquery.min.js"></script>
-    <script src="../../../assets/vendor/popper.js"></script>
-    <script src="../../../assets/vendor/tooltip.js"></script>
-    <script src="../../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../../assets/vendor/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="../../../assets/vendor/moment.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="../../../assets/js/stisla.js"></script>
-
-    <!-- JS Libraies -->
-    <script src="../../../assets/vendor/jquery.sparkline.min.js"></script>
-    <script src="../../../assets/vendor/chart.min.js"></script>
-    <script src="../../../assets/vendor/owlcarousel2/dist/owl.carousel.min.js"></script>
-    <script src="../../../assets/vendor/summernote/summernote-bs4.js"></script>
-    <script src="../../../assets/vendor/chocolat/dist/js/jquery.chocolat.min.js"></script>
-
-    <!-- Page Specific JS File -->
-    <script src="../../../assets/js/page/index.js"></script>
-
-    <!-- Template JS File -->
-    <script src="../../../assets/js/scripts.js"></script>
-    <script src="../../../assets/js/custom.js"></script>
+    <script src="assets/modules/jquery.min.js"></script>
+    <script src="assets/modules/popper.js"></script>
+    <script src="assets/modules/tooltip.js"></script>
+    <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="assets/modules/moment.min.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="assets/js/stisla.js"></script>
 
     <script>
-        function progressBar() {
-          var progress = 1,
-            timer,
-            percent;
-          var bar = document.getElementById("progressbar");
-          var loop = function loop(progress) {
-            if (progress === 60) {
-              clearTimeout(timer);
-            } else {
-              percent = progress * 1;
-              bar.style.width = percent + "px";
-              bar.textContent = percent + "%";
-              timer = setTimeout(loop, 1000, ++progress);
-            }
-          };
-          loop(progress);
-        }
-  
-        progressBar();
-        
-        const btnfull = document.getElementById("fullscreenbtn");
-        function toggleFullScreen() {
-          if (
-            (document.fullScreenElement && document.fullScreenElement !== null) ||
-            (!document.mozFullScreen && !document.webkitIsFullScreen)
-          ) {
-            if (document.documentElement.requestFullScreen) {
-              btnfull.setAttribute("name", "contract-outline");
-              document.documentElement.requestFullScreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-              btnfull.setAttribute("name", "contract-outline");
-              document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullScreen) {
-              btnfull.setAttribute("name", "contract-outline");
-              document.documentElement.webkitRequestFullScreen(
-                Element.ALLOW_KEYBOARD_INPUT
-              );
-            }
+      function progressBar() {
+        var progress = 1,
+          timer,
+          percent;
+        var bar = document.getElementById("progressbar");
+        var loop = function loop(progress) {
+          if (progress === 60) {
+            clearTimeout(timer);
           } else {
-            if (document.cancelFullScreen) {
-              btnfull.setAttribute("name", "expand-outline");
-              document.cancelFullScreen();
-            } else if (document.mozCancelFullScreen) {
-              btnfull.setAttribute("name", "expand-outline");
-              document.mozCancelFullScreen();
-            } else if (document.webkitCancelFullScreen) {
-              btnfull.setAttribute("name", "expand-outline");
-              document.webkitCancelFullScreen();
-            }
+            percent = progress * 1;
+            bar.style.width = percent + "px";
+            bar.textContent = percent + "%";
+            timer = setTimeout(loop, 1000, ++progress);
+          }
+        };
+        loop(progress);
+      }
+
+      progressBar();
+
+      function killCopy(e){
+        return false;
+    }
+    function reEnable(){
+        return true;
+    }
+    document.onselectstart=new Function ("return false");
+    if (window.sidebar){
+        document.onmousedown=killCopy;
+        document.onclick=reEnable;
+    }
+    
+      const btnfull = document.getElementById("fullscreenbtn");
+      function toggleFullScreen() {
+        if (
+          (document.fullScreenElement && document.fullScreenElement !== null) ||
+          (!document.mozFullScreen && !document.webkitIsFullScreen)
+        ) {
+          if (document.documentElement.requestFullScreen) {
+            btnfull.setAttribute("name", "contract-outline");
+            document.documentElement.requestFullScreen();
+          } else if (document.documentElement.mozRequestFullScreen) {
+            btnfull.setAttribute("name", "contract-outline");
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullScreen) {
+            btnfull.setAttribute("name", "contract-outline");
+            document.documentElement.webkitRequestFullScreen(
+              Element.ALLOW_KEYBOARD_INPUT
+            );
+          }
+        } else {
+          if (document.cancelFullScreen) {
+            btnfull.setAttribute("name", "expand-outline");
+            document.cancelFullScreen();
+          } else if (document.mozCancelFullScreen) {
+            btnfull.setAttribute("name", "expand-outline");
+            document.mozCancelFullScreen();
+          } else if (document.webkitCancelFullScreen) {
+            btnfull.setAttribute("name", "expand-outline");
+            document.webkitCancelFullScreen();
           }
         }
-      </script>
+      }
+    </script>
+
+    <!-- JS Libraies -->
+    <script src="assets/modules/jquery.sparkline.min.js"></script>
+    <script src="assets/modules/chart.min.js"></script>
+    <script src="assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+    <script src="assets/modules/summernote/summernote-bs4.js"></script>
+    <script src="assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="assets/js/page/index.js"></script>
+
+    <!-- Template JS File -->
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/custom.js"></script>
   </body>
 </html>
