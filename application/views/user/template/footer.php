@@ -12,6 +12,8 @@
 <!-- Footer -->
 <!-- General JS Scripts -->
 <script src="<?= base_url('assets/'); ?>vendor/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="<?= base_url('assets/'); ?>vendor/popper.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/popper.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/tooltip.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -30,6 +32,7 @@
 
 <!-- Page Specific JS File -->
 <script src="<?= base_url('assets/'); ?>js/page/index.js"></script>
+<script src="<?= base_url('assets/'); ?>js/page/bootstrap-modal.js"></script>
 
 <!-- Template JS File -->
 <script src="<?= base_url('assets/'); ?>js/scripts.js"></script>

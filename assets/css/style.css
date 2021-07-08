@@ -1762,7 +1762,8 @@ h6 .badge {
 .btn-danger.disabled:hover,
 .btn-danger.disabled:focus,
 .btn-danger.disabled:active {
-	background-color: #fb160a !important;
+	background-color: white !important;
+	color: var(--primary) !important;
 }
 
 .btn-outline-danger:hover,
@@ -1788,7 +1789,8 @@ h6 .badge {
 .btn-dark.disabled:hover,
 .btn-dark.disabled:focus,
 .btn-dark.disabled:active {
-	background-color: black !important;
+	background-color: white !important;
+	color: var(--primary) !important;
 }
 
 .btn-outline-dark:hover,
@@ -1845,8 +1847,8 @@ h6 .badge {
 .btn-warning.disabled:hover,
 .btn-warning.disabled:focus,
 .btn-warning.disabled:active {
-	background-color: #ff990d !important;
-	color: #fff !important;
+	background-color: white !important;
+	color: var(--primary) !important;
 }
 
 .btn-outline-warning:hover,
@@ -1872,7 +1874,8 @@ h6 .badge {
 .btn-info.disabled:hover,
 .btn-info.disabled:focus,
 .btn-info.disabled:active {
-	background-color: #0da8ee !important;
+	background-color: white !important;
+	color: var(--primary) !important;
 }
 
 .btn-outline-info:hover,
