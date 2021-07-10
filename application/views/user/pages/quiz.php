@@ -9,11 +9,11 @@
                   class="progress-bar"
                   role="progressbar"
                   id="progressbar"
-                  data-width="50%"
-                  aria-valuenow="50"
+                  data-width="100"
+                  aria-valuenow="100"
                   aria-valuemin="0"
                   aria-valuemax="100"
-                  style="width: 50%"
+                  style="width: 100%"
                 >
                   50%
                 </div>

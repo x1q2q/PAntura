@@ -26,71 +26,93 @@
 <script src="<?= base_url('assets/'); ?>js/custom.js"></script>
 
 <script>
-      
-      function progressBar() {
-        var progress = 1,
-          timer,
-          percent;
-        var bar = document.getElementById("progressbar");
-        var loop = function loop(progress) {
-          if (progress === 60) {
-            clearTimeout(timer);
-          } else {
-            percent = progress * 1;
-            bar.style.width = percent + "px";
-            bar.textContent = percent + "%";
-            timer = setTimeout(loop, 1000, ++progress);
-          }
-        };
-        loop(progress);
+  String.prototype.toHHMMSS = function() {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
+  }
+
+  // console.log("5678".toHHMMSS())
+
+  function progressBar() {
+    var progress = 1,
+      timer,
+      percent;
+    var bar = document.getElementById("progressbar");
+    var loop = function loop(progress) {
+      if (progress >= 61) {
+        clearTimeout(timer);
+      } else {
+        percent = progress * (100/60);
+        waktu = 60 - progress;
+        bar.style.width = 100 - Math.floor(percent) + "%";
+        bar.textContent = waktu.toString().toHHMMSS();
+        timer = setTimeout(loop, 1000, ++progress);
       }
+    };
+    loop(progress);
+  }
 
-      progressBar();
+  progressBar();
 
-      function killCopy(e){
-        return false;
-    }
-    function reEnable(){
-        return true;
-    }
-    document.onselectstart=new Function ("return false");
-    if (window.sidebar){
-        document.onmousedown=killCopy;
-        document.onclick=reEnable;
-    }
+  function killCopy(e) {
+    return false;
+  }
 
-      const btnfull = document.getElementById("fullscreenbtn");
-      function toggleFullScreen() {
-        if (
-          (document.fullScreenElement && document.fullScreenElement !== null) ||
-          (!document.mozFullScreen && !document.webkitIsFullScreen)
-        ) {
-          if (document.documentElement.requestFullScreen) {
-            btnfull.setAttribute("name", "contract-outline");
-            document.documentElement.requestFullScreen();
-          } else if (document.documentElement.mozRequestFullScreen) {
-            btnfull.setAttribute("name", "contract-outline");
-            document.documentElement.mozRequestFullScreen();
-          } else if (document.documentElement.webkitRequestFullScreen) {
-            btnfull.setAttribute("name", "contract-outline");
-            document.documentElement.webkitRequestFullScreen(
-              Element.ALLOW_KEYBOARD_INPUT
-            );
-          }
-        } else {
-          if (document.cancelFullScreen) {
-            btnfull.setAttribute("name", "expand-outline");
-            document.cancelFullScreen();
-          } else if (document.mozCancelFullScreen) {
-            btnfull.setAttribute("name", "expand-outline");
-            document.mozCancelFullScreen();
-          } else if (document.webkitCancelFullScreen) {
-            btnfull.setAttribute("name", "expand-outline");
-            document.webkitCancelFullScreen();
-          }
-        }
+  function reEnable() {
+    return true;
+  }
+  document.onselectstart = new Function("return false");
+  if (window.sidebar) {
+    document.onmousedown = killCopy;
+    document.onclick = reEnable;
+  }
+
+  const btnfull = document.getElementById("fullscreenbtn");
+
+  function toggleFullScreen() {
+    if (
+      (document.fullScreenElement && document.fullScreenElement !== null) ||
+      (!document.mozFullScreen && !document.webkitIsFullScreen)
+    ) {
+      if (document.documentElement.requestFullScreen) {
+        btnfull.setAttribute("name", "contract-outline");
+        document.documentElement.requestFullScreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        btnfull.setAttribute("name", "contract-outline");
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullScreen) {
+        btnfull.setAttribute("name", "contract-outline");
+        document.documentElement.webkitRequestFullScreen(
+          Element.ALLOW_KEYBOARD_INPUT
+        );
       }
-    </script>
+    } else {
+      if (document.cancelFullScreen) {
+        btnfull.setAttribute("name", "expand-outline");
+        document.cancelFullScreen();
+      } else if (document.mozCancelFullScreen) {
+        btnfull.setAttribute("name", "expand-outline");
+        document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+        btnfull.setAttribute("name", "expand-outline");
+        document.webkitCancelFullScreen();
+      }
+    }
+  }
+</script>
 </body>
 
 </html>
