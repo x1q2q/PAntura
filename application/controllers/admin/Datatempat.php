@@ -44,7 +44,7 @@ class Datatempat extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE){
 			$this->index();
-			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
+			alert("YOU CANT ATTACK ME WITH THAT. BUNG! ");
 		}else{
 			$dt_input = array(
 				'nm_tempat' 			=> $this->input->post('tempat'),

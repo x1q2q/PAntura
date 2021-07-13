@@ -43,12 +43,12 @@ class Datasekolah extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE){
 			$this->index();
-			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
+			alert("YOU CANT ATTACK ME WITH THAT. BUNG! ");
 		}else{
-			$pembina = $this->input->post('pembina');
+			$desk = $this->input->post('deskripsi');
 			$dt_input = array(
-				'nm_sekolah' 	=> $this->input->post('sekolah'),
-				'pembina'			=> $pembina == null?'-':$pembina
+				'nm_sekolah' 				=> $this->input->post('sekolah'),
+				'deskripsi_sekolah'	=> $desk == null?'-':$desk
 			);
 			$insert = $this->db->insert('pa_sekolah',$dt_input);
 			if($insert){
@@ -66,10 +66,10 @@ class Datasekolah extends CI_Controller {
 			$this->index();
 			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
 		}else{
-			$pembina = $this->input->post('pembina');
+			$desk = $this->input->post('deskripsi');
 			$dt_input = array(
-				'nm_sekolah' 	=> $this->input->post('sekolah'),
-				'pembina'			=> $pembina == null?'-':$pembina
+				'nm_sekolah' 				=> $this->input->post('sekolah'),
+				'deskripsi_sekolah'	=> $desk == null?'-':$desk
 			);
 			$where = array('id_sekolah' => $id);
 			$update = $this->db->update('pa_sekolah',$dt_input,$where);

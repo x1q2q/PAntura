@@ -46,7 +46,7 @@ class Datapos extends CI_Controller {
 		$tempat = $this->input->post('tempat');
 		if($this->form_validation->run() == FALSE){
 			$this->index();
-			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
+			alert("YOU CANT ATTACK ME WITH THAT. BUNG! ");
 		}else{
 			$desk = $this->input->post('deskripsi');
 			$dt_input = array(

@@ -46,16 +46,16 @@ class Datasiswa extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE){
 			$this->index();
-			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
+			alert("YOU CANT ATTACK ME WITH THAT. BUNG! ");
 		}else{
-			$fullname = $this->input->post('fullname');
+			$jenkel = $this->input->post('jenkel');
 			$username = $this->input->post('username');
 			$dt_input = array(
 				'sekolah_id'		=> $this->input->post('sekolah'),
-				'regu_id'				=> $this->input->post('regu'),
+				'regu'					=> $this->input->post('regu'),
 				'username'			=> $username,
 				'password'			=> $this->input->post('password'),
-				'fullname'			=> $fullname == null?$username:$fullname
+				'jenkel'				=> $jenkel
 			);
 			$insert = $this->db->insert('pa_siswa',$dt_input);
 			if($insert){
@@ -76,14 +76,14 @@ class Datasiswa extends CI_Controller {
 			$this->index();
 			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
 		}else{
-			$fullname = $this->input->post('fullname');
+			$jenkel = $this->input->post('jenkel');
 			$username = $this->input->post('username');
 			$dt_input = array(
 				'sekolah_id'		=> $this->input->post('sekolah'),
-				'regu_id'				=> $this->input->post('regu'),
+				'regu'					=> $this->input->post('regu'),
 				'username'			=> $username,
 				'password'			=> $this->input->post('password'),
-				'fullname'			=> $fullname == null?$username:$fullname
+				'jenkel'				=> $jenkel
 			);
 			$where = array('id_siswa' => $id);
 			$update = $this->db->update('pa_siswa',$dt_input,$where);
