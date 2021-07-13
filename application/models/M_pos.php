@@ -25,5 +25,30 @@ class M_pos extends CI_Model {
     $this->db->or_like('t.nm_tempat', $search); // Untuk menambahkan query where OR LIKE
     return $this->db->get()->num_rows(); // Untuk menghitung jumlah data sesuai dengan filter pada textbox pencarian
   }
+  public function get_join_array(){
+    $this->db->select("*");
+    $this->db->from('pa_pos p');
+    $this->db->join('pa_tempat t','p.tempat_id=t.id_tempat');
+    $this->db->order_by('p.nm_pos','asc');
+    return $this->db->get()->result_array();
+  }
+  public function get_in($data){
+    $this->db->select("*");
+    $this->db->from('pa_pos p');
+    $this->db->join('pa_tempat t','p.tempat_id=t.id_tempat');
+    $this->db->where_in('p.id_pos',$data);
+    $this->db->order_by('p.nm_pos','asc');
+    return $this->db->get()->result_array();
+  }
+  public function get_join_detail($kode){
+    $this->db->select("*");
+    $this->db->from('pa_quiz_soal qs');
+    $this->db->join('pa_pos p','p.id_pos=qs.pos_id');
+    $this->db->join('pa_tempat t','p.tempat_id=t.id_tempat');
+    $this->db->where('qs.kode',$kode);
+    $this->db->group_by('qs.pos_id');
+    $this->db->order_by('p.nm_pos','asc');
+    return $this->db->get()->result_array();
+  }
 }
 ?>
