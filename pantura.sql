@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jun 2021 pada 05.15
+-- Waktu pembuatan: 13 Jul 2021 pada 09.19
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -38,6 +38,19 @@ CREATE TABLE `pa_admin` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `pa_notif`
+--
+
+CREATE TABLE `pa_notif` (
+  `id_notif` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `judul_notif` text NOT NULL,
+  `stts_notif` enum('seen','unseen') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pa_pos`
 --
 
@@ -57,7 +70,8 @@ INSERT INTO `pa_pos` (`id_pos`, `tempat_id`, `nm_pos`, `lokasi_pos`, `deskripsi_
 (1, 1, 'Pos A', 'dekat pohon nangkas', 'Banyak orangnya di sini'),
 (2, 1, 'Pos B', 'dekat lapangan', 'banyak daunnya di sini'),
 (3, 3, 'Pos C', 'dekat sungai klawing', 'banyak orangnya di sini heheh'),
-(4, 3, 'Pos D', 'dekat pohon beringin', 'Ada duitnya');
+(4, 3, 'Pos D', 'dekat pohon beringin', 'Ada duitnya'),
+(7, 3, 'Pos A', 'dekat sungai selo', 'dekat sekali gan');
 
 -- --------------------------------------------------------
 
@@ -88,6 +102,25 @@ CREATE TABLE `pa_quiz_pilihan` (
   `is_pilihan_benar` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pa_quiz_pilihan`
+--
+
+INSERT INTO `pa_quiz_pilihan` (`id_quizpilihan`, `quizsoal_id`, `pilihan`, `is_pilihan_benar`) VALUES
+(1, 'QZ52784', 'simpul kegaduhan', '0'),
+(2, 'QZ52784', 'simpul kebenaran', '0'),
+(3, 'QZ52784', 'simpul kebatilan', '0'),
+(4, 'QZ52784', 'simpul belahdua', '1'),
+(5, 'RY590546', 'Bapak Raffi', '0'),
+(6, 'RY590546', 'Anon darkjokes', '0'),
+(7, 'RY590546', 'Boden Powell', '1'),
+(8, 'RY590546', 'Jessno limit', '0'),
+(9, 'SX53789', '17 Agustus 1945', '0'),
+(10, 'SX53789', '3 Januari 1936', '1'),
+(11, 'SX53789', '2 Desember 1967', '0'),
+(12, 'SX53789', '03 Oktober 1934', '0'),
+(14, 'TY42890', 'sandi morse memiliki beberapa macam yaitu: (a). sandi morse I; (b). sandi morse II', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -97,36 +130,22 @@ CREATE TABLE `pa_quiz_pilihan` (
 CREATE TABLE `pa_quiz_soal` (
   `id_quizsoal` varchar(30) NOT NULL,
   `pos_id` int(11) NOT NULL,
+  `kode` varchar(10) NOT NULL,
   `soal` text NOT NULL,
-  `tema` varchar(25) NOT NULL,
   `jenis` enum('pilgan','esai') NOT NULL,
-  `point_skor` float NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `img_path` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `pa_regu`
+-- Dumping data untuk tabel `pa_quiz_soal`
 --
 
-CREATE TABLE `pa_regu` (
-  `id_regu` int(11) NOT NULL,
-  `sekolah_id` int(11) NOT NULL,
-  `nm_regu` varchar(25) NOT NULL,
-  `total_skor` float NOT NULL,
-  `deskripsi_regu` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `pa_regu`
---
-
-INSERT INTO `pa_regu` (`id_regu`, `sekolah_id`, `nm_regu`, `total_skor`, `deskripsi_regu`) VALUES
-(1, 1, 'Regu Barongsai', 0, 'Siap Menerkam Kapanpun'),
-(2, 7, 'Regu Makcongcang', 0, 'Menerkanerka'),
-(4, 3, 'Regu Bajaklaut', 0, 'we are blackpirates');
+INSERT INTO `pa_quiz_soal` (`id_quizsoal`, `pos_id`, `kode`, `soal`, `jenis`, `created_at`, `img_path`) VALUES
+('QZ52784', 2, '20347HE32S', 'Di antara berikut, manakah yang termasuk jenis simpul pramuka', 'pilgan', '2021-07-10 10:54:26', ''),
+('RY590546', 2, '20347HE32S', 'Siapakah bapak pramuka sedunia?', 'pilgan', '2021-07-10 10:51:39', ''),
+('SX53789', 2, '20347HE32S', 'Kapan hari pramuka dirayakan?', 'pilgan', '2021-07-10 10:52:20', ''),
+('TY42890', 1, '70673RY797', 'sebutkan macam-macam sandi morse', 'esai', '2021-07-10 11:01:06', '');
 
 -- --------------------------------------------------------
 
@@ -137,20 +156,21 @@ INSERT INTO `pa_regu` (`id_regu`, `sekolah_id`, `nm_regu`, `total_skor`, `deskri
 CREATE TABLE `pa_sekolah` (
   `id_sekolah` int(11) NOT NULL,
   `nm_sekolah` varchar(30) NOT NULL,
-  `pembina` varchar(25) NOT NULL
+  `deskripsi_sekolah` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pa_sekolah`
 --
 
-INSERT INTO `pa_sekolah` (`id_sekolah`, `nm_sekolah`, `pembina`) VALUES
-(1, 'SMKN 1 Purbalingga', 'Bpk. Sumardis'),
-(2, 'SMAN 1 Purbalingga', 'Bpk. Sukardi'),
-(3, 'SMAN 2 Purbalingga', 'Bpk. Sakirun'),
-(6, 'SMAN 1 Padamara', 'Ibu. Lilis'),
-(7, 'SMK YPLP Purbalingga', 'Bpk. Satyo'),
-(16, 'SMK JATENG', 'Bpk. Solihun');
+INSERT INTO `pa_sekolah` (`id_sekolah`, `nm_sekolah`, `deskripsi_sekolah`) VALUES
+(1, 'SMKN 1 Purbalingga', 'pembina = Bpk. Sumardis'),
+(2, 'SMAN 1 Purbalingga', 'pembina = Bpk. Sukardi'),
+(3, 'SMAN 2 Purbalingga', 'pembina = Bpk. Sakiruns'),
+(6, 'SMAN 1 Padamara', 'pembina = Ibu. Lilis'),
+(7, 'SMK YPLP Purbalingga', 'pembina = Bpk. Satyo'),
+(16, 'SMK JATENG', 'pembina = Bpk. Solihun'),
+(19, 'SMK YPLP 1 Purbalingga', '-');
 
 -- --------------------------------------------------------
 
@@ -160,37 +180,33 @@ INSERT INTO `pa_sekolah` (`id_sekolah`, `nm_sekolah`, `pembina`) VALUES
 
 CREATE TABLE `pa_siswa` (
   `id_siswa` int(11) NOT NULL,
+  `regu` varchar(30) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `regu_id` int(11) NOT NULL,
+  `jenkel` enum('laki-laki','perempuan') NOT NULL,
   `sekolah_id` int(11) NOT NULL,
-  `fullname` varchar(50) NOT NULL
+  `is_login` enum('1','0') NOT NULL,
+  `skor_regu` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pa_siswa`
 --
 
-INSERT INTO `pa_siswa` (`id_siswa`, `username`, `password`, `regu_id`, `sekolah_id`, `fullname`) VALUES
-(1, 'rafikbojes', 'bojes123', 2, 3, 'Arafik Bojess'),
-(2, 'zakie', 'zakie123', 2, 7, 'zakie'),
-(4, 'rendi', 'rendi123', 4, 3, 'rendi pangalilo');
+INSERT INTO `pa_siswa` (`id_siswa`, `regu`, `username`, `password`, `jenkel`, `sekolah_id`, `is_login`, `skor_regu`) VALUES
+(1, 'barongsai', 'rafikbojes', 'bojes123', 'laki-laki', 1, '0', 0),
+(2, 'yakuza', 'zakie', 'zakie123', 'laki-laki', 7, '0', 0),
+(4, 'muay thai', 'rendi', 'rendi123', 'laki-laki', 19, '0', 0),
+(5, 'gajahduduks', 'ibnuarya', 'ibnu123', 'laki-laki', 2, '1', 0),
+(7, 'teratai', 'hafsani', 'hafsani123', 'perempuan', 2, '1', 0);
 
 -- --------------------------------------------------------
 
 --
 -- Struktur dari tabel `pa_skor`
 --
-
-CREATE TABLE `pa_skor` (
-  `id_skor` int(11) NOT NULL,
-  `pos_id` int(11) NOT NULL,
-  `regu_id` int(11) NOT NULL,
-  `skor` float NOT NULL,
-  `tipe` enum('manual','otomatis') NOT NULL,
-  `deskripsi` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Kesalahan membaca struktur untuk tabel pantura.pa_skor: #1932 - Table 'pantura.pa_skor' doesn't exist in engine
+-- Kesalahan membaca data untuk tabel pantura.pa_skor: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `pantura`.`pa_skor`' at line 1
 
 -- --------------------------------------------------------
 
@@ -223,6 +239,12 @@ ALTER TABLE `pa_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
+-- Indeks untuk tabel `pa_notif`
+--
+ALTER TABLE `pa_notif`
+  ADD PRIMARY KEY (`id_notif`);
+
+--
 -- Indeks untuk tabel `pa_pos`
 --
 ALTER TABLE `pa_pos`
@@ -253,13 +275,6 @@ ALTER TABLE `pa_quiz_soal`
   ADD KEY `FK_posid` (`pos_id`);
 
 --
--- Indeks untuk tabel `pa_regu`
---
-ALTER TABLE `pa_regu`
-  ADD PRIMARY KEY (`id_regu`),
-  ADD KEY `FK_sekolahid2` (`sekolah_id`);
-
---
 -- Indeks untuk tabel `pa_sekolah`
 --
 ALTER TABLE `pa_sekolah`
@@ -270,16 +285,7 @@ ALTER TABLE `pa_sekolah`
 --
 ALTER TABLE `pa_siswa`
   ADD PRIMARY KEY (`id_siswa`),
-  ADD KEY `FK_reguid` (`regu_id`),
   ADD KEY `FK_sekolahid` (`sekolah_id`);
-
---
--- Indeks untuk tabel `pa_skor`
---
-ALTER TABLE `pa_skor`
-  ADD PRIMARY KEY (`id_skor`),
-  ADD KEY `FK_posid2` (`pos_id`),
-  ADD KEY `FK_reguid2` (`regu_id`);
 
 --
 -- Indeks untuk tabel `pa_tempat`
@@ -298,10 +304,16 @@ ALTER TABLE `pa_admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT untuk tabel `pa_notif`
+--
+ALTER TABLE `pa_notif`
+  MODIFY `id_notif` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `pa_pos`
 --
 ALTER TABLE `pa_pos`
-  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_quiz_jawaban`
@@ -313,31 +325,19 @@ ALTER TABLE `pa_quiz_jawaban`
 -- AUTO_INCREMENT untuk tabel `pa_quiz_pilihan`
 --
 ALTER TABLE `pa_quiz_pilihan`
-  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `pa_regu`
---
-ALTER TABLE `pa_regu`
-  MODIFY `id_regu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_sekolah`
 --
 ALTER TABLE `pa_sekolah`
-  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_siswa`
 --
 ALTER TABLE `pa_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT untuk tabel `pa_skor`
---
-ALTER TABLE `pa_skor`
-  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_tempat`
@@ -376,24 +376,10 @@ ALTER TABLE `pa_quiz_soal`
   ADD CONSTRAINT `FK_posid` FOREIGN KEY (`pos_id`) REFERENCES `pa_pos` (`id_pos`);
 
 --
--- Ketidakleluasaan untuk tabel `pa_regu`
---
-ALTER TABLE `pa_regu`
-  ADD CONSTRAINT `FK_sekolahid2` FOREIGN KEY (`sekolah_id`) REFERENCES `pa_sekolah` (`id_sekolah`);
-
---
 -- Ketidakleluasaan untuk tabel `pa_siswa`
 --
 ALTER TABLE `pa_siswa`
-  ADD CONSTRAINT `FK_reguid` FOREIGN KEY (`regu_id`) REFERENCES `pa_regu` (`id_regu`),
   ADD CONSTRAINT `FK_sekolahid` FOREIGN KEY (`sekolah_id`) REFERENCES `pa_sekolah` (`id_sekolah`);
-
---
--- Ketidakleluasaan untuk tabel `pa_skor`
---
-ALTER TABLE `pa_skor`
-  ADD CONSTRAINT `FK_posid2` FOREIGN KEY (`pos_id`) REFERENCES `pa_pos` (`id_pos`),
-  ADD CONSTRAINT `FK_reguid2` FOREIGN KEY (`regu_id`) REFERENCES `pa_regu` (`id_regu`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
