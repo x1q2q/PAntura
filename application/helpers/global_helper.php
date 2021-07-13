@@ -1,9 +1,9 @@
 <?php
 function alert($pesan){
-	echo "<script type='text/javascript'>alert('".$pesan."')</script>";
+	echo "<script type='text/javascript'>alert('".$pesan."');</script>";
 }
 function back(){
-	echo "<script type='text/javascript'>history.go(-1)</script>";
+	echo "<script type='text/javascript'>history.go(-1);</script>";
 }
 function get_waktu($strip,$format){
 	$asal = new Datetime($strip);
@@ -16,7 +16,7 @@ function get_timestamp($format){
 	$dt->setTimestamp($timestamp);
 	return $dt->format($format);
 }
-function my_form($dt_form){ // to auto generate input form
+function my_form($dt_form){ // to auto generate input form by rafikbojes
 	$htmlAwal = '<div class="modal-body">';
 	$htmlMid = '';
 	$htmlAkhir = '</div>';
@@ -34,16 +34,20 @@ function my_form($dt_form){ // to auto generate input form
 	return $htmlAwal.$htmlMid.$htmlAkhir;
 }
 
-function my_input($val,$param){
+function isfile($tipeform){
+	return ($tipeform == 'file');
+}
+
+function my_input($val,$param){ // generate input type to form group generate
 	$html = "";
 		foreach($val as $val2){
 			if($param == 'much'){ $html.= '<div class="col">'; }
-			$html .= '<label for="'.$val2['id'].'">'.$val2['label'].'</label>';
-			$html .= '<div class="input-group">';
+			$html .='<label for="'.$val2['id'].'"><b>'.$val2['label'].'</b></label>';
+			$html .= (isfile($val2['form'])) ? '<div class="custom-file">':'<div class="input-group">';
 			$dt_group = array(
 				'name' 				=> $val2['name'],
 				'placeholder' => $val2['placeholder'],
-				'class' 			=> 'form-control '.$val2['addClass'],
+				'class' 			=> 'form-control input-default '.$val2['addClass'],
 				'id'					=> $val2['id']);
 			if($val2['required']){ $dt_group['required'] = true; }
 			switch ($val2['form']) {
@@ -58,13 +62,21 @@ function my_input($val,$param){
 										array('class' => $dt_group['class'],'id' => $dt_group['id'],'required' => $dt_group['required']));
 						break;
 
+				case 'multiselect':
+						$html .= form_multiselect($val2['name'],$val2['dt_select'],$val2['dt_selected'],
+										array('class' => $dt_group['class'],'id' => $dt_group['id'],'required' => $dt_group['required']));
+						break;
+
+				case 'file':
+						$html .= '<input type="file" class="custom-file-input" name="'.$val2['name'].'">';
+						$html .= '<label class="custom-file-label">Pilih File</label>';
+						break;
 
 				default:
 					$dt_group['type'] = $val2['type'];
 					$html .= form_input($dt_group);
 					break;
 			}
-			$html .= '<div class="invalid-feedback"> silakan isi '.$val2['placeholder'].'</div>';
 			$html .= '</div>';
 			if($param == 'much'){ $html.= '</div>'; }
 		}
