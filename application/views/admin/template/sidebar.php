@@ -24,9 +24,6 @@
             <li class="<?php if($for == 'datapos'){echo "active";} ?>">
               <a class="nav-link" href="<?= base_url('admin/datapos'); ?>">Data POS</a>
             </li>
-            <li class="<?php if($for == 'dataregu'){echo "active";} ?>">
-              <a class="nav-link" href="<?= base_url('admin/dataregu'); ?>">Data Regu</a>
-            </li>
             <li class="<?php if($for == 'datasiswa'){echo "active";} ?>">
               <a class="nav-link" href="<?= base_url('admin/datasiswa'); ?>">Data Siswa</a>
             </li>

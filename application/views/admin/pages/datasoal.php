@@ -1,122 +1,56 @@
 <div class="row">
   <div class="col-12">
     <div class="card">
-      <div class="card-header">
-        <h4>Advanced Table</h4>
-        <div class="card-header-form">
-          <form>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search">
-              <div class="input-group-btn">
-                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-              </div>
-            </div>
-          </form>
+      <div class="card-header row mb-2 justify-content-between">
+        <div class="col">
+          <h4>Semua Data </h4>
+        </div>
+        <div class="col-auto">
+          <button data-toggle="modal" data-target="#modal-add" class="btn btn-action btn-success">
+            Tambah <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
+          </button>
         </div>
       </div>
-      <div class="card-body p-0">
+      <div class="col">
+        <?php if($this->session->flashdata('hijau')){ ?>
+          <div class="m-2 alert alert-success alert-dismissible show fade alert-has-icon">
+            <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">Sukses </div>
+              <?= $this->session->flashdata('hijau') ?></span>
+              <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+            </div>
+          </div>
+         <?php } ?>
+         <?php if($this->session->flashdata('merah')){ ?>
+           <div class="m-2 alert alert-danger alert-dismissible show fade alert-has-icon">
+             <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+             <div class="alert-body">
+               <div class="alert-title">Peringatan </div>
+               <?= $this->session->flashdata('merah') ?></span>
+               <button class="close" data-dismiss="alert">
+                 <span>&times;</span>
+               </button>
+             </div>
+           </div>
+          <?php } ?>
+      </div>
+      <div class="card-body p-4">
         <div class="table-responsive">
-          <table class="table table-striped">
-            <tr>
-              <th>
-                <div class="custom-checkbox custom-control">
-                  <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
-                  <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                </div>
-              </th>
-              <th>Task Name</th>
-              <th>Progress</th>
-              <th>Members</th>
-              <th>Due Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-            <tr>
-              <td class="p-0 text-center">
-                <div class="custom-checkbox custom-control">
-                  <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-                  <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                </div>
-              </td>
-              <td>Create a mobile app</td>
-              <td class="align-middle">
-                <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                  <div class="progress-bar bg-success" data-width="100"></div>
-                </div>
-              </td>
-              <td>
-                <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
-              </td>
-              <td>2018-01-20</td>
-              <td><div class="badge badge-success">Completed</div></td>
-              <td><a href="#" class="btn btn-secondary">Detail</a></td>
-            </tr>
-            <tr>
-              <td class="p-0 text-center">
-                <div class="custom-checkbox custom-control">
-                  <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-2">
-                  <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
-                </div>
-              </td>
-              <td>Redesign homepage</td>
-              <td class="align-middle">
-                <div class="progress" data-height="4" data-toggle="tooltip" title="0%">
-                  <div class="progress-bar" data-width="0"></div>
-                </div>
-              </td>
-              <td>
-                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Nur Alpiana">
-                <img alt="image" src="../assets/img/avatar/avatar-3.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hariono Yusup">
-                <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Bagus Dwi Cahya">
-              </td>
-              <td>2018-04-10</td>
-              <td><div class="badge badge-info">Todo</div></td>
-              <td><a href="#" class="btn btn-secondary">Detail</a></td>
-            </tr>
-            <tr>
-              <td class="p-0 text-center">
-                <div class="custom-checkbox custom-control">
-                  <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-3">
-                  <label for="checkbox-3" class="custom-control-label">&nbsp;</label>
-                </div>
-              </td>
-              <td>Backup database</td>
-              <td class="align-middle">
-                <div class="progress" data-height="4" data-toggle="tooltip" title="70%">
-                  <div class="progress-bar bg-warning" data-width="70"></div>
-                </div>
-              </td>
-              <td>
-                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hasan Basri">
-              </td>
-              <td>2018-01-29</td>
-              <td><div class="badge badge-warning">In Progress</div></td>
-              <td><a href="#" class="btn btn-secondary">Detail</a></td>
-            </tr>
-            <tr>
-              <td class="p-0 text-center">
-                <div class="custom-checkbox custom-control">
-                  <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-4">
-                  <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
-                </div>
-              </td>
-              <td>Input data</td>
-              <td class="align-middle">
-                <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                  <div class="progress-bar bg-success" data-width="100"></div>
-                </div>
-              </td>
-              <td>
-                <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Isnap Kiswandi">
-                <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Yudi Nawawi">
-                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Khaerul Anwar">
-              </td>
-              <td>2018-01-16</td>
-              <td><div class="badge badge-success">Completed</div></td>
-              <td><a href="#" class="btn btn-secondary">Detail</a></td>
-            </tr>
+          <table class="table table-striped" id="table-viewsoal">
+            <thead>
+              <tr>
+                <th scope="col" class="sort" data-sort="no">No.</th>
+                <th scope="col" class="sort" data-sort="nm_pos">Untuk POS</th>
+                <th scope="col" class="sort" data-sort="kode">Kode</th>
+                <th scope="col" class="sort" data-sort="created_by">Dibuat TGL</th>
+                <th scope="col" class="sort" data-sort="jml_soal">JML. Soal</th>
+                <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
           </table>
         </div>
       </div>
@@ -127,3 +61,142 @@
 </div>
 </section>
 </div>
+
+<?php
+  $query = $this->m_pos->get_join_array();
+  $dt_pos = array();
+  foreach ($query as $value) {
+    $dt_pos[$value['id_pos']] = $value['nm_pos'].'-'.$value['nm_tempat'];
+  }
+
+  $dt_selected = array();
+  $form_modal = array('add');
+  $dt_input = array('add' => []);
+  foreach ($form_modal as $value) {
+    $dt_form = array(array(
+          	   array(
+          	      "form"        => "multiselect", // input, textarea, select
+          	      "type"        => "", // text, number, dll
+          		    "label"       => "Untuk POS",
+          	      "name"        => "pos[]",
+          		    "placeholder" => "pos",
+                  "id"          => "add-pos",
+          		    "addClass"    => "select2-pos",
+          		    "required"    => true,
+                  "dt_select"   => $dt_pos,
+                  "dt_selected" => $dt_selected,
+          	 )),array(
+          	   array(
+                "form"        => "input", // input, textarea, select
+                "type"        => "text", // text, number, dll
+                "label"       => "KODE (QR/Input)",
+                "name"        => "kode",
+                "placeholder" => "max.10 karakter",
+                "id"          => "add-kode",
+                "addClass"    => "",
+                "required"    => true
+          	 )));
+    $dt_input[$value] = $dt_form;
+  }
+
+
+  $input_html_add = my_form($dt_input['add']);
+?>
+
+<?php
+  // modal page section
+  $md_tambah = array(
+    'div_id'      => 'modal-add',
+    'btn_color'   => 'success',
+    'btn_title'   => 'SUBMIT',
+    'md_link'     => base_url('admin/datasoal/tambah/'),
+    'md_title'    => 'Tambah Data Tempat',
+    'md_body'     => $input_html_add
+  );
+  $this->load->view('admin/pages/md_form',$md_tambah);
+
+
+  $md_hapus = array(
+    'div_id'      => 'modal-delete',
+    'btn_color'   => 'danger',
+    'btn_title'   => 'Ya, Hapus',
+  );
+  $this->load->view('admin/pages/md_konfirm',$md_hapus);
+?>
+
+<script type="text/javascript">
+  var tabel = null;
+  var urldata = "<?php echo base_url('admin/datasoal/') ?>";
+  $(document).ready(function() {
+      tabel = $('#table-viewsoal').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ordering": true, // Set true agar bisa di sorting
+          "order": [[ 0, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "ajax":
+          {
+              "url": urldata+'alldata/',
+              "type": "POST"
+          },
+          "deferRender": true,
+          "aLengthMenu": [[10, 15, 25],[ 10, 15, 25]], // Combobox Limit
+          "columnDefs": [
+              { className: "text-center", "targets": [4,5] },
+            ],
+
+          "columns": [
+              {"data": "id_quizsoal",
+              render: function (data, type, row, meta) {
+                  return meta.row + meta.settings._iDisplayStart + 1;
+              }},
+              { "data": "nm_pos",
+              render: function (data, type, row, meta) {
+                  return row.nm_pos+'-'+row.nm_tempat;
+              }},
+              { "data": "kode",
+              render: function (data, type, row, meta) {
+                  return '<b><u>'+row.kode+'</u></b>';
+              }},
+              { "data": "created_at"},
+              { "data": "jml_soal",
+              render: function (data, type, row, meta) {
+                  return '<span class="badge badge-dark">'+row.jml_soal+' Butir</span>';
+              }},
+              { "render": function ( data, type, row ) {
+                var dtdetail = ' data-soal="'+row.nm_pos+'-'+row.nm_tempat+'"';
+                var linkdel = ' data-link="'+urldata+'hapusdata/'+row.kode+'" ';
+
+                var btn = '<a href="'+urldata+'detail/'+row.jml_soal+'/'+row.kode+'"'+
+                ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"'+
+                ' title="Edit" '+dtdetail+'>Detail <i class="fas fa-eye"></i></a>'+
+
+                '<a data-toggle="modal" data-target="#modal-delete"'+
+                ' class="btn btn-danger btn-action mr-1" data-toggle="tooltip"'+
+                ' title="Edit" '+linkdel+dtdetail+'>Hapus <i class="fas fa-trash"></i></a>';
+
+                  return btn;
+                }
+              },
+          ],
+      });
+
+      $("#modal-add").on('show.bs.modal', function (e) {
+        $('.select2-pos').select2({
+          tags: false,
+          dropdownParent: $("#modal-add")
+        });
+        $(this).find('input[name=kode]').val('QR-X32423FS');
+      });
+
+     $("#modal-delete").on('show.bs.modal', function (e) {
+        let trgL = $(e.relatedTarget);
+        let link = trgL.data("link");
+        let soal = trgL.data("soal");
+
+        $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus SOAL");
+        $(this).find('.modal-footer a').attr("href",link);
+        $(this).find(".modal-body").html("Yakin Menghapus soal untuk <strong>"+soal+"</strong><br/> dari data SOAL?");
+    });
+
+  });
+  </script>

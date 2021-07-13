@@ -27,8 +27,6 @@
 <script src="<?= base_url('assets/'); ?>vendor/datatables.net-select-bs4/js/select.bootstrap4.min.js"></script>
 <?php if($for == 'dashboard'){ ?>
 <script src="<?= base_url('assets/'); ?>vendor/chart.js/dist/Chart.min.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/chocolat/dist/js/jquery.chocolat.min.js"></script>
 <?php } ?>
 

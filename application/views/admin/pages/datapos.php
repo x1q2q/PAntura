@@ -163,7 +163,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 0, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -191,7 +191,7 @@
                 var linkdel = ' data-link="'+urldata+'hapusdata/'+row.id_pos+'" ';
 
                 var btn = '<a data-toggle="modal" data-target="#modal-edit"'+
-                ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"'+
+                ' class="btn btn-warning btn-action mr-1" data-toggle="tooltip"'+
                 ' title="Edit" '+linkedit+dtedit+' >Edit <i class="fas fa-pencil-alt"></i></a>'+
 
                 '<a data-toggle="modal" data-target="#modal-delete"'+

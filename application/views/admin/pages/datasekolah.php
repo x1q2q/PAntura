@@ -44,7 +44,7 @@
               <tr>
                 <th scope="col" class="sort" data-sort="no">No.</th>
                 <th scope="col" class="sort" data-sort="nm_sekolah">Nama Sekolah</th>
-                <th scope="col" class="sort" data-sort="pembina">Pembina</th>
+                <th scope="col" class="sort" data-sort="deskripsi_sekolah">Deskripsi</th>
                 <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
               </tr>
             </thead>
@@ -76,12 +76,12 @@
           		    "required"    => true
           	 )),array(
           	   array(
-                "form"        => "input", // input, textarea, select
-                "type"        => "text", // text, number, dll
-                "label"       => "PEMBINA",
-                "name"        => "pembina",
-                "placeholder" => "Nama Pembina",
-                "id"          => $value."-pembina",
+                "form"        => "textarea", // input, textarea, select
+                "type"        => "", // text, number, dll
+                "label"       => "DESKRIPSI",
+                "name"        => "deskripsi",
+                "placeholder" => "Deskripsi Sekolah",
+                "id"          => $value."-deskripsi",
                 "addClass"    => "",
                 "required"    => false
           	 )));
@@ -133,7 +133,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 0, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -151,14 +151,14 @@
                   return meta.row + meta.settings._iDisplayStart + 1;
               }},
               { "data": "nm_sekolah"},
-              { "data": "pembina"},
+              { "data": "deskripsi_sekolah"},
               { "render": function ( data, type, row ) {
-                var dtedit = ' data-sekolah="'+row.nm_sekolah+'" data-pembina="'+row.pembina+'" ';
+                var dtedit = ' data-sekolah="'+row.nm_sekolah+'" data-desk="'+row.deskripsi_sekolah+'" ';
                 var linkedit = ' data-link="'+urldata+'editdata/'+row.id_sekolah+'" ';
                 var linkdel = ' data-link="'+urldata+'hapusdata/'+row.id_sekolah+'" ';
 
                 var btn = '<a data-toggle="modal" data-target="#modal-edit" '+
-                ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"'+
+                ' class="btn btn-warning btn-action mr-1" data-toggle="tooltip"'+
                 ' title="Edit" '+linkedit+dtedit+'>Edit <i class="fas fa-pencil-alt"></i></a>'+
 
                 '<a data-toggle="modal" data-target="#modal-delete" '+
@@ -175,10 +175,10 @@
          let trgL = $(e.relatedTarget);
          let link = trgL.data("link");
          let sekolah = trgL.data("sekolah");
-         let pembina = trgL.data("pembina");
+         let desk = trgL.data("desk");
 
          $(this).find('input[name=sekolah]').val(sekolah);
-         $(this).find('input[name=pembina]').val(pembina);
+         $(this).find('textarea[name=deskripsi]').val(desk);
          $(this).find('form[method=post]').attr("action",link);
      });
 

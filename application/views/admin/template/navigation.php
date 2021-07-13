@@ -12,6 +12,7 @@
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>vendor/jqvmap/dist/jqvmap.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>vendor/summernote/dist/summernote-bs4.css">
+  <link rel="stylesheet" href="<?= base_url('assets/'); ?>vendor/select2/dist/css/select2.min.css">
 
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
@@ -21,8 +22,10 @@
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/components.css">
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/custom.css">
 
-</head>
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+<script src="<?= base_url('assets/'); ?>vendor/select2/dist/js/select2.min.js"></script>
+</head>
+
 
 <body>
   <div id="app">
