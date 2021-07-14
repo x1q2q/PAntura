@@ -7,7 +7,7 @@
             <span class="badge badge-dark"><h4 class="text-white">KODE: <?= $kode; ?> </h4></span>
           </div>
           <div>
-            <span class="badge badge-secondary"><h4 class="text-dark">JML SOAL: <?= $jml_soal; ?> BUTIR</h4></span>
+            <span class="badge badge-secondary jml-soal"><h4 class="text-dark">JML SOAL: 1 BUTIR</h4></span>
           </div>
         </div>
         <div class="col-auto m-1">
@@ -47,82 +47,43 @@
           <?php } ?>
       </div>
       <div class="card-body p-3" id="kawah-soal">
-        <div class="row box-soal" data-soal="soal1">
-            <div class="col-12 d-flex justify-content-start pa-soal">
-              <div class="soal-nomor align-items-start flex-grow"> <!--  untuk no. soal -->
-                <span><h4 class="text-dark">1. </h4></span>
-              </div>
-              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
-                <div class="form-group">
-                  <textarea name="soal" value="" class="summernote-simple"></textarea>
-                </div>
-              </div>
-              <div class="align-self-start btn-submit">
-                <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('soal1')">
-                  <i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="col-12 row pa-pilihan mt-2">
-              <div class="col-1"></div>
-              <div class="col-11  pilihan-input">
-                <ol class="p-0" data-soal="soal1">
-                 <li data-id="1">
-                   <div class="form-group btn-group">
-                     <textarea type="text" name="pilihan" value="" class="form-control"
-                     placeholder="Input Opsi Jawaban" rows="1"></textarea>
-                     <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal1-1')">
-                       <i class="fa fa-times"></i>
-                     </button>
-                   </div>
-                 </li>
-                </ol>
-                <div class="btn-btn">
-                  <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal1')">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="row box-soal" data-soal="soal2">
-            <div class="col-12 d-flex justify-content-start pa-soal">
-              <div class="soal-nomor align-items-start flex-grow"> <!--  untuk no. soal -->
-                <span><h4 class="text-dark">2. </h4></span>
-              </div>
-              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
-                <div class="form-group">
-                  <textarea name="soal" value="" class="summernote-simple"></textarea>
-                </div>
-              </div>
-              <div class="align-self-start btn-submit">
-                <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('soal2')">
-                  <i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="col-12 row pa-pilihan mt-2">
-              <div class="col-1"></div>
-              <div class="col-11  pilihan-input">
-                <ol class="p-0" data-soal="soal2">
-                 <li data-id="1">
-                   <div class="form-group btn-group">
-                     <textarea type="text" name="pilihan" value="" class="form-control"
-                     placeholder="Input Opsi Jawaban" rows="1"></textarea>
-                     <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal2-1')">
-                       <i class="fa fa-times"></i>
-                     </button>
-                   </div>
-                 </li>
-                </ol>
-                <div class="btn-btn">
-                  <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal2')">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-        </div>
+        <ol class="listing-soal">
+          <li class="row box-soal" data-soal="soal1">
+                  <div class="col-12 d-flex justify-content-start pa-soal">
+                    <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
+                      <div class="form-group">
+                        <textarea name="soal" value="" class="summernote-simple"></textarea>
+                      </div>
+                    </div>
+                    <div class="align-self-start btn-submit">
+                      <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('soal1')">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-12 row pa-pilihan mt-2">
+                    <div class="col-1"></div>
+                    <div class="col-11  pilihan-input">
+                      <ol class="p-0" data-soal="soal1">
+                       <li data-id="1">
+                         <div class="form-group btn-group">
+                           <textarea type="text" name="pilihan" value="" class="form-control"
+                           placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                           <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal1-1')">
+                             <i class="fa fa-times"></i>
+                           </button>
+                         </div>
+                       </li>
+                      </ol>
+                      <div class="btn-btn">
+                        <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal1')">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+        </ol>
       </div>
     </div>
   </div>
@@ -138,8 +99,8 @@
           SELESAI <span class="btn-inner--icon"><i class="fa fa-check"></i></span>
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item has-icon" onclick="buatPilgan()"><i class="fas fa-list-ul"></i> Pilihan Ganda</a>
-            <a class="dropdown-item has-icon" onclick="buatEsai()"><i class="fas fa-pencil-ruler"></i> Esai</a>
+            <a class="dropdown-item has-icon" onclick="buatSoal('pilgan')"><i class="fas fa-list-ul"></i> Pilihan Ganda</a>
+            <a class="dropdown-item has-icon" onclick="buatSoal('esai')"><i class="fas fa-pencil-ruler"></i> Esai</a>
         </div>
     </div>
   </div>
@@ -149,6 +110,36 @@
 </section>
 </div>
 <style type="text/css">
+
+  ol.listing-soal {
+    width: 100%!important;
+    counter-reset: my-awesome-counter;
+    list-style: none;
+    padding-left: 20px;
+  }
+  ol.listing-soal li.box-soal {
+    margin: 0 0 0.5rem 0;
+    counter-increment: my-awesome-counter;
+    position: relative;
+  }
+  ol.listing-soal li.box-soal::before {
+    content: counter(my-awesome-counter);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    --size: 32px;
+    left: calc(-0.5 * var(--size));
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: 0;
+    background: black;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 1px 1px 0 #999;
+  }
+  /* bates */
   .btn-submit{
     margin-right: 30px!important;
   }
@@ -164,17 +155,6 @@
    border-bottom:1px dashed #000;
    margin:0 20px;
  }
- .soal-nomor span{
-    display: block;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    padding: 6px;
-
-    background: rgba(0,0,0,0.3);
-    border: 2px solid #666;
-    text-align: center;
-  }
   .pa-pilihan ol{
     list-style-type:upper-alpha;
   }
@@ -202,11 +182,6 @@
     width: 30px;
     height: 30px;
     padding:3px;
-  }
-  @media screen and (min-width: 1240px){
-    .pa-soal{
-      margin-left:30px;
-    }
   }
   @media screen and (max-width: 640px){
     .pa-pilihan .form-group{
@@ -249,21 +224,31 @@
 
 <script type="text/javascript">
   var urldata = "<?php echo base_url('admin/datasoal/') ?>";
-
-  function buatPilgan(){
-    var no = $('#kawah-soal .box-soal:last-of-type()').attr('data-soal');
-        no = no.substr(4,no.length);
+  function refreshJml(){
+    var totalSoal = $('#kawah-soal .box-soal').length;
+    $('span.jml-soal .text-dark').html('JML SOAL: '+totalSoal+' BUTIR');
+  }
+  function buatSoal(tipe){
+    var inputJmlSoal = $('input[name="jmlsoal"]').val();
+    for(var i=0; i<parseInt(inputJmlSoal);i++){
+      if(tipe == 'pilgan'){
+        htmlPilgan();
+      }else if(tipe == 'esai'){
+        htmlEsai();
+      }
+    }
+    refreshJml();
+  }
+  function htmlPilgan(){
+    var no = $('#kawah-soal ol.listing-soal li.box-soal:last-of-type()').attr('data-soal');
+        no = (no == undefined) ? 0: no.substr(4,no.length);
         no = parseInt(no)+1;
     var idLast = 1;
 
     var soal = "soal"+no;
     var soalhitung = soal+"-"+idLast;
-    var totalSoal = $('input[name="jmlsoal"]').val();
-    var htmlInputPilgan = `<div class="row box-soal" data-soal="${soal}">
+    var htmlInputPilgan = `<li class="row box-soal" data-soal="${soal}">
             <div class="col-12 d-flex justify-content-start pa-soal">
-              <div class="soal-nomor align-items-start flex-grow"> <!--  untuk no. soal -->
-                <span><h4 class="text-dark">${no} </h4></span>
-              </div>
               <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
                 <div class="form-group">
                   <textarea name="soal" value="" class="summernote-simple"></textarea>
@@ -271,7 +256,7 @@
               </div>
               <div class="align-self-start btn-submit">
                 <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('${soal}')">
-                  <i class="fa fa-times"></i>
+                  <i class="fa fa-trash"></i>
                 </button>
               </div>
             </div>
@@ -296,11 +281,11 @@
                 </div>
               </div>
             </div>
-        </div>`;
-    $('#kawah-soal').append(htmlInputPilgan);
+        </li>`;
+    $('#kawah-soal ol.listing-soal').append(htmlInputPilgan);
     $(".summernote-simple").summernote({
        dialogsInBody: true,
-        minHeight: 78,
+        minHeight: 80,
         toolbar: [
           ['style', ['bold', 'italic', 'underline', 'clear']],
           ['font', ['strikethrough']],
@@ -308,13 +293,53 @@
         ]
       });
   }
-  function buatEsai(){
-    var total;
-    total = $('input[name="jmlsoal"]').val();
-    alert('esai '+total);
+
+  function htmlEsai(){
+    var no = $('#kawah-soal ol.listing-soal li.box-soal:last-of-type()').attr('data-soal');
+        no = (no == undefined) ? 0: no.substr(4,no.length);
+        no = parseInt(no)+1;
+    var idLast = 1;
+
+    var soal = "soal"+no;
+    var soalhitung = soal+"-"+idLast;
+    var htmlInputEsai = `<li class="row box-soal" data-soal="${soal}">
+            <div class="col-12 d-flex justify-content-start pa-soal">
+              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
+                <div class="form-group">
+                  <textarea name="soal" value="" class="summernote-simple"></textarea>
+                </div>
+              </div>
+              <div class="align-self-start btn-submit">
+                <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('${soal}')">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-12 row pa-pilihan mt-2">
+              <div class="col-1"></div>
+              <div class="col-11 pilihan-input">
+                 <div class="form-group btn-group">
+                   <textarea type="text" name="pilihan" value="" class="form-control"
+                   placeholder="Input Jawaban Esai Benar" rows="2"></textarea>
+                 </div>
+              </div>
+            </div>
+        </li>`;
+    $('#kawah-soal ol.listing-soal').append(htmlInputEsai);
+    $(".summernote-simple").summernote({
+       dialogsInBody: true,
+        minHeight: 120,
+        toolbar: [
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough']],
+          ['para', ['paragraph']]
+        ]
+      });
   }
+
   function rmvSoal(kdsoal){
     $('#kawah-soal .box-soal[data-soal="'+kdsoal+'"]').remove();
+    refreshJml();
   }
   function rmvOpsi(kode){
     var splKode = kode.split('-');
