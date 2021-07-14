@@ -26,6 +26,13 @@
 <script src="<?= base_url('assets/'); ?>js/custom.js"></script>
 
 <script>
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      console.log("hidden")
+    } else {
+      location.reload()
+    }
+  })
   String.prototype.toHHMMSS = function() {
     var sec_num = parseInt(this, 10); // don't forget the second param
     var hours = Math.floor(sec_num / 3600);
@@ -55,7 +62,7 @@
       if (progress >= 61) {
         clearTimeout(timer);
       } else {
-        percent = progress * (100/60);
+        percent = progress * (100 / 60);
         waktu = 60 - progress;
         bar.style.width = 100 - Math.floor(percent) + "%";
         bar.textContent = waktu.toString().toHHMMSS();
