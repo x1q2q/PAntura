@@ -78,7 +78,45 @@
                  </li>
                 </ol>
                 <div class="btn-btn">
-                  <button type="button" class="btn btn-primary btn-sm btn-icon" name="addopsi" data-soal="soal1">
+                  <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal1')">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row box-soal" data-soal="soal2">
+            <div class="col-12 d-flex justify-content-start pa-soal">
+              <div class="soal-nomor align-items-start flex-grow"> <!--  untuk no. soal -->
+                <span><h4 class="text-dark">2. </h4></span>
+              </div>
+              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
+                <div class="form-group">
+                  <textarea name="soal" value="" class="summernote-simple"></textarea>
+                </div>
+              </div>
+              <div class="align-self-start btn-submit">
+                <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('soal2')">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-12 row pa-pilihan mt-2">
+              <div class="col-1"></div>
+              <div class="col-11  pilihan-input">
+                <ol class="p-0" data-soal="soal2">
+                 <li data-id="1">
+                   <div class="form-group btn-group">
+                     <textarea type="text" name="pilihan" value="" class="form-control"
+                     placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                     <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal2-1')">
+                       <i class="fa fa-times"></i>
+                     </button>
+                   </div>
+                 </li>
+                </ol>
+                <div class="btn-btn">
+                  <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal2')">
                     <i class="fa fa-plus"></i>
                   </button>
                 </div>
@@ -199,7 +237,7 @@
     }
   }
   .note-editor .note-editing-area .note-editable{
-    min-height: 78px !important;
+    min-height: auto!important;
     max-height: 200px !important;
   }
   .note-editor .note-editing-area .note-editable p,
@@ -219,49 +257,56 @@
     var idLast = 1;
 
     var soal = "soal"+no;
-    var soalhitung = "'"+soal+"-"+idLast+"'";
-    var rmvSoal = 'onclick="rmvSoal('+soal+')" ';
-    var rmvOpsi = 'onclick="rmvOpsi('+soalhitung+')" ';
+    var soalhitung = soal+"-"+idLast;
     var totalSoal = $('input[name="jmlsoal"]').val();
-    var htmlInputPilgan = '<div class="row box-soal" data-soal="'+soal+'">'+
-          '<div class="col-12 d-flex justify-content-start pa-soal">'+
-            '<div class="soal-nomor align-items-start flex-grow">'+
-              '<span><h4 class="text-dark">'+no+'</h4></span>'+
-            '</div>'+
-            '<div class="align-self-center flex-fill soal-text">'+
-              '<div class="form-group">'+
-                '<textarea name="soal" value="" class="summernote-simple"></textarea>'+
-              '</div>'+
-            '</div>'+
-            '<div class="align-self-start btn-submit">'+
-              '<button type="button" class="btn btn-lg btn-icon btn-danger" '+rmvSoal+'>'+
-                '<i class="fa fa-times"></i>'+
-              '</button>'+
-            '</div>'+
-          '</div>'+
-          '<div class="col-12 row pa-pilihan mt-2">'+
-            '<div class="col-1"></div>'+
-            '<div class="col-11  pilihan-input">'+
-              '<ol class="p-0" data-soal="'+soal+'">'+
-               '<li data-id="1">'+
-                 '<div class="form-group btn-group">'+
-                   '<textarea type="text" name="pilihan" value="" class="form-control"'+
-                   'placeholder="Input Opsi Jawaban" rows="1"></textarea>'+
-                   '<button type="button" class="btn btn-icon btn-danger" '+rmvOpsi+'>'+
-                     '<i class="fa fa-times"></i>'+
-                   '</button>'+
-                 '</div>'+
-               '</li>'+
-              '</ol>'+
-              '<div class="btn-btn">'+
-                '<button type="button" class="btn btn-primary btn-sm btn-icon" name="addopsi" data-soal="'+soal+'">'+
-                  '<i class="fa fa-plus"></i>'+
-                '</button>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-      '</div>';
+    var htmlInputPilgan = `<div class="row box-soal" data-soal="${soal}">
+            <div class="col-12 d-flex justify-content-start pa-soal">
+              <div class="soal-nomor align-items-start flex-grow"> <!--  untuk no. soal -->
+                <span><h4 class="text-dark">${no} </h4></span>
+              </div>
+              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
+                <div class="form-group">
+                  <textarea name="soal" value="" class="summernote-simple"></textarea>
+                </div>
+              </div>
+              <div class="align-self-start btn-submit">
+                <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('${soal}')">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-12 row pa-pilihan mt-2">
+              <div class="col-1"></div>
+              <div class="col-11  pilihan-input">
+                <ol class="p-0" data-soal="${soal}">
+                 <li data-id="1">
+                   <div class="form-group btn-group">
+                     <textarea type="text" name="pilihan" value="" class="form-control"
+                     placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                     <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('${soalhitung}')">
+                       <i class="fa fa-times"></i>
+                     </button>
+                   </div>
+                 </li>
+                </ol>
+                <div class="btn-btn">
+                  <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('${soal}')">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>`;
     $('#kawah-soal').append(htmlInputPilgan);
+    $(".summernote-simple").summernote({
+       dialogsInBody: true,
+        minHeight: 78,
+        toolbar: [
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough']],
+          ['para', ['paragraph']]
+        ]
+      });
   }
   function buatEsai(){
     var total;
@@ -269,7 +314,7 @@
     alert('esai '+total);
   }
   function rmvSoal(kdsoal){
-    $('.box-soal[data-soal="'+kdsoal+'"]').remove();
+    $('#kawah-soal .box-soal[data-soal="'+kdsoal+'"]').remove();
   }
   function rmvOpsi(kode){
     var splKode = kode.split('-');
@@ -277,12 +322,10 @@
     var lidt = splKode[1];
     $('.box-soal[data-soal="'+soaldt+'"] .pa-pilihan .pilihan-input ol').find('li[data-id="'+lidt+'"]').remove();
   }
-  $("button[name='addopsi']").click(function(){
-    var idLast = $(this).parent().parent().find('ol li:last-of-type()').data('id');
-    var soal = $(this).attr('data-soal');
-    // var soal = $(this).parent().parent().parent().parent().attr('data-soal'); // attr data-soal
+  function addOpsi(dtsoal){
+    var idLast = $('.box-soal[data-soal="'+dtsoal+'"] ol[data-soal="'+dtsoal+'"] li:last-of-type()').attr('data-id');
     var hitung = idLast+1; // attr data-id dari li
-    var soalhitung = "'"+soal+"-"+hitung+"'";
+    var soalhitung = "'"+dtsoal+"-"+hitung+"'";
     var idAttr = 'onclick="rmvOpsi('+soalhitung+')" ';
     var htmlList = '<li data-id="'+hitung+'">'+
        '<div class="form-group btn-group">'+
@@ -293,8 +336,8 @@
          '</button>'+
        '</div>'+
      '</li>';
-    $('.box-soal[data-soal="'+soal+'"] ol[data-soal="'+soal+'"]').append(htmlList);
-  });
+    $('.box-soal[data-soal="'+dtsoal+'"] ol[data-soal="'+dtsoal+'"]').append(htmlList);
+  }
 
 
   </script>
