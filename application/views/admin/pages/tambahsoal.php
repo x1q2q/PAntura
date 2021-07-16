@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -48,7 +49,7 @@
       </div>
       <div class="card-body p-3" id="kawah-soal">
         <ol class="listing-soal">
-          <li class="row box-soal" data-soal="soal1">
+          <li class="row box-soal" data-soal="soal1" data-jenis="pilgan">
                   <div class="col-12 d-flex justify-content-start pa-soal">
                     <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
                       <div class="form-group">
@@ -63,12 +64,15 @@
                   </div>
                   <div class="col-12 row pa-pilihan mt-2">
                     <div class="col-1"></div>
-                    <div class="col-11  pilihan-input">
+                    <div class="col-11 pilihan-input">
                       <ol class="p-0" data-soal="soal1">
                        <li data-id="1">
                          <div class="form-group btn-group">
-                           <textarea type="text" name="pilihan" value="" class="form-control"
-                           placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                           <textarea name="pilihan" class="form-control" placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                           <div class="switch-field">
+                        		<input  type="radio" id="jwbn-soal1-1" name="opsi-soal1" value="1">
+                        		<label for="jwbn-soal1-1" data-on-label="Benar" data-off-label="Salah"></label>
+                          </div>
                            <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal1-1')">
                              <i class="fa fa-times"></i>
                            </button>
@@ -95,9 +99,9 @@
         <button class="btn btn-outline-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           BUAT SOAL
         </button>
-        <button class="btn btn-lg btn-success">
+        <a class="btn btn-lg btn-success" onclick="prosesData()">
           SELESAI <span class="btn-inner--icon"><i class="fa fa-check"></i></span>
-        </button>
+        </a>
         <div class="dropdown-menu">
             <a class="dropdown-item has-icon" onclick="buatSoal('pilgan')"><i class="fas fa-list-ul"></i> Pilihan Ganda</a>
             <a class="dropdown-item has-icon" onclick="buatSoal('esai')"><i class="fas fa-pencil-ruler"></i> Esai</a>
@@ -109,6 +113,21 @@
 </div>
 </section>
 </div>
+<?php
+  $md_info = array(
+    'div_id'      => 'modal-info',
+    'btn_color'   => 'warning',
+    'btn_title'   => 'OKE',
+  );
+  $this->load->view('admin/pages/md_konfirm',$md_info);
+
+  $md_submit = array(
+    'div_id'      => 'modal-submitall',
+    'btn_color'   => 'success',
+    'btn_title'   => 'SAYA YAKIN',
+  );
+  $this->load->view('admin/pages/md_konfirm',$md_submit);
+?>
 <style type="text/css">
 
   ol.listing-soal {
@@ -160,14 +179,14 @@
   }
   .note-editor .note-editing-area .note-editable p,
   .box-soal textarea{
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
   }
   .note-editor .note-editing-area .note-editable,
   .box-soal textarea{
     background: #efefef !important;
   }
   .pa-pilihan .form-group{
-    width: 55%;
+    width: 60%;
   }
   .pilihan-input{
     position: relative!important;
@@ -185,7 +204,7 @@
   }
   @media screen and (max-width: 640px){
     .pa-pilihan .form-group{
-      width: 75%;
+      width: 80%;
     }
     .btn-submit{
       margin:0px!important;
@@ -220,10 +239,58 @@
   .note-editor .note-editing-area .note-editable ol{
     line-height: 10px!important;
   }
+  /* styling toggle */
+  .switch-field {
+  	display: flex;
+  	overflow: hidden;
+  }
+
+  .switch-field input {
+  	position: absolute !important;
+  	clip: rect(0, 0, 0, 0);
+  	height: 1px;
+  	width: 1px;
+  	border: 0;
+  	overflow: hidden;
+  }
+  .switch-field input + label:before {
+    content: attr(data-off-label);
+  }
+  .switch-field label {
+    margin:0px!important;
+  	background-color: #e4e4e4;
+  	color: rgba(0, 0, 0, 0.6);
+  	font-size: 14px;
+  	text-align: center;
+  	padding: 8px 16px;
+  	border: 1px solid rgba(0, 0, 0, 0.2);
+  	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  	transition: all 0.1s ease-in-out;
+  }
+
+  .switch-field label:hover {
+  	cursor: pointer;
+  }
+
+  .switch-field input:checked + label {
+  	background-color: #a5dc86;
+  	box-shadow: none;
+  }
+  .switch-field input:checked + label:before {
+    color: #fff;
+    font-weight: bolder;
+    content: attr(data-on-label);
+  }
+
 </style>
 
 <script type="text/javascript">
+  var kodeSoal = "<?php echo $kode;  ?>";
+  var posId = "<?php echo $dt_posid; ?>";
+  var dtPosId = posId.split('-');
+
   var urldata = "<?php echo base_url('admin/datasoal/') ?>";
+  var dtFieldKosong = [];
   function refreshJml(){
     var totalSoal = $('#kawah-soal .box-soal').length;
     $('span.jml-soal .text-dark').html('JML SOAL: '+totalSoal+' BUTIR');
@@ -247,9 +314,9 @@
 
     var soal = "soal"+no;
     var soalhitung = soal+"-"+idLast;
-    var htmlInputPilgan = `<li class="row box-soal" data-soal="${soal}">
+    var htmlInputPilgan = `<li class="row box-soal" data-soal="${soal}" data-jenis="pilgan">
             <div class="col-12 d-flex justify-content-start pa-soal">
-              <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
+              <div class="align-self-center flex-fill soal-text">
                 <div class="form-group">
                   <textarea name="soal" value="" class="summernote-simple"></textarea>
                 </div>
@@ -262,12 +329,15 @@
             </div>
             <div class="col-12 row pa-pilihan mt-2">
               <div class="col-1"></div>
-              <div class="col-11  pilihan-input">
+              <div class="col-11 pilihan-input">
                 <ol class="p-0" data-soal="${soal}">
-                 <li data-id="1">
+                 <li data-id="${idLast}">
                    <div class="form-group btn-group">
-                     <textarea type="text" name="pilihan" value="" class="form-control"
-                     placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                     <textarea name="pilihan" class="form-control" placeholder="Input Opsi Jawaban" rows="1"></textarea>
+                     <div class="switch-field">
+                      <input  type="radio" id="jwbn-${soalhitung}" name="opsi-${soal}" value="1">
+                      <label for="jwbn-${soalhitung}" data-on-label="Benar" data-off-label="Salah"></label>
+                    </div>
                      <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('${soalhitung}')">
                        <i class="fa fa-times"></i>
                      </button>
@@ -302,7 +372,7 @@
 
     var soal = "soal"+no;
     var soalhitung = soal+"-"+idLast;
-    var htmlInputEsai = `<li class="row box-soal" data-soal="${soal}">
+    var htmlInputEsai = `<li class="row box-soal" data-soal="${soal}" data-jenis="esai">
             <div class="col-12 d-flex justify-content-start pa-soal">
               <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
                 <div class="form-group">
@@ -319,8 +389,7 @@
               <div class="col-1"></div>
               <div class="col-11 pilihan-input">
                  <div class="form-group btn-group">
-                   <textarea type="text" name="pilihan" value="" class="form-control"
-                   placeholder="Input Jawaban Esai Benar" rows="2"></textarea>
+                   <textarea name="pilihan" class="form-control" placeholder="Input Jawaban Esai Benar" rows="2"></textarea>
                  </div>
               </div>
             </div>
@@ -336,7 +405,122 @@
         ]
       });
   }
+  function prosesData(){
+    var no = 0;
+    var jmlSoal = $('#kawah-soal ol.listing-soal li').length;
+    $('#kawah-soal .box-soal').each(function(){
+      no++;
+      var summernote = $(this).find('.pa-soal .soal-text .form-group textarea[name="soal"]');
+      var soal = summernote.val();
+      var jenis = $(this).attr('data-jenis');
+      if($(summernote).summernote('isEmpty')){
+        dtFieldKosong.push("-<b>SOAL No."+no+"</b> masih kosong. <br/>");
+      }
 
+      var dtpilihane = [];
+      if(jenis == 'pilgan'){
+        var pilno = 0;
+        var dtCekPilgan = [];
+        $(this).find('.pa-pilihan .pilihan-input ol li').each(function(){
+          pilno++;
+          var jwbnopsi = $(this).find('.form-group textarea[name="pilihan"]').val();
+          var pilbenar = $(this).find('.form-group .switch-field input:checked').val();
+          if(pilbenar == '1'){
+            dtCekPilgan.push(pilbenar);
+          }
+          if(jwbnopsi.trim().length > 0){
+            dtpilihane.push({
+              "pilihan":jwbnopsi,
+              "is_benar": (pilbenar=='1')?pilbenar:'0'
+            });
+          }else{
+            dtFieldKosong.push("-<b>SOAL No."+no+"</b>, input opsi jawaban ke-"+pilno+" masih kosong. <br/>")
+          }
+        });
+        if(dtCekPilgan.length == 0){
+          dtFieldKosong.push("-<b>SOAL No."+no+"</b> data opsi jawaban belum ada yang dipilih untuk jawaban benar. <br/>");
+          dtCekPilgan = [];
+        }
+
+      }else if(jenis == 'esai'){
+          var jwbnEsaiBenar = $(this).find('.pa-pilihan .pilihan-input .form-group textarea[name="pilihan"]').val();
+          if(jwbnEsaiBenar.trim().length > 0){
+            dtpilihane.push({
+              "pilihan":jwbnEsaiBenar,
+              "is_benar": '1'
+            });
+          }else{
+            dtFieldKosong.push("-<b>SOAL No."+no+"</b> input jawaban esai masih kosong <br/>")
+          }
+      }
+
+    });
+    $('#modal-info').on('show.bs.modal', function (e) {
+       $(this).find(".modal-header .modal-title").text("PERINGATAN! Ada data yang kosong");
+       $(this).find(".modal-footer a").attr('data-dismiss','modal');
+       $(this).find(".modal-body").html("<b>Catatan</b>:<br/>"+txtKosong);
+       dtFieldKosong = [];
+   });
+   if(jmlSoal == 0){
+     dtFieldKosong.push("-<b>SOAL Masih Kosong, lur!</b>")
+   }
+    if(dtFieldKosong.length > 0 || jmlSoal == 0){
+      var txtKosong ="";
+      for(var i=0; i<dtFieldKosong.length; i++){
+        txtKosong += dtFieldKosong[i];
+      }
+      $('#modal-info').modal('show');
+    }else{ // jika tidak ada yg empty field, konfirmasi submit
+      $('#modal-submitall').modal('show');
+    }
+  }
+  function submitAll(){
+    var dtSoal = [];
+    $('#kawah-soal .box-soal').each(function(){
+      var soale = $(this).find('.pa-soal .soal-text .form-group textarea[name="soal"]').val();
+      var jenis = $(this).attr('data-jenis');
+
+      var dtpilihane = [];
+        if(jenis == 'pilgan'){
+          $(this).find('.pa-pilihan .pilihan-input ol li').each(function(){
+            var pilbenar = $(this).find('.form-group .switch-field input:checked').val();
+              dtpilihane.push({
+                "pilihan":$(this).find('.form-group textarea[name="pilihan"]').val(),
+                "is_benar": (pilbenar=='1')?pilbenar:'0'
+              });
+          });
+        }else if(jenis == 'esai'){
+          var jwbnEsaiBenar = $(this).find('.pa-pilihan .pilihan-input .form-group textarea[name="pilihan"]').val();
+          if(jwbnEsaiBenar.trim().length > 0){
+            dtpilihane.push({
+              "pilihan":jwbnEsaiBenar,
+              "is_benar": '1'
+            });
+          }
+        }
+
+      dtSoal.push({
+          "soal":soale,
+          "jenis":jenis,
+          "posid":dtPosId,
+          "kode":kodeSoal,
+          "dtpilihan":dtpilihane
+      });
+    });
+    inputDatabase(dtSoal);
+  }
+  function inputDatabase(dtSoal){
+    var soal = JSON.stringify(dtSoal);
+    $.ajax({
+         type: "POST",
+         url:  urldata+'inputsoal/',
+         data: {soal: soal},
+         cache:false,
+         success: function(data){
+            window.location.replace(data);
+          }
+    });
+  }
   function rmvSoal(kdsoal){
     $('#kawah-soal .box-soal[data-soal="'+kdsoal+'"]').remove();
     refreshJml();
@@ -349,20 +533,28 @@
   }
   function addOpsi(dtsoal){
     var idLast = $('.box-soal[data-soal="'+dtsoal+'"] ol[data-soal="'+dtsoal+'"] li:last-of-type()').attr('data-id');
-    var hitung = idLast+1; // attr data-id dari li
-    var soalhitung = "'"+dtsoal+"-"+hitung+"'";
-    var idAttr = 'onclick="rmvOpsi('+soalhitung+')" ';
-    var htmlList = '<li data-id="'+hitung+'">'+
-       '<div class="form-group btn-group">'+
-         ' <textarea type="text" name="pilihan" value="" class="form-control"'+
-          'placeholder="Input Opsi Jawaban" rows="1"></textarea>'+
-         '<button type="button" class="btn btn-icon btn-danger " '+idAttr+'>'+
-           '<i class="fa fa-times"></i>'+
-         '</button>'+
-       '</div>'+
-     '</li>';
+    var hitung = parseInt(idLast)+1; // attr data-id dari li
+    var soalhitung = dtsoal+"-"+hitung;
+    var htmlList = `<li data-id="${hitung}">
+      <div class="form-group btn-group">
+        <textarea name="pilihan" class="form-control" placeholder="Input Opsi Jawaban" rows="1"></textarea>
+        <div class="switch-field">
+         <input type="radio" id="jwbn-${soalhitung}" name="opsi-${dtsoal}" value="1">
+         <label for="jwbn-${soalhitung}" data-on-label="Benar" data-off-label="Salah"></label>
+       </div>
+        <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('${soalhitung}')" >
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </li>`;
     $('.box-soal[data-soal="'+dtsoal+'"] ol[data-soal="'+dtsoal+'"]').append(htmlList);
   }
+
+  $("#modal-submitall").on('show.bs.modal', function (e) {
+     $(this).find(".modal-header .modal-title").text("Konfirmasi Submit SOAL");
+     $(this).find('.modal-footer a').attr("onClick",'submitAll()');
+     $(this).find(".modal-body").html("Yakin untuk mengirimkan data SOAL yang telah diinputkan ke database?");
+ });
 
 
   </script>

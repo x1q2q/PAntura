@@ -110,7 +110,7 @@
     'btn_color'   => 'success',
     'btn_title'   => 'SUBMIT',
     'md_link'     => base_url('admin/datasoal/tambah/'),
-    'md_title'    => 'Tambah Data Tempat',
+    'md_title'    => 'Tambah Data SOAL',
     'md_body'     => $input_html_add
   );
   $this->load->view('admin/pages/md_form',$md_tambah);
@@ -181,11 +181,13 @@
       });
 
       $("#modal-add").on('show.bs.modal', function (e) {
+        var kode = gen_rand_kode();
+            kode = 'PA-'+kode.substr(0,7).toUpperCase();
         $('.select2-pos').select2({
           tags: false,
           dropdownParent: $("#modal-add")
         });
-        $(this).find('input[name=kode]').val('QR-X32423FS');
+        $(this).find('input[name=kode]').val(kode);
       });
 
      $("#modal-delete").on('show.bs.modal', function (e) {
