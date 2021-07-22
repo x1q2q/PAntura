@@ -27,8 +27,19 @@
               <h3 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">PAntura</span></h3>
               <p class="text-muted">Silakan menghubungi admin untuk mendapatkan akun.</p>
           </div>
-
-          <form method="POST" action="#" class="needs-validation" novalidate="">
+          <?php if($this->session->flashdata('login_gagal')){ ?>
+            <div class="alert alert-danger alert-dismissible show fade alert-has-icon">
+              <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+              <div class="alert-body">
+                <div class="alert-title">Peringatan! </div>
+                <?= $this->session->flashdata('login_gagal') ?></span>
+                <button class="close" data-dismiss="alert">
+                  <span>&times;</span>
+                </button>
+              </div>
+            </div>
+          <?php } ?>
+          <form method="POST" action="<?= base_url('admin/login/dologin'); ?>" class="needs-validation" novalidate="">
             <div class="form-group">
               <label for="username">Username</label>
               <div class="input-group">
@@ -38,7 +49,7 @@
                 <input id="username" type="text" class="form-control" name="username"
                 tabindex="1" required autofocus>
                 <div class="invalid-feedback">
-                  Please fill in your username
+                Silakan isi username anda
                 </div>
               </div>
             </div>
@@ -52,7 +63,7 @@
                 <input id="password" type="password" class="form-control" name="password"
                 tabindex="2" required>
                 <div class="invalid-feedback">
-                  please fill in your password
+                 Silakan isi password anda
                 </div>
               </div>
             </div>

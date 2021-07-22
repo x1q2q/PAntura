@@ -43,9 +43,9 @@
             <thead>
               <tr>
                 <th scope="col" class="sort" data-sort="no">No.</th>
-                <th scope="col" class="sort" data-sort="nm_pos">Untuk POS</th>
+                <th scope="col" class="sort" data-sort="pos_tempat">Untuk POS</th>
                 <th scope="col" class="sort" data-sort="kode">Kode</th>
-                <th scope="col" class="sort" data-sort="created_by">Dibuat TGL</th>
+                <th scope="col" class="sort" data-sort="created_at">Dibuat TGL</th>
                 <th scope="col" class="sort" data-sort="jml_soal">JML. Soal</th>
                 <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
               </tr>
@@ -134,72 +134,65 @@ $this->load->view('admin/pages/md_konfirm', $md_hapus);
   var tabel = null;
   var urldata = "<?php echo base_url('admin/datasoal/') ?>";
   $(document).ready(function() {
-    tabel = $('#table-viewsoal').DataTable({
-      "processing": true,
-      "serverSide": true,
-      "ordering": true, // Set true agar bisa di sorting
-      "order": [
-        [0, 'desc']
-      ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
-      "ajax": {
-        "url": urldata + 'alldata/',
-        "type": "POST"
-      },
-      "deferRender": true,
-      "aLengthMenu": [
-        [10, 15, 25],
-        [10, 15, 25]
-      ], // Combobox Limit
-      "columnDefs": [{
-        className: "text-center",
-        "targets": [4, 5]
-      }, ],
+      tabel = $('#table-viewsoal').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ordering": true, // Set true agar bisa di sorting
+          "order": [[ 3, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "ajax":
+          {
+              "url": urldata+'alldata/',
+              "type": "POST"
+          },
+          "deferRender": true,
+          "aLengthMenu": [[10, 15, 25],[ 10, 15, 25]], // Combobox Limit
+          "columnDefs": [
+              { className: "text-center", "targets": [4,5] },
+            ],
 
-      "columns": [{
-          "data": "id_quizsoal",
-          render: function(data, type, row, meta) {
-            return meta.row + meta.settings._iDisplayStart + 1;
-          }
-        },
-        {
-          "data": "nm_pos",
-          render: function(data, type, row, meta) {
-            return row.nm_pos + '-' + row.nm_tempat;
-          }
-        },
-        {
-          "data": "kode",
-          render: function(data, type, row, meta) {
-            return '<b><u>' + row.kode + '</u></b>';
-          }
-        },
-        {
-          "data": "created_at"
-        },
-        {
-          "data": "jml_soal",
-          render: function(data, type, row, meta) {
-            return '<span class="badge badge-dark">' + row.jml_soal + ' Butir</span>';
-          }
-        },
-        {
-          "render": function(data, type, row) {
-            var dtdetail = ' data-soal="' + row.nm_pos + '-' + row.nm_tempat + '"';
-            var linkdel = ' data-link="' + urldata + 'hapusdata/' + row.kode + '" ';
+          "columns": [
+              {"data": "id_quizsoal",
+              render: function (data, type, row, meta) {
+                  return meta.row + meta.settings._iDisplayStart + 1;
+              }},
+              { "data": "pos_tempat",
+              render: function (data, type, row, meta) {
+                var txtPosTempat = "";
+                  for(var i=0; i<row.pos_tempat.length; i++){
+                    txtPosTempat += '('+row.pos_tempat[i]+')'+'<br/>';
+                  }
+                return txtPosTempat;
+              }},
+              { "data": "kode",
+              render: function (data, type, row, meta) {
+                  return '<b><u>'+row.kode+'</u></b>';
+              }},
+              { "data": "created_at"},
+              { "data": "jml_soal",
+              render: function (data, type, row, meta) {
+                  return '<span class="badge badge-dark">'+row.jml_soal+' Butir</span>';
+              }},
+              { "render": function ( data, type, row ) {
+                var txtPosTempat = "";
+                  for(var i=0; i<row.pos_tempat.length; i++){
+                    txtPosTempat += row.pos_tempat[i]+', ';
+                  }
+                var dtdetail = ' data-soal="'+txtPosTempat+'" ';
+                var linkdel = ' data-link="'+urldata+'hapusdata/'+row.kode+'" ';
 
-            var btn = '<a href="' + urldata + 'detail/' + row.jml_soal + '/' + row.kode + '"' +
-              ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"' +
-              ' title="Edit" ' + dtdetail + '>Detail <i class="fas fa-eye"></i></a>' +
+                var btn = '<a href="'+urldata+'detail/'+row.jml_soal+'/'+row.kode+'"'+
+                ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"'+
+                ' title="Detail" '+dtdetail+'>Detail <i class="fas fa-eye"></i></a>'+
 
-              '<a data-toggle="modal" data-target="#modal-delete"' +
-              ' class="btn btn-danger btn-action mr-1" data-toggle="tooltip"' +
-              ' title="Edit" ' + linkdel + dtdetail + '>Hapus <i class="fas fa-trash"></i></a>';
+                '<a data-toggle="modal" data-target="#modal-delete"'+
+                ' class="btn btn-danger btn-action mr-1" data-toggle="tooltip"'+
+                ' title="Edit" '+linkdel+dtdetail+'>Hapus <i class="fas fa-trash"></i></a>';
 
-            return btn;
-          }
-        },
-      ],
-    });
+                  return btn;
+                }
+              },
+          ],
+      });
 
     $("#modal-add").on('show.bs.modal', function(e) {
       var kode = gen_rand_kode();
@@ -216,9 +209,9 @@ $this->load->view('admin/pages/md_konfirm', $md_hapus);
       let link = trgL.data("link");
       let soal = trgL.data("soal");
 
-      $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus SOAL");
-      $(this).find('.modal-footer a').attr("href", link);
-      $(this).find(".modal-body").html("Yakin Menghapus soal untuk <strong>" + soal + "</strong><br/> dari data SOAL?");
+        $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus SOAL");
+        $(this).find('.modal-footer a').attr("href",link);
+        $(this).find(".modal-body").html("Yakin Menghapus soal untuk:<br/> <strong>"+soal+"</strong> dari data SOAL?");
     });
 
   });

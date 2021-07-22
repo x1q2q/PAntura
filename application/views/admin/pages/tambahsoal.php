@@ -8,7 +8,7 @@
             <span class="badge badge-dark"><h4 class="text-white">KODE: <?= $kode; ?> </h4></span>
           </div>
           <div>
-            <span class="badge badge-secondary jml-soal"><h4 class="text-dark">JML SOAL: 1 BUTIR</h4></span>
+            <span class="badge badge-secondary jml-soal"><h4 class="text-dark txt-jml">JML SOAL: 1 BUTIR</h4></span>
           </div>
         </div>
         <div class="col-auto m-1">
@@ -49,44 +49,7 @@
       </div>
       <div class="card-body p-3" id="kawah-soal">
         <ol class="listing-soal">
-          <li class="row box-soal" data-soal="soal1" data-jenis="pilgan">
-                  <div class="col-12 d-flex justify-content-start pa-soal">
-                    <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
-                      <div class="form-group">
-                        <textarea name="soal" value="" class="summernote-simple"></textarea>
-                      </div>
-                    </div>
-                    <div class="align-self-start btn-submit">
-                      <button type="button" class="btn btn-lg btn-icon btn-danger" onclick="rmvSoal('soal1')">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-12 row pa-pilihan mt-2">
-                    <div class="col-1"></div>
-                    <div class="col-11 pilihan-input">
-                      <ol class="p-0" data-soal="soal1">
-                       <li data-id="1">
-                         <div class="form-group btn-group">
-                           <textarea name="pilihan" class="form-control" placeholder="Input Opsi Jawaban" rows="1"></textarea>
-                           <div class="switch-field">
-                        		<input  type="radio" id="jwbn-soal1-1" name="opsi-soal1" value="1">
-                        		<label for="jwbn-soal1-1" data-on-label="Benar" data-off-label="Salah"></label>
-                          </div>
-                           <button type="button" class="btn btn-icon btn-danger" onclick="rmvOpsi('soal1-1')">
-                             <i class="fa fa-times"></i>
-                           </button>
-                         </div>
-                       </li>
-                      </ol>
-                      <div class="btn-btn">
-                        <button type="button" class="btn btn-primary btn-sm btn-icon" onclick="addOpsi('soal1')">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-              </li>
+          <!-- kosong pertama -->
         </ol>
       </div>
     </div>
@@ -202,6 +165,22 @@
     height: 30px;
     padding:3px;
   }
+  @media screen and (max-width: 540px){
+    ol.listing-soal{
+      padding-left:0px;
+    }
+    ol.listing-soal li.box-soal{
+      margin:0;
+    }
+    ol.listing-soal li.box-soal::before{
+      color:#000;
+      font-size:1rem;
+      height:auto!important;
+      background:transparent!important;
+      box-shadow:none;
+      border-radius:0%;
+    }
+  }
   @media screen and (max-width: 640px){
     .pa-pilihan .form-group{
       width: 80%;
@@ -230,14 +209,11 @@
       padding: 8px;
     }
   }
-  .note-editor .note-editing-area .note-editable{
-    min-height: auto!important;
-    max-height: 200px !important;
-  }
-  .note-editor .note-editing-area .note-editable p,
-  .note-editor .note-editing-area .note-editable ul:not(.list-unstyled),
-  .note-editor .note-editing-area .note-editable ol{
+  .note-editor .note-editing-area .note-editable p{
     line-height: 10px!important;
+  }
+  .note-editor.note-frame{
+    max-width: 100vw!important;
   }
   /* styling toggle */
   .switch-field {
@@ -281,19 +257,32 @@
     font-weight: bolder;
     content: attr(data-on-label);
   }
-
 </style>
 
 <script type="text/javascript">
   var kodeSoal = "<?php echo $kode;  ?>";
   var posId = "<?php echo $dt_posid; ?>";
   var dtPosId = posId.split('-');
+  let config = {
+    placeholder:'Input Soal di sini...',
+    tabs:1,
+    minHeight: 80,
+    maxHeight:250,
+    toolbar: [
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough']],
+      ['para', ['ul','ol']],
+    ]
+  };
 
   var urldata = "<?php echo base_url('admin/datasoal/') ?>";
   var dtFieldKosong = [];
+
+  buatSoal('pilgan'); //build awalan
+
   function refreshJml(){
     var totalSoal = $('#kawah-soal .box-soal').length;
-    $('span.jml-soal .text-dark').html('JML SOAL: '+totalSoal+' BUTIR');
+    $('span.jml-soal .txt-jml').html('JML SOAL: '+totalSoal+' BUTIR');
   }
   function buatSoal(tipe){
     var inputJmlSoal = $('input[name="jmlsoal"]').val();
@@ -318,7 +307,7 @@
             <div class="col-12 d-flex justify-content-start pa-soal">
               <div class="align-self-center flex-fill soal-text">
                 <div class="form-group">
-                  <textarea name="soal" value="" class="summernote-simple"></textarea>
+                  <textarea name="soal" value="" class="summernote-simple" data-soal="${soal}"></textarea>
                 </div>
               </div>
               <div class="align-self-start btn-submit">
@@ -353,15 +342,18 @@
             </div>
         </li>`;
     $('#kawah-soal ol.listing-soal').append(htmlInputPilgan);
-    $(".summernote-simple").summernote({
-       dialogsInBody: true,
-        minHeight: 80,
-        toolbar: [
-          ['style', ['bold', 'italic', 'underline', 'clear']],
-          ['font', ['strikethrough']],
-          ['para', ['paragraph']]
-        ]
-      });
+    let callbacks = {callbacks: {
+        onImageUpload: function(image) {
+            uploadImage(soal,image[0]); // karena menggunakan variable dynamic soal, untuk args upload
+        },
+        onMediaDelete: function(target) {
+            deleteImage(target[0].src);
+        }
+      }};
+  let summConf = {...config,...callbacks};
+    $(document).ready(function(){
+      $(".summernote-simple[data-soal="+soal+"]").summernote(summConf);
+    });
   }
 
   function htmlEsai(){
@@ -376,7 +368,7 @@
             <div class="col-12 d-flex justify-content-start pa-soal">
               <div class="align-self-center flex-fill soal-text"> <!--  untuk soal text -->
                 <div class="form-group">
-                  <textarea name="soal" value="" class="summernote-simple"></textarea>
+                  <textarea name="soal" value="" class="summernote-simple" data-soal="${soal}"></textarea>
                 </div>
               </div>
               <div class="align-self-start btn-submit">
@@ -395,15 +387,18 @@
             </div>
         </li>`;
     $('#kawah-soal ol.listing-soal').append(htmlInputEsai);
-    $(".summernote-simple").summernote({
-       dialogsInBody: true,
-        minHeight: 120,
-        toolbar: [
-          ['style', ['bold', 'italic', 'underline', 'clear']],
-          ['font', ['strikethrough']],
-          ['para', ['paragraph']]
-        ]
-      });
+    let callbacks = {callbacks: {
+        onImageUpload: function(image) {
+            uploadImage(soal,image[0]); // karena menggunakan variable dynamic soal, untuk args upload
+        },
+        onMediaDelete: function(target) {
+            deleteImage(target[0].src);
+        }
+      }};
+    let summConf = {...config,...callbacks};
+    $(document).ready(function(){
+      $(".summernote-simple[data-soal="+soal+"]").summernote(summConf);
+    });
   }
   function prosesData(){
     var no = 0;
@@ -455,12 +450,6 @@
       }
 
     });
-    $('#modal-info').on('show.bs.modal', function (e) {
-       $(this).find(".modal-header .modal-title").text("PERINGATAN! Ada data yang kosong");
-       $(this).find(".modal-footer a").attr('data-dismiss','modal');
-       $(this).find(".modal-body").html("<b>Catatan</b>:<br/>"+txtKosong);
-       dtFieldKosong = [];
-   });
    if(jmlSoal == 0){
      dtFieldKosong.push("-<b>SOAL Masih Kosong, lur!</b>")
    }
@@ -469,7 +458,8 @@
       for(var i=0; i<dtFieldKosong.length; i++){
         txtKosong += dtFieldKosong[i];
       }
-      $('#modal-info').modal('show');
+      showAlertInfo("PERINGATAN! Ada data yang kosong","<b>Catatan</b>:<br/>"+txtKosong);
+      dtFieldKosong = []; // reset pesan error
     }else{ // jika tidak ada yg empty field, konfirmasi submit
       $('#modal-submitall').modal('show');
     }
@@ -478,6 +468,7 @@
     var dtSoal = [];
     $('#kawah-soal .box-soal').each(function(){
       var soale = $(this).find('.pa-soal .soal-text .form-group textarea[name="soal"]').val();
+      var imge = $(this).find('.note-editor img').attr('src');
       var jenis = $(this).attr('data-jenis');
 
       var dtpilihane = [];
@@ -504,9 +495,10 @@
           "jenis":jenis,
           "posid":dtPosId,
           "kode":kodeSoal,
+          "imgpath": imge,
           "dtpilihan":dtpilihane
       });
-    });
+    }); // each lsiting box soal
     inputDatabase(dtSoal);
   }
   function inputDatabase(dtSoal){
@@ -522,7 +514,13 @@
     });
   }
   function rmvSoal(kdsoal){
-    $('#kawah-soal .box-soal[data-soal="'+kdsoal+'"]').remove();
+    var boxPilih = '.box-soal[data-soal="'+kdsoal+'"]';
+    $(boxPilih).find('.note-editable img').each(function(){
+      var srcImg = $(this).attr('src');
+      deleteImage(srcImg);
+    });
+
+    $(boxPilih).remove();
     refreshJml();
   }
   function rmvOpsi(kode){
@@ -556,5 +554,49 @@
      $(this).find(".modal-body").html("Yakin untuk mengirimkan data SOAL yang telah diinputkan ke database?");
  });
 
+function uploadImage(dataSoal,image) {
+   var data = new FormData();
+        data.append("image", image);
+    $.ajax({
+        url: "<?php echo base_url('admin/datasoal/upload_image')?>",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: data,
+        type: "POST",
+        success: function(resp) {
+          var msg = resp['message'];
+          if(resp['type'] == '1'){
+            $('li.box-soal[data-soal='+dataSoal+'] .summernote-simple').summernote("insertImage", msg);
+          }else{
+            showAlertInfo("PERINGATAN!","<b>Upload Gambar Gagal!</b><br/>"+msg);
+          }
+
+        },
+        error: function(data) {
+          showAlertInfo("ERRORR!","<b>Upload Gambar Gagal!</b>:<br/>"+msg);
+        }
+    });
+  }
+
+  function deleteImage(src) {
+      $.ajax({
+          data: {src : src},
+          type: "POST",
+          url: "<?php echo base_url('admin/datasoal/delete_image')?>",
+          cache: false,
+          success: function(response) {
+              showAlertInfo("Peringatan!","Gambar telah dihapus!");
+          }
+      });
+  }
+  function showAlertInfo(judul,message){
+    $('#modal-info').on('show.bs.modal', function (e) {
+       $(this).find(".modal-header .modal-title").text(judul);
+       $(this).find(".modal-footer a").attr('data-dismiss','modal');
+       $(this).find(".modal-body").html(message);
+   });
+    $('#modal-info').modal('show');
+  }
 
   </script>

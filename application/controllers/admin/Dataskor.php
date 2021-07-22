@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Papanskor extends CI_Controller {
+class Dataskor extends CI_Controller {
 	public function __construct(){
     parent::__construct();
 		$sesi = $this->session->userdata('user_admin');
@@ -14,13 +14,13 @@ class Papanskor extends CI_Controller {
 		$where = array('id_admin' =>  $this->session->userdata('user_admin'));
 		$data = array(
 			'nm_admin'		=> $this->m_global->get_profil($where,'nama'),
-      'template'		=> 'admin/pages/papanskor',
-      'for'					=> 'papanskor',
+      'template'		=> 'admin/pages/dataskor',
+      'for'					=> 'dataskor',
 			'dropdown'		=> '',
-      'titlebread'	=> 'Papan Skor',
+      'titlebread'	=> 'Data Skor',
 			'contentbread'=> array(
 					array(base_url('admin/'),'Dashboard'),
-					array('#','Papan Skor')),
+					array('#','Data Skor')),
       );
 			$this->load->view('admin/template/navigation',$data);
 			$this->load->view('admin/template/sidebar',$data);

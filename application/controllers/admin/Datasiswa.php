@@ -4,9 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Datasiswa extends CI_Controller {
 	public function __construct(){
     parent::__construct();
+		$sesi = $this->session->userdata('user_admin');
+		if(empty($sesi)){
+			redirect('admin/login');
+			return false;
+		}
   }
   public function index(){
+		$where = array('id_admin' =>  $this->session->userdata('user_admin'));
     $data = array(
+			'nm_admin'		=> $this->m_global->get_profil($where,'nama'),
       'template'		=> 'admin/pages/datasiswa',
       'for'					=> 'datasiswa',
 			'dropdown'		=> 'alldata',
