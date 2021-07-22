@@ -28,7 +28,7 @@
               <p class="text-muted">Silakan menghubungi admin untuk mendapatkan akun.</p>
           </div>
 
-          <form method="POST" action="#" class="needs-validation" novalidate="">
+          <form method="POST" action="<?= base_url('admin/login/dologin'); ?>" class="needs-validation" novalidate="">
             <div class="form-group">
               <label for="username">Username</label>
               <div class="input-group">
@@ -38,7 +38,7 @@
                 <input id="username" type="text" class="form-control" name="username"
                 tabindex="1" required autofocus>
                 <div class="invalid-feedback">
-                  Please fill in your username
+                Silakan isi username anda
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@
                 <input id="password" type="password" class="form-control" name="password"
                 tabindex="2" required>
                 <div class="invalid-feedback">
-                  please fill in your password
+                 Silakan isi password anda
                 </div>
               </div>
             </div>

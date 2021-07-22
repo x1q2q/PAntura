@@ -45,16 +45,9 @@
         </li>
         <hr>
         <li class="menu-header px-4">Skor</li>
-        <li class="nav-item dropdown <?php if($dropdown == 'dataskor'){echo "active";} ?>">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-clipboard"></i> <span>Data Skor</span></a>
-          <ul class="dropdown-menu">
-            <li class="<?php if($for == 'skorotomatis'){echo "active";} ?>">
-              <a href="<?= base_url('admin/skorotomatis'); ?>">Skor Otomatis</a>
-            </li>
-            <li class="<?php if($for == 'skormanual'){echo "active";} ?>">
-              <a href="<?= base_url('admin/skormanual'); ?>">Skor Manual</a>
-            </li>
-          </ul>
+        <li class="<?php if($for == 'dataskor'){echo "active";} ?>">
+          <a class="nav-link" href="<?= base_url('admin/dataskor'); ?>">
+            <i class="fas fa-clipboard"></i><span>Data Skor</span></a>
         </li>
         <li class="<?php if($for == 'papanskor'){echo "active";} ?>">
           <a class="nav-link" href="<?= base_url('admin/papanskor'); ?>">
