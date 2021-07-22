@@ -83,7 +83,9 @@ class Datasoal extends CI_Controller {
 		}else{
 			$pos = $this->input->post('pos[]');
 			$kode = $this->input->post('kode');
+			$where = array('id_admin' =>  $this->session->userdata('user_admin'));
 			$data = array(
+				'nm_admin'		=> $this->m_global->get_profil($where,'nama'),
 	      'template'		=> 'admin/pages/tambahsoal',
 	      'for'					=> 'datasoal',
 				'dropdown'		=> '',
@@ -134,7 +136,9 @@ class Datasoal extends CI_Controller {
 			array_push($dt_new,$dt_push);
 		}
 		//
+		$where = array('id_admin' =>  $this->session->userdata('user_admin'));
 		$data = array(
+			'nm_admin'		=> $this->m_global->get_profil($where,'nama'),
       'template'		=> 'admin/pages/detailsoal',
       'for'					=> 'datasoal',
 			'dropdown'		=> '',
