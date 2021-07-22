@@ -15,5 +15,15 @@ class M_global extends CI_Model {
   public function cek_row($query){
 		return $query->num_rows();
 	}
+  public function get_profil($where,$tipe){
+    $role = '';
+    $nama = '';
+    $login = $this->m_global->get_detail('pa_admin',$where);
+		foreach($login->result() as $profil){
+			$nama		= $profil->username;
+      $role		= $profil->role;
+		}
+    return ($tipe == 'nama')? $nama : $role;
+  }
 }
 ?>
