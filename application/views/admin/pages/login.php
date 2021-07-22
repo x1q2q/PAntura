@@ -27,7 +27,18 @@
               <h3 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">PAntura</span></h3>
               <p class="text-muted">Silakan menghubungi admin untuk mendapatkan akun.</p>
           </div>
-
+          <?php if($this->session->flashdata('login_gagal')){ ?>
+            <div class="alert alert-danger alert-dismissible show fade alert-has-icon">
+              <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+              <div class="alert-body">
+                <div class="alert-title">Peringatan! </div>
+                <?= $this->session->flashdata('login_gagal') ?></span>
+                <button class="close" data-dismiss="alert">
+                  <span>&times;</span>
+                </button>
+              </div>
+            </div>
+          <?php } ?>
           <form method="POST" action="<?= base_url('admin/login/dologin'); ?>" class="needs-validation" novalidate="">
             <div class="form-group">
               <label for="username">Username</label>
