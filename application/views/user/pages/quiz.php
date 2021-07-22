@@ -5,7 +5,7 @@
       <div class="row mt-5">
         <div class="col">
           <div class="progress mb-3">
-            <div class="progress-bar" role="progressbar" id="progressbar" data-width="100" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            <div class="progress-bar font-32" role="progressbar" id="progressbar" data-width="100" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
               50%
             </div>
           </div>
@@ -100,7 +100,7 @@
       <section class="mb-5">
         <div class="row">
           <div class="col">
-            <button type="submit" href="#" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15">Kirim</a>
+            <button type="submit" id="submit" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15">Kirim</a>
           </div>
         </div>
       </section>

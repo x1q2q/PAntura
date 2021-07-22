@@ -53,26 +53,48 @@
 
   // console.log("5678".toHHMMSS())
 
-  function progressBar() {
-    var progress = 1,
-      timer,
-      percent;
-    var bar = document.getElementById("progressbar");
-    var loop = function loop(progress) {
-      if (progress >= 61) {
+  function progressBar(i) {
+    let time
+    if (localStorage.getItem('waktu') === null) {
+      time = i
+    } else {
+      time = localStorage.getItem('waktu')
+    }
+    let progress = 1
+    let timer
+    let percent
+    let bar = document.getElementById("progressbar");
+    let loop = function loop(progress) {
+      if (progress >= time + 1) {
         clearTimeout(timer);
+        document.getElementById('submit').click()
+        localStorage.removeItem('waktu')
       } else {
+        // let lah
         percent = progress * (100 / 60);
-        waktu = 60 - progress;
-        bar.style.width = 100 - Math.floor(percent) + "%";
+        waktu = time - progress;
+        if (waktu < 10) {
+          bar.classList.add('bg-danger')
+        }
+        // if(localStorage.getItem('bar') === null){
+        //   bar.style.width = 100 + "%"
+        // }else{
+        //   lah = localStorage.getItem('bar')
+        //   lah = lah.slice(0,-1)
+        //   console.log(lah)
+        // }
+        // bar.style.width = 100 - Math.floor(percent) + "%";
+        bar.style.width = 100 + "%";
         bar.textContent = waktu.toString().toHHMMSS();
         timer = setTimeout(loop, 1000, ++progress);
+        // localStorage.setItem('bar', percent)
+        localStorage.setItem('waktu', waktu)
       }
     };
     loop(progress);
   }
 
-  progressBar();
+  progressBar(60);
 
   function killCopy(e) {
     return false;

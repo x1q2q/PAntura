@@ -15,6 +15,18 @@ class Kode extends CI_Controller {
 			$this->load->view('user/template/navbar',$data);
 			$this->load->view('user/template/footer',$data);
   }
+  public function confirm(){
+    $kode = $this->input->post('kode');
+    $pos_data  = $this->m_pos->get_join_detail($kode);
+    $soal = $this->m_soal->get_soal_detail($kode,$pos_data[0]["pos_id"]);
+    if (count($soal) > 0) {
+      return redirect('http://localhost/pantura/user/quiz/k/'.$kode);
+    }else{
+      $this->session->set_flashdata('merah','Kode Salah');
+      return redirect('user/kode');
+    }
+  }
+
   public function error(){
 
   }

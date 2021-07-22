@@ -6,8 +6,20 @@
                 <img src="<?= base_url('assets/'); ?>img/img_pantura_home.png" alt="HOME" class="img-fluid">
             </div>
             <div class="col-lg-5 col-sm-12 mt-5">
-                <form action="">
+                <form action="<?= base_url('/')?>user/kode/confirm" method="POST">
                     <div class="card text-center lengkung-20">
+                        <?php if ($this->session->flashdata('merah')) { ?>
+                            <div class="m-2 alert alert-danger alert-dismissible show fade alert-has-icon lengkung-20">
+                                <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                                <div class="alert-body">
+                                    <div class="alert-title">Peringatan </div>
+                                    <?= $this->session->flashdata('merah') ?></span>
+                                    <button class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <div class="card-header mt-5 d-inline">
                             <h3 class="text-primary">Masukkan Kode</h3>
                         </div>
@@ -60,7 +72,6 @@
 
 <script src="<?= base_url('assets/'); ?>vendor/html5-qrcode.min.js"></script>
 <script>
-    
     function onScanSuccess(decodedText, decodedResult) {
         // handle the scanned code as you like, for example:
         console.log(`Code matched = ${decodedText}`, decodedResult);
