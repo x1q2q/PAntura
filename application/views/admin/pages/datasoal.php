@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col">
-        <?php if ($this->session->flashdata('hijau')) { ?>
+        <?php if($this->session->flashdata('hijau')){ ?>
           <div class="m-2 alert alert-success alert-dismissible show fade alert-has-icon">
             <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
             <div class="alert-body">
@@ -23,19 +23,19 @@
               </button>
             </div>
           </div>
-        <?php } ?>
-        <?php if ($this->session->flashdata('merah')) { ?>
-          <div class="m-2 alert alert-danger alert-dismissible show fade alert-has-icon">
-            <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-            <div class="alert-body">
-              <div class="alert-title">Peringatan </div>
-              <?= $this->session->flashdata('merah') ?></span>
-              <button class="close" data-dismiss="alert">
-                <span>&times;</span>
-              </button>
-            </div>
-          </div>
-        <?php } ?>
+         <?php } ?>
+         <?php if($this->session->flashdata('merah')){ ?>
+           <div class="m-2 alert alert-danger alert-dismissible show fade alert-has-icon">
+             <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+             <div class="alert-body">
+               <div class="alert-title">Peringatan </div>
+               <?= $this->session->flashdata('merah') ?></span>
+               <button class="close" data-dismiss="alert">
+                 <span>&times;</span>
+               </button>
+             </div>
+           </div>
+          <?php } ?>
       </div>
       <div class="card-body p-4">
         <div class="table-responsive">
@@ -63,74 +63,68 @@
 </div>
 
 <?php
-$query = $this->m_pos->get_join_array();
-$dt_pos = array();
-foreach ($query as $value) {
-  $dt_pos[$value['id_pos']] = $value['nm_pos'] . '-' . $value['nm_tempat'];
-}
+  $query = $this->m_pos->get_join_array();
+  $dt_pos = array();
+  foreach ($query as $value) {
+    $dt_pos[$value['id_pos']] = $value['nm_pos'].'-'.$value['nm_tempat'];
+  }
 
-$dt_selected = array();
-$form_modal = array('add');
-$dt_input = array('add' => []);
-foreach ($form_modal as $value) {
-  $dt_form = array(array(
-    array(
-      "form"        => "multiselect", // input, textarea, select
-      "type"        => "", // text, number, dll
-      "label"       => "Untuk POS",
-      "name"        => "pos[]",
-      "placeholder" => "pos",
-      "id"          => "add-pos",
-      "addClass"    => "select2-pos",
-      "required"    => true,
-      "dt_select"   => $dt_pos,
-      "dt_selected" => $dt_selected,
-    )
-  ), array(
-    array(
-      "form"        => "input", // input, textarea, select
-      "type"        => "text", // text, number, dll
-      "label"       => "KODE (QR/Input)",
-      "name"        => "kode",
-      "placeholder" => "max.10 karakter",
-      "id"          => "add-kode",
-      "addClass"    => "",
-      "required"    => true
-    )
-  ));
-  $dt_input[$value] = $dt_form;
-}
+  $dt_selected = array();
+  $form_modal = array('add');
+  $dt_input = array('add' => []);
+  foreach ($form_modal as $value) {
+    $dt_form = array(array(
+          	   array(
+          	      "form"        => "multiselect", // input, textarea, select
+          	      "type"        => "", // text, number, dll
+          		    "label"       => "Untuk POS",
+          	      "name"        => "pos[]",
+          		    "placeholder" => "pos",
+                  "id"          => "add-pos",
+          		    "addClass"    => "select2-pos",
+          		    "required"    => true,
+                  "dt_select"   => $dt_pos,
+                  "dt_selected" => $dt_selected,
+          	 )),array(
+          	   array(
+                "form"        => "input", // input, textarea, select
+                "type"        => "text", // text, number, dll
+                "label"       => "KODE (QR/Input)",
+                "name"        => "kode",
+                "placeholder" => "max.10 karakter",
+                "id"          => "add-kode",
+                "addClass"    => "",
+                "required"    => true
+          	 )));
+    $dt_input[$value] = $dt_form;
+  }
 
 
-$input_html_add = my_form($dt_input['add']);
+  $input_html_add = my_form($dt_input['add']);
 ?>
 
 <?php
-// modal page section
-$md_tambah = array(
-  'div_id'      => 'modal-add',
-  'btn_color'   => 'success',
-  'btn_title'   => 'SUBMIT',
-  'md_link'     => base_url('admin/datasoal/tambah/'),
-  'md_title'    => 'Tambah Data SOAL',
-  'md_body'     => $input_html_add
-);
-$this->load->view('admin/pages/md_form', $md_tambah);
+  // modal page section
+  $md_tambah = array(
+    'div_id'      => 'modal-add',
+    'btn_color'   => 'success',
+    'btn_title'   => 'SUBMIT',
+    'md_link'     => base_url('admin/datasoal/tambah/'),
+    'md_title'    => 'Tambah Data SOAL',
+    'md_body'     => $input_html_add
+  );
+  $this->load->view('admin/pages/md_form',$md_tambah);
 
 
-$md_hapus = array(
-  'div_id'      => 'modal-delete',
-  'btn_color'   => 'danger',
-  'btn_title'   => 'Ya, Hapus',
-);
-$this->load->view('admin/pages/md_konfirm', $md_hapus);
+  $md_hapus = array(
+    'div_id'      => 'modal-delete',
+    'btn_color'   => 'danger',
+    'btn_title'   => 'Ya, Hapus',
+  );
+  $this->load->view('admin/pages/md_konfirm',$md_hapus);
 ?>
 
 <script type="text/javascript">
-  function gen_rand_kode() {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  }
-
   var tabel = null;
   var urldata = "<?php echo base_url('admin/datasoal/') ?>";
   $(document).ready(function() {
@@ -194,20 +188,20 @@ $this->load->view('admin/pages/md_konfirm', $md_hapus);
           ],
       });
 
-    $("#modal-add").on('show.bs.modal', function(e) {
-      var kode = gen_rand_kode();
-      kode = 'PA-' + kode.substr(0, 7).toUpperCase();
-      $('.select2-pos').select2({
-        tags: false,
-        dropdownParent: $("#modal-add")
+      $("#modal-add").on('show.bs.modal', function (e) {
+        var kode = gen_rand_kode();
+            kode = 'PA-'+kode.substr(0,7).toUpperCase();
+        $('.select2-pos').select2({
+          tags: false,
+          dropdownParent: $("#modal-add")
+        });
+        $(this).find('input[name=kode]').val(kode);
       });
-      $(this).find('input[name=kode]').val(kode);
-    });
 
-    $("#modal-delete").on('show.bs.modal', function(e) {
-      let trgL = $(e.relatedTarget);
-      let link = trgL.data("link");
-      let soal = trgL.data("soal");
+     $("#modal-delete").on('show.bs.modal', function (e) {
+        let trgL = $(e.relatedTarget);
+        let link = trgL.data("link");
+        let soal = trgL.data("soal");
 
         $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus SOAL");
         $(this).find('.modal-footer a').attr("href",link);
@@ -215,4 +209,4 @@ $this->load->view('admin/pages/md_konfirm', $md_hapus);
     });
 
   });
-</script>
+  </script>

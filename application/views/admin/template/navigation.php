@@ -140,7 +140,7 @@
                 <i class="far fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="<?= base_url('admin/logout'); ?>" class="dropdown-item has-icon text-danger">
+              <a href="<?= base_url('admin/login/logout'); ?>" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
             </div>

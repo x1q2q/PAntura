@@ -37,16 +37,13 @@
       </div>
       <div class="card-body p-4">
         <div class="table-responsive">
-          <table class="table table-striped" id="table-viewjwbn">
+          <table class="table table-striped" id="table-skoringesai">
             <thead>
-              <tr>
-                <th scope="col" class="sort" data-sort="id_quizjawaban">No.</th>
-                <th scope="col" class="sort" data-sort="kode_jawaban">#KODE Soal</th>
-                <th scope="col" class="sort" data-sort="siswa_regu">Penjawab</th>
-                <th scope="col" class="sort" data-sort="nm_sekolah">Sekolah</th>
-                <th scope="col" class="sort" data-sort="nm_pos">POS Tempat</th>
-                <th scope="col" class="sort" data-sort="submited_at">TGL Submit</th>
-                <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
+                <th scope="col" class="sort" data-sort="kode_jawaban">Kode - POS</th>
+                <th scope="col" class="sort" data-sort="nm_sekolah">Penjawab - Sekolah</th>
+                <th scope="col" class="sort" data-sort="soal">Soal - Jawaban</th>
+                <th scope="col" class="sort" data-sort="jawaban">JWBN. SISWA</th>
+                <th scope="col" class="sort text-center" data-sort"skoring">Skoring</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -60,23 +57,16 @@
 </div>
 </section>
 </div>
-
-<?php
-  // modal page section
-
-  $md_hapus = array(
-    'div_id'      => 'modal-delete',
-    'btn_color'   => 'danger',
-    'btn_title'   => 'Ya, Hapus',
-  );
-  $this->load->view('admin/pages/md_konfirm',$md_hapus);
-?>
-
+<style type="text/css">
+  .input-skor{
+    width: 80px;
+  }
+</style>
 <script type="text/javascript">
   var tabel = null;
-  var urldata = "<?php echo base_url('admin/datajawaban/') ?>";
+  var urldata = "<?php echo base_url('admin/skoringesai/') ?>";
   $(document).ready(function() {
-      tabel = $('#table-viewjwbn').DataTable({
+      tabel = $('#table-skoringesai').DataTable({
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
@@ -89,48 +79,35 @@
           "deferRender": true,
           "aLengthMenu": [[10, 15, 25],[ 10, 15, 25]], // Combobox Limit
           "columnDefs": [
-              { className: "text-center", "targets": [6] },
+              { className: "text-center", "targets": [4] },
             ],
 
           "columns": [
-              {"data": "id_quizjawaban",
-              render: function (data, type, row, meta) {
-                  return meta.row + meta.settings._iDisplayStart + 1;
-              }},
               { "data": "kode_jawaban",
               render: function (data, type, row, meta) {
-                return '<span class="badge badge-dark">'+row.kode_jawaban+'</span>';
+                var pos = '<br/>'+row.nm_pos+'<br/>'+row.nm_tempat;
+                return '<span class="badge badge-dark">'+row.kode_jawaban+'</span>'+pos;
               }},
               { "data": "username",
               render: function (data, type, row, meta) {
-                  return '<b>('+row.username+' - '+row.regu+')</b>';
+                var sekolah = '<br/>'+row.nm_sekolah;
+                  return '<b>('+row.username+' - '+row.regu+')</b>'+sekolah;
               }},
-              { "data": "nm_sekolah"},
-              { "data": "nm_pos",
+              { "data": "username",
               render: function (data, type, row, meta) {
-                return '<u>'+row.nm_pos+'-'+row.nm_tempat+'</u>';
+                var jwbn = '(Jawaban: '+row.pilihan+')';
+                  return row.soal+jwbn;
               }},
-              { "data": "submited_at"},
+              { "data": "jawaban"},
               { "render": function ( data, type, row ) {
 
-                var btn = '<a href="'+urldata+'detail/'+row.siswa_id+'/'+row.kode_jawaban+'"'+
-                  ' class="btn btn-primary btn-action mr-1" data-toggle="tooltip"'+
-                  ' title="Detail" >Detail <i class="fas fa-eye"></i></a>';
+                var btn = '<div class="btn-group"> <input type="number" class="input-skor" placeholder="0-100">'+
+                  '<a class="btn btn-success btn-action mr-1" data-toggle="tooltip"'+
+                  ' title="Detail" >Update</a></div>';
                   return btn;
                 }
               },
           ],
       });
-    //
-    //  $("#modal-delete").on('show.bs.modal', function (e) {
-    //     let trgL = $(e.relatedTarget);
-    //     let link = trgL.data("link");
-    //     let jawaban = trgL.data("jawaban");
-    //
-    //     $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus JAWABAN");
-    //     $(this).find('.modal-footer a').attr("href",link);
-    //     $(this).find(".modal-body").html("Yakin Menghapus jawban untuk:<br/> <strong>"+jawaban+"</strong> dari data Jawaban?");
-    // });
-
   });
   </script>

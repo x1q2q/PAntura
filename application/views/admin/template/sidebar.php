@@ -39,9 +39,9 @@
           <a class="nav-link" href="<?= base_url('admin/datajawaban'); ?>">
             <i class="fas fa-pencil-ruler"></i><span>Data Jawaban</span></a>
         </li>
-        <li class="<?php if($for == 'esaipanitia'){echo "active";} ?>">
-          <a class="nav-link" href="<?= base_url('admin/esaipanitia'); ?>">
-            <i class="fas fa-keyboard"></i><span>Esai Panitia</span></a>
+        <li class="<?php if($for == 'skoringesai'){echo "active";} ?>">
+          <a class="nav-link" href="<?= base_url('admin/skoringesai'); ?>">
+            <i class="fas fa-keyboard"></i><span>Skoring Esai</span></a>
         </li>
         <hr>
         <li class="menu-header px-4">Skor</li>
