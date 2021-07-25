@@ -39,7 +39,7 @@ class M_soal extends CI_Model {
     $this->db->join('pa_quiz_pilihan pl','qs.id_quizsoal=pl.quizsoal_id','left');
     $this->db->where('qs.kode', $kode);
     $this->db->where('qs.pos_id', $pos);
-    $this->db->order_by('qs.soal', 'asc');
+    $this->db->order_by('qs.soal', 'desc');
     return $this->db->get()->result_array();
   }
 }
