@@ -34,7 +34,7 @@ class Login extends CI_Controller {
           $role 		= $profil->role;
         }
         if($row > 0){
-          $this->session->set_flashdata('login_sukses',strtoupper('Selamat datang '.$unama));
+          $this->session->set_flashdata('login_sukses',strtoupper('Selamat datang '.$uname));
           $this->session->set_userdata(array('user_admin' => $getid));
           redirect('admin/dashboard');
         }else{
