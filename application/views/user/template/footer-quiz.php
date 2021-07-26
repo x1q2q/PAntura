@@ -13,15 +13,8 @@
 <script src="<?= base_url('assets/'); ?>js/stisla.js"></script>
 
 <!-- JS Libraies -->
-<script src="<?= base_url('assets/'); ?>vendor/jquery.sparkline.min.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/chart.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/owlcarousel2/dist/owl.carousel.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/summernote/summernote-bs4.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/chocolat/dist/js/jquery.chocolat.min.js"></script>
-
-<!-- Page Specific JS File -->
-<script src="<?= base_url('assets/'); ?>js/page/index.js"></script>
-
 <!-- Template JS File -->
 <script src="<?= base_url('assets/'); ?>js/scripts.js"></script>
 <script src="<?= base_url('assets/'); ?>js/custom.js"></script>
@@ -110,10 +103,11 @@
           dtpilihane.push({
             "quizsoal_id": $(this).find('.row .col label input:checked').attr('name'),
             "quizpilihan_id": $(this).find('.row .col label input:checked').data('idpilihan'),
+            "jawaban_pilihan": $(this).find('.row .col label input:checked').data('pilihan'),
             "is_benar": (pilbenar=='1')?pilbenar:'0'
           });
       });
-
+      //
       dtJawaban.push({
           "kode_jawaban": kode_jawaban,
           "pos_id": pos_id,
@@ -121,7 +115,6 @@
       });
     }); // each lsiting box soal
     inputDatabase(dtJawaban);
-    // console.log(dtJawaban);
   }
   function inputDatabase(dtJawaban){
     var jawaban = JSON.stringify(dtJawaban);

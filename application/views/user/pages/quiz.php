@@ -5,7 +5,6 @@
 } */
 </style>
 <main>
-  <?php var_dump($dt_soal); ?>
   <div class="container">
     <section>
       <div class="row mt-5">
@@ -44,8 +43,8 @@
       <?php
         foreach ($dt_pos as $res) {
       ?>
-        <input type="text" name="pos_id" id="pos_id" value="<?= $res['pos_id'];?>" hidden>  
-        <input type="text" name="kode_jawaban" id="kode_jawaban" value="<?= $res['kode'];?>" hidden>  
+        <input type="text" name="pos_id" id="pos_id" value="<?= $res['pos_id'];?>" hidden>
+        <input type="text" name="kode_jawaban" id="kode_jawaban" value="<?= $res['kode'];?>" hidden>
       <?php
         }
       ?>
@@ -75,7 +74,7 @@
                         <label class="d-block
                           w-100" for="<?= $value["id_soal"] ?>-<?= $nopil ?>">
                           <div type="button" class="
-                          btn 
+                          btn
                           <?php if ($nopil == 1) : ?>
                           btn-info
                           <?php elseif ($nopil == 2) : ?>
@@ -93,7 +92,8 @@
                           white-space
                           py-3
                         ">
-                            <input type="radio" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" name="<?= $value["id_soal"] ?>" value="<?= $ans['is_benar'] ?>" id="<?= $value["id_soal"] ?>-<?= $nopil ?>">
+                            <input type="radio" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>"
+                            value="<?= $ans['is_benar'] ?>" id="<?= $value["id_soal"] ?>-<?= $nopil ?>">
                             <?= $ans["pilihan"] ?>
                           </div>
                         </label>
