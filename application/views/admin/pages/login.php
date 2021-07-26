@@ -47,7 +47,7 @@
                   <div class="input-group-text"> <i class="fa fa-user"></i> </div>
                 </div>
                 <input id="username" type="text" class="form-control" name="username"
-                tabindex="1" required autofocus>
+                tabindex="1" required autofocus placeholder="masukkan username anda">
                 <div class="invalid-feedback">
                 Silakan isi username anda
                 </div>
@@ -61,7 +61,7 @@
                   <div class="input-group-text"> <i class="fa fa-eye"></i> </div>
                 </div>
                 <input id="password" type="password" class="form-control" name="password"
-                tabindex="2" required>
+                tabindex="2" required placeholder="masukkan password anda">
                 <div class="invalid-feedback">
                  Silakan isi password anda
                 </div>

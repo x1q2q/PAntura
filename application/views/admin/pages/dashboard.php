@@ -70,7 +70,7 @@
             </div>
             <div class="card-body pb-0">
               <?php if($this->session->flashdata('login_sukses')){ ?>
-                <div class="m-2 alert alert-success alert-dismissible show fade alert-has-icon">
+                <div class="alert alert-success alert-dismissible show fade alert-has-icon">
                   <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
                   <div class="alert-body">
                     <div class="alert-title">Sukses </div>

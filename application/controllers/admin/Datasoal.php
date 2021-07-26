@@ -105,9 +105,6 @@ class Datasoal extends CI_Controller {
 		}
 	}
 	public function detail($jml,$kode){
-		function replace_img($soal,$imgname){
-			return str_replace('src="'.$imgname.'"','src="'.base_url(PATH_IMGSOAL).$imgname.'"', $soal);
-		}
 		$pos_data  = $this->m_pos->get_join_detail($kode);
 		$soal_asal = $this->m_soal->get_soal_detail($kode,$pos_data[0]["pos_id"]);
 		$soal_data = array();
@@ -157,9 +154,6 @@ class Datasoal extends CI_Controller {
 			$this->load->view('admin/template/content',$data);
 	}
 	public function inputsoal(){
-		function replace_url($imgpath){ // mengganti src imgpath ke hanya nama saja
-			return str_replace(base_url(PATH_IMGSOAL),"",$imgpath);
-		}
 		$soal = json_decode($_POST['soal']);
 		foreach($soal as $val){
 			foreach($val->posid as $dtposid){
@@ -202,15 +196,19 @@ class Datasoal extends CI_Controller {
 		$query = $this->m_global->get_detail('pa_quiz_soal',array('kode' => $id));
 		foreach($query->result() as $val){
 			$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
-	  	unlink($file_name);
+	  	if(unlink($file_name)){
+				$where = array('kode' => $id);
+				$delete = $this->db->delete('pa_quiz_soal', $where);
+				if($delete){
+					$this->session->set_flashdata('merah','Data Quiz Soal berhasil dihapus');
+				}else{
+					$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
+				}
+			}else{
+				$this->session->set_flashdata('merah','Data Image gagal dihapus + data Quiz Soal gagal dihapus');
+			}
 		}
-		$where = array('kode' => $id);
-		$delete = $this->db->delete('pa_quiz_soal', $where);
-		if($delete){
-			$this->session->set_flashdata('merah','Data Quiz Soal berhasil dihapus');
-		}else{
-			$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
-		}
+
 		redirect('admin/datasoal');
 	}
 	public function upload_image(){

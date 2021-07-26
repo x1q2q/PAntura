@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jul 2021 pada 07.24
+-- Waktu pembuatan: 25 Jul 2021 pada 22.56
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -93,6 +93,8 @@ CREATE TABLE `pa_quiz_jawaban` (
   `quizsoal_id` varchar(30) NOT NULL,
   `kode_jawaban` varchar(10) NOT NULL,
   `quizpilihan_id` int(11) NOT NULL,
+  `jenis_jawaban` enum('esai','pilgan') NOT NULL,
+  `jawaban` text NOT NULL,
   `siswa_id` int(11) NOT NULL,
   `is_jawaban_benar` enum('1','0') NOT NULL,
   `submited_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -102,16 +104,16 @@ CREATE TABLE `pa_quiz_jawaban` (
 -- Dumping data untuk tabel `pa_quiz_jawaban`
 --
 
-INSERT INTO `pa_quiz_jawaban` (`id_quiz_jawaban`, `pos_id`, `quizsoal_id`, `kode_jawaban`, `quizpilihan_id`, `siswa_id`, `is_jawaban_benar`, `submited_at`) VALUES
-(1, 1, 'QZ199043', 'PA-4M12D9D', 46, 1, '0', '2021-07-20 08:42:25'),
-(2, 1, 'QZ210626', 'PA-4M12D9D', 41, 1, '1', '2021-07-20 08:44:32'),
-(3, 1, 'QZ506281', 'PA-4M12D9D', 40, 2, '1', '2021-07-20 08:45:28'),
-(4, 1, 'QZ506281', 'PA-4M12D9D', 40, 1, '1', '2021-07-20 14:45:32'),
-(5, 1, 'QZ199043', 'PA-4M12D9D', 45, 2, '1', '2021-07-20 14:53:53'),
-(6, 1, 'QZ210626', 'PA-4M12D9D', 41, 2, '1', '2021-07-20 14:53:53'),
-(7, 3, 'QZ136977', 'PA-RX859YG', 78, 1, '0', '2021-07-20 15:00:11'),
-(8, 3, 'QZ118570', 'PA-RX859YG', 74, 1, '1', '2021-07-20 15:00:11'),
-(9, 3, 'QZ152026', 'PA-RX859YG', 73, 1, '1', '2021-07-20 15:00:11');
+INSERT INTO `pa_quiz_jawaban` (`id_quiz_jawaban`, `pos_id`, `quizsoal_id`, `kode_jawaban`, `quizpilihan_id`, `jenis_jawaban`, `jawaban`, `siswa_id`, `is_jawaban_benar`, `submited_at`) VALUES
+(1, 1, 'QZ199043', 'PA-4M12D9D', 46, 'pilgan', '-', 1, '0', '2021-07-20 08:42:25'),
+(2, 1, 'QZ210626', 'PA-4M12D9D', 41, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 08:44:32'),
+(3, 1, 'QZ506281', 'PA-4M12D9D', 40, 'pilgan', '-', 2, '1', '2021-07-20 08:45:28'),
+(4, 1, 'QZ506281', 'PA-4M12D9D', 40, 'pilgan', '-', 1, '1', '2021-07-20 14:45:32'),
+(5, 1, 'QZ199043', 'PA-4M12D9D', 45, 'pilgan', '-', 2, '1', '2021-07-20 14:53:53'),
+(6, 1, 'QZ210626', 'PA-4M12D9D', 41, 'esai', 'sudah diisikan bosq', 2, '1', '2021-07-20 14:53:53'),
+(7, 3, 'QZ136977', 'PA-RX859YG', 78, 'pilgan', '-', 1, '0', '2021-07-20 15:00:11'),
+(8, 3, 'QZ118570', 'PA-RX859YG', 74, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 15:00:11'),
+(9, 3, 'QZ152026', 'PA-RX859YG', 73, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 15:00:11');
 
 -- --------------------------------------------------------
 
@@ -241,10 +243,18 @@ INSERT INTO `pa_siswa` (`id_siswa`, `regu`, `username`, `password`, `jenkel`, `s
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pa_skor`
+-- Struktur dari tabel `pa_skoring`
 --
--- Kesalahan membaca struktur untuk tabel pantura.pa_skor: #1932 - Table 'pantura.pa_skor' doesn't exist in engine
--- Kesalahan membaca data untuk tabel pantura.pa_skor: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `pantura`.`pa_skor`' at line 1
+
+CREATE TABLE `pa_skoring` (
+  `id_skor` int(11) NOT NULL,
+  `pos_id` int(11) NOT NULL,
+  `regu_id` int(11) NOT NULL,
+  `skor` float NOT NULL,
+  `tipe` enum('manual','otomatis') NOT NULL,
+  `deskripsi` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -358,13 +368,13 @@ ALTER TABLE `pa_pos`
 -- AUTO_INCREMENT untuk tabel `pa_quiz_jawaban`
 --
 ALTER TABLE `pa_quiz_jawaban`
-  MODIFY `id_quiz_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_quiz_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_quiz_pilihan`
 --
 ALTER TABLE `pa_quiz_pilihan`
-  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_sekolah`

@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="col-auto m-1">
-          <h5 style="border:2px dashed grey;" class="p-2">
+          <h5 style="border:2px solid grey;" class="p-2">
             <?php
             foreach($dt_pos as $res){
               echo $res["nm_pos"].'('.$res["nm_tempat"].')<br/>';

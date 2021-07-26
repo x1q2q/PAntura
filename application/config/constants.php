@@ -12,7 +12,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
-
+// my cosntanta
+define('PATH_IMGSOAL','./assets/img/datasoal/');
+define('RULES_SKORING',array('pilgan' => '2', 'esai1' => '100', 'esai2' => '60'));
 /*
 |--------------------------------------------------------------------------
 | File and Directory Modes
