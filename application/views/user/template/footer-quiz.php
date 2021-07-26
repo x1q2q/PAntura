@@ -1,6 +1,7 @@
 <?php $this->load->view($template); ?>
 
 <!-- General JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="<?= base_url('assets/'); ?>vendor/jquery.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/popper.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/tooltip.js"></script>
@@ -95,6 +96,45 @@
   }
 
   progressBar(60);
+
+  var urldata = "<?php echo base_url('user/quiz/') ?>";
+
+  function submitAll(){
+    var dtJawaban = [];
+    var pos_id = $('#pos_id').val();
+    var kode_jawaban = $('#kode_jawaban').val();
+    var dtpilihane = [];
+    $('#kawah-soal .box-soal').each(function(){
+      $(this).find('.row .col .card .card-body').each(function(){
+        var pilbenar = $(this).find('.row .col label input:checked').val();
+          dtpilihane.push({
+            "quizsoal_id": $(this).find('.row .col label input:checked').attr('name'),
+            "quizpilihan_id": $(this).find('.row .col label input:checked').data('idpilihan'),
+            "is_benar": (pilbenar=='1')?pilbenar:'0'
+          });
+      });
+
+      dtJawaban.push({
+          "kode_jawaban": kode_jawaban,
+          "pos_id": pos_id,
+          "dtpilihan":dtpilihane
+      });
+    }); // each lsiting box soal
+    inputDatabase(dtJawaban);
+    // console.log(dtJawaban);
+  }
+  function inputDatabase(dtJawaban){
+    var jawaban = JSON.stringify(dtJawaban);
+    $.ajax({
+         type: "POST",
+         url:  urldata+'inputjawaban/',
+         data: {jawaban: jawaban},
+         cache:false,
+         success: function(data){
+            window.location.replace(data);
+          }
+    });
+  }
 
   function killCopy(e) {
     return false;

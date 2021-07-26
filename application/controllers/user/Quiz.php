@@ -1,78 +1,101 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Quiz extends CI_Controller {
-	public function __construct(){
-    parent::__construct();
-  }
-  public function index(){
-    $data = array(
-      'template'		=> 'user/pages/quiz',
-      'for'					=> 'quiz',
+class Quiz extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	public function index()
+	{
+		$data = array(
+			'template'		=> 'user/pages/quiz',
+			'for'					=> 'quiz',
 			'dropdown'		=> '',
-      'titlebread'	=> 'Home',
-      );
-			$this->load->view('user/template/navbar-quiz',$data);
-			$this->load->view('user/template/footer-quiz',$data);
-  }
-  public function k($kode){
-    $pos_data  = $this->m_pos->get_join_detail($kode);
-		$soal_asal = $this->m_soal->get_soal_detail($kode,$pos_data[0]["pos_id"]);
-		$soal_data = array();
-		foreach($soal_asal as $val){
-			$soal_data[$val["soal"]][] = $val;
+			'titlebread'	=> 'Home',
+		);
+		$this->load->view('user/template/navbar-quiz', $data);
+		$this->load->view('user/template/footer-quiz', $data);
+	}
+	public function k($kode)
+	{
+		$sesi = $this->session->userdata('user');
+		if (empty($sesi)) {
+			redirect('user/login');
 		}
-		$no=0;
+		$pos_data  = $this->m_pos->get_join_detail($kode);
+		$soal_asal = $this->m_soal->get_soal_detail($kode, $pos_data[0]["pos_id"]);
+		$soal_data = array();
+		foreach ($soal_asal as $val) {
+			$soal_data[$val["id_quizsoal"]][] = $val;
+		}
 		$dt_new = array();
-		foreach($soal_data as $res){
-			array_push($dt_new,
-				array(
-						"soal" => $res[$no]["soal"],
-						"id_soal" => $res[$no]["id_quizsoal"],
-            "gambar" => $res[$no]["img_path"],
-						"jenis" => $res[$no]["jenis"],
-						"dt_pilihan" => []
-				)
-			);
+		foreach($soal_data as $key => $res){
+			$dt_push = array('dt_pilihan' => []);
+			foreach($res as $val){
+				$dt_push["soal"]	= replace_img($val["soal"],$val["img_path"]);
+				$dt_push["jenis"]	= $val["jenis"];
+				$dt_push["id_soal"] = $val["id_quizsoal"];
+			}
 			foreach($soal_asal as $res2){
-				if($res[$no]["id_quizsoal"] == $res2["quizsoal_id"]){
+				if($key == $res2["quizsoal_id"]){
 					array_push(
-						$dt_new[$no]["dt_pilihan"],
+						$dt_push["dt_pilihan"],
 							array(
 								"pilihan" => $res2["pilihan"],
-								"is_benar" => $res2["is_pilihan_benar"]
+								"is_benar" => $res2["is_pilihan_benar"],
+								"id_quizpilihan" => $res2['id_quizpilihan']
 							)
 					);
 				}
 			}
-			$no++;
+			array_push($dt_new,$dt_push);
 		}
-    $data = array(
-      'template'		=> 'user/pages/quiz',
-      'for'					=> 'quiz',
-      'kode'				=> $kode,
+		$data = array(
+			'template'		=> 'user/pages/quiz',
+			'for'					=> 'quiz',
+			'kode'				=> $kode,
 			'dt_pos'			=> $pos_data,
 			'dt_soal'			=> $dt_new,
 			'dropdown'		=> '',
-      'titlebread'	=> 'Home',
-      );
-			$this->load->view('user/template/navbar-quiz',$data);
-			$this->load->view('user/template/footer-quiz',$data);
-  }
-  public function essay(){
-    $data = array(
-      'template'		=> 'user/pages/quiz-essay',
-      'for'					=> 'quiz',
+			'titlebread'	=> 'Home',
+		);
+		$this->load->view('user/template/navbar-quiz', $data);
+		$this->load->view('user/template/footer-quiz', $data);
+	}
+	public function essay()
+	{
+		$data = array(
+			'template'		=> 'user/pages/quiz-essay',
+			'for'					=> 'quiz',
 			'dropdown'		=> '',
-      'titlebread'	=> 'Soal',
-      );
-			$this->load->view('user/template/navbar-quiz',$data);
-			$this->load->view('user/template/footer-quiz',$data);
-  }
-  public function inputjawaban(){
-	  $user = $this->input->post('user');
-  }
-  public function error(){
-
-  }
+			'titlebread'	=> 'Soal',
+		);
+		$this->load->view('user/template/navbar-quiz', $data);
+		$this->load->view('user/template/footer-quiz', $data);
+	}
+	public function inputjawaban()
+	{
+		$user = $this->session->userdata('user');
+		$submitedat = get_timestamp('Y-m-d H:i:s');
+		$jawaban = json_decode($_POST['jawaban']);
+		foreach($jawaban as $ans){
+			foreach($ans['dtpilihan'] as $pilihan){
+				$dt_jawaban = array(
+					'pos_id' => $ans['pos_id'],
+					'siswa_id' => $user,
+					'quizsoal_id' => $pilihan['quizsoal_id'],
+					'quizpilihan_id' => $pilihan['quizpilihan_id'],
+					'is_jawaban_benar' => $pilihan['is_benar'],
+					'submited_at' => $submitedat
+				);
+				$this->db->insert('pa_quiz_jawaban', $dt_jawaban);
+			}
+		}
+		// redirect('user/');
+	}
+	public function error()
+	{
+	}
 }

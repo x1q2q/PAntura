@@ -6,6 +6,10 @@ class Kode extends CI_Controller {
     parent::__construct();
   }
   public function index(){
+    $sesi = $this->session->userdata('user');
+    if (empty($sesi)) {
+      redirect('user/login');
+    }
     $data = array(
       'template'		=> 'user/pages/kode',
       'for'					=> 'kode',

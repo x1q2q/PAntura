@@ -1,10 +1,11 @@
 <!-- Main -->
 <style>
-/* input[type=radio]{
+  /* input[type=radio]{
   float: left;
 } */
 </style>
 <main>
+  <?php var_dump($dt_soal); ?>
   <div class="container">
     <section>
       <div class="row mt-5">
@@ -39,26 +40,28 @@
         </div>
       </div>
     </section>
-      <form action="<?= base_url('user/inputjawaban');?>" method="post">
-      <input type="text" name="user" id="user" value="<?= $this->session->userdata('user'); ?>" hidden>
+      <form action="<?= base_url('user/inputjawaban'); ?>" method="post" id="kawah-soal">
+      <?php
+        foreach ($dt_pos as $res) {
+      ?>
+        <input type="text" name="pos_id" id="pos_id" value="<?= $res['pos_id'];?>" hidden>  
+        <input type="text" name="kode_jawaban" id="kode_jawaban" value="<?= $res['kode'];?>" hidden>  
+      <?php
+        }
+      ?>
       <?php
       foreach ($dt_soal as $value) :
       ?>
-        <section>
+        <section class="box-soal">
           <div class="row d-flex align-items-star justify-content-between">
             <div class="col">
               <div class="card lengkung-20 bg-primary">
                 <div class="card-header d-inline">
                   <div class="row">
-                    <?php if ($value["gambar"] > 0) { ?>
-                      <div class="col-lg-6 col-sm-12">
-                        <img src="<?= base_url('assets/'); ?>img/img_soal_placeholder.png" alt="image soal" class="img-fluid" />
+                    <div class="col-lg-12 col-sm-12 mt-3">
+                      <div class="font-20" id="soal">
+                        <?= $value["soal"]; ?>
                       </div>
-                    <?php } ?>
-                    <div class="col-lg-6 col-sm-12 mt-3">
-                      <p class="font-20" id="soal">
-                        <?= strip_tags($value["soal"]); ?>
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -70,7 +73,8 @@
                     <div class="row">
                       <div class="col mb-3">
                         <label class="d-block
-                          w-100" for="<?=$value["id_soal"]?>-<?= $nopil?>"><div type="button" class="
+                          w-100" for="<?= $value["id_soal"] ?>-<?= $nopil ?>">
+                          <div type="button" class="
                           btn 
                           <?php if ($nopil == 1) : ?>
                           btn-info
@@ -89,7 +93,7 @@
                           white-space
                           py-3
                         ">
-                            <input type="radio" name="<?=$value["id_soal"]?>" value="<?= $nopil?>" id="<?=$value["id_soal"]?>-<?= $nopil?>">
+                            <input type="radio" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" name="<?= $value["id_soal"] ?>" value="<?= $ans['is_benar'] ?>" id="<?= $value["id_soal"] ?>-<?= $nopil ?>">
                             <?= $ans["pilihan"] ?>
                           </div>
                         </label>
@@ -106,11 +110,11 @@
       <section class="mb-5">
         <div class="row">
           <div class="col">
-            <button type="submit" id="submit" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15">Kirim</a>
+            <button type="button" id="submit" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15" onclick="submitAll()">Kirim</a>
           </div>
         </div>
       </section>
-      </form>
+    </form>
   </div>
 </main>
 <!-- Main -->

@@ -4,7 +4,7 @@
         <h1 class="text-white mt-5">Pilih POS</h1>
         <div class="row d-flex align-items-center justify-content-between">
             <div class="col-lg-4 col-sm-12 mt-5">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
                             <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-12 mt-5">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
                             <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
@@ -28,7 +28,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-12 mt-5">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
                             <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
@@ -40,7 +40,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-12 mt-5">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
                             <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
@@ -52,7 +52,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-12 mt-5">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
                             <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
