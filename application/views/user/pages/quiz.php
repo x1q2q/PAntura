@@ -1,4 +1,9 @@
 <!-- Main -->
+<style>
+/* input[type=radio]{
+  float: left;
+} */
+</style>
 <main>
   <div class="container">
     <section>
@@ -34,7 +39,8 @@
         </div>
       </div>
     </section>
-      <form action="" method="get">
+      <form action="<?= base_url('user/inputjawaban');?>" method="post">
+      <input type="text" name="user" id="user" value="<?= $this->session->userdata('user'); ?>" hidden>
       <?php
       foreach ($dt_soal as $value) :
       ?>
@@ -51,7 +57,7 @@
                     <?php } ?>
                     <div class="col-lg-6 col-sm-12 mt-3">
                       <p class="font-20" id="soal">
-                        <?= $value["soal"]; ?>
+                        <?= strip_tags($value["soal"]); ?>
                       </p>
                     </div>
                   </div>
@@ -64,7 +70,7 @@
                     <div class="row">
                       <div class="col mb-3">
                         <label class="d-block
-                          w-100"><button type="button" class="
+                          w-100" for="<?=$value["id_soal"]?>-<?= $nopil?>"><div type="button" class="
                           btn 
                           <?php if ($nopil == 1) : ?>
                           btn-info
@@ -83,9 +89,9 @@
                           white-space
                           py-3
                         ">
-                            <input type="radio" name="q_answer" value="<?= $nopil?>" style="display: contents;">
+                            <input type="radio" name="<?=$value["id_soal"]?>" value="<?= $nopil?>" id="<?=$value["id_soal"]?>-<?= $nopil?>">
                             <?= $ans["pilihan"] ?>
-                          </button>
+                          </div>
                         </label>
                       </div>
                     </div>

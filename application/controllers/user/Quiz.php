@@ -28,6 +28,7 @@ class Quiz extends CI_Controller {
 			array_push($dt_new,
 				array(
 						"soal" => $res[$no]["soal"],
+						"id_soal" => $res[$no]["id_quizsoal"],
             "gambar" => $res[$no]["img_path"],
 						"jenis" => $res[$no]["jenis"],
 						"dt_pilihan" => []
@@ -67,6 +68,9 @@ class Quiz extends CI_Controller {
       );
 			$this->load->view('user/template/navbar-quiz',$data);
 			$this->load->view('user/template/footer-quiz',$data);
+  }
+  public function inputjawaban(){
+	  $user = $this->input->post('user');
   }
   public function error(){
 
