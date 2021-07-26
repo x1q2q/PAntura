@@ -80,18 +80,19 @@ class Quiz extends CI_Controller
 		$user = $this->session->userdata('user');
 		$submitedat = get_timestamp('Y-m-d H:i:s');
 		$jawaban = json_decode($_POST['jawaban']);
-		foreach($jawaban as $ans){
-			foreach($ans['dtpilihan'] as $pilihan){
-				$dt_jawaban = array(
-					'pos_id' => $ans['pos_id'],
-					'siswa_id' => $user,
-					'quizsoal_id' => $pilihan['quizsoal_id'],
-					'quizpilihan_id' => $pilihan['quizpilihan_id'],
-					'is_jawaban_benar' => $pilihan['is_benar'],
-					'submited_at' => $submitedat
+		foreach($jawaban[0]->dtpilihan as $ans){
+			$dt_jawaban = array(
+							"pos_id" 				=> $jawaban[0]->pos_id,
+							"siswa_id"			=> $user,
+							"submited_at"		=> $submitedat,
+							"jenis_jawaban" => "pilgan",
+							"kode_jawaban"	=> $jawaban[0]->kode_jawaban,
+							"quizsoal_id"		=> $ans->quizsoal_id,
+							"quizpilihan_id"=> $ans->quizpilihan_id,
+							"jawaban"				=> $ans->jawaban_pilihan,
+							"is_jawaban_benar"=> $ans->is_benar
 				);
-				$this->db->insert('pa_quiz_jawaban', $dt_jawaban);
-			}
+			$this->db->insert('pa_quiz_jawaban', $dt_jawaban);
 		}
 		// redirect('user/');
 	}
