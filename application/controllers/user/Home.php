@@ -23,7 +23,7 @@ class Home extends CI_Controller
     $this->load->view('user/template/footer', $data);
   }
   public function success(){
-    
+    $this->load->view('user/pages/complete');
   }
   public function error()
   {
