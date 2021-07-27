@@ -98,7 +98,9 @@
     var kode_jawaban = $('#kode_jawaban').val();
     var dtpilihane = [];
     $('#kawah-soal .box-soal').each(function(){
-      $(this).find('.row .col .card .card-body').each(function(){
+      var jenis = $(this).find('#soal').data('jenis');
+      if(jenis === 'pilgan'){
+        $(this).find('.row .col .card .card-body').each(function(){
         var pilbenar = $(this).find('.row .col label input:checked').val();
           dtpilihane.push({
             "quizsoal_id": $(this).find('.row .col label input:checked').attr('name'),
@@ -106,11 +108,24 @@
             "jawaban_pilihan": $(this).find('.row .col label input:checked').data('pilihan'),
             "is_benar": (pilbenar=='1')?pilbenar:'0'
           });
-      });
+        });
+      }else{
+        var jawabanEssay = $(this).find('.form-control.jawaban-essay').val();
+        if(jawabanEssay.trim().length > 0){
+          dtpilihane.push({
+            "quizsoal_id": $(this).find('.form-control.jawaban-essay').attr('name'),
+            "quizpilihan_id": $(this).find('.form-control.jawaban-essay').data('idpilihan'),
+            "jawaban_pilihan": jawabanEssay,
+            "is_benar": '1'
+          })
+        }
+      }
+      
       //
       dtJawaban.push({
           "kode_jawaban": kode_jawaban,
           "pos_id": pos_id,
+          "jenis": jenis,
           "dtpilihan":dtpilihane
       });
     }); // each lsiting box soal

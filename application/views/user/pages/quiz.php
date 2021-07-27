@@ -58,14 +58,14 @@
                 <div class="card-header d-inline">
                   <div class="row">
                     <div class="col-lg-12 col-sm-12 mt-3">
-                      <div class="font-20" id="soal">
+                      <div class="font-20" id="soal" data-jenis="<?= $value["jenis"];?>">
                         <?= $value["soal"]; ?>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="card-body text-center">
-
+                  <?php if($value["jenis"] == "pilgan"):?>
                   <?php
                   $nopil = 1;
                   foreach ($value["dt_pilihan"] as $ans) : ?>
@@ -102,6 +102,15 @@
                   <?php
                     $nopil++;
                   endforeach; ?>
+                  <?php else:?>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                            <textarea class="form-control lengkung-15 jawaban-essay" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endif;?>
                 </div>
               </div>
             </div>

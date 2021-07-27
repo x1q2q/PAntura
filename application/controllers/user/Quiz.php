@@ -85,7 +85,7 @@ class Quiz extends CI_Controller
 							"pos_id" 				=> $jawaban[0]->pos_id,
 							"siswa_id"			=> $user,
 							"submited_at"		=> $submitedat,
-							"jenis_jawaban" => "pilgan",
+							"jenis_jawaban" => $jawaban[0]->jenis,
 							"kode_jawaban"	=> $jawaban[0]->kode_jawaban,
 							"quizsoal_id"		=> $ans->quizsoal_id,
 							"quizpilihan_id"=> $ans->quizpilihan_id,
