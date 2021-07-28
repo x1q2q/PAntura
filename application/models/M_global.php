@@ -25,5 +25,18 @@ class M_global extends CI_Model {
 		}
     return ($tipe == 'nama')? $nama : $role;
   }
+  public function get_userdata($where){
+    $users = $this->m_global->get_detail('pa_siswa', $where);
+    foreach($users->result() as $user){
+      $data = array(
+        'username' => $user->username,
+        'regu' => $user->regu,
+        'jenkel' => $user->jenkel,
+        'sekolah_id' => $user->sekolah_id,
+        'password' => $user->password
+      ); 
+    }
+    return $data;
+  }
 }
 ?>

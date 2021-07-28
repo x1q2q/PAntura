@@ -9,35 +9,35 @@
                             <form action="">
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Username</label>
-                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="saepul12" />
+                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="<?= $user['username'];?>" disabled/>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Password</label>
-                                    <input type="password" class="form-control py-4 lengkung-15 text-primary" value="Saeful Anwar" />
+                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="<?= $user['password'];?>" disabled/>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Nama Regu</label>
-                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="REGU PRAMUKA" />
+                                    <input type="text" class="form-control py-4 lengkung-15 text-primary text-capitalize" value="<?= $user['regu'];?>" disabled/>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Sekolah</label>
-                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="SMA Negeri 1 Purbalingga" />
+                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="<?= $sekolah;?>" disabled/>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Tempat</label>
-                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="SMA Negeri 1 Purbalingga" disabled />
+                                    <input type="text" class="form-control py-4 lengkung-15 text-primary" value="<?= $sekolah;?>" disabled />
                                 </div>
                                 <div class="form-group">
                                     <label class="font-18 text-primary">Jenis Kelamin</label>
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" checked />
+                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" <?php if($user['jenkel'] == 'laki-laki'){?> checked <?php }else{?> <?php }?> disabled/>
                                             <label class="form-check-label font-20 text-primary" for="exampleRadios1">
                                                 Laki-laki
                                             </label>
                                         </div>
                                         <div class="form-check ml-3">
-                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios2" checked />
+                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios2" <?php if($user['jenkel'] == 'perempuan'){?> checked <?php }else{?> <?php }?> disabled/>
                                             <label class="form-check-label font-20 text-primary" for="exampleRadios2">
                                                 Perempuan
                                             </label>
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center pt-3">
-                                    <button type="submit" class="btn btn-success font-32 py-3 lengkung-15 d-block w-100">
+                                    <button type="submit" disabled class="btn btn-success font-32 py-3 lengkung-15 d-block w-100">
                                         Simpan
                                     </button>
                                 </div>
@@ -57,7 +57,7 @@
                     <div class="card text-center lengkung-20 bg-primary">
                         <div class="card-header d-inline">
                             <ion-icon name="person-circle-outline" style="width: 100px; height: 100px" class="mt-3"></ion-icon>
-                            <h3 class="text-white">REGU GARUDA</h3>
+                            <h3 class="text-white text-uppercase">regu <?= $user['regu'];?></h3>
                             <a href="profile.html" class="text-white text-decoration-none">
                                 <p>EDIT PROFILE</p>
                             </a>

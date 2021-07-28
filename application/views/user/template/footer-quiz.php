@@ -59,7 +59,7 @@
     let percent
     let bar = document.getElementById("progressbar");
     let loop = function loop(progress) {
-      if (progress >= time + 1) {
+      if (progress > time + 1) {
         clearTimeout(timer);
         document.getElementById('submit').click()
         localStorage.removeItem('waktu')
@@ -82,7 +82,12 @@
         bar.textContent = waktu.toString().toHHMMSS();
         timer = setTimeout(loop, 1000, ++progress);
         // localStorage.setItem('bar', percent)
-        localStorage.setItem('waktu', waktu)
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            localStorage.setItem('waktu', waktu)
+          }
+        })
+        
       }
     };
     loop(progress);
@@ -92,26 +97,32 @@
 
   var urldata = "<?php echo base_url('user/quiz/') ?>";
 
-  function submitAll(){
+  function submitAll() {
     var dtJawaban = [];
     var pos_id = $('#pos_id').val();
     var kode_jawaban = $('#kode_jawaban').val();
     var dtpilihane = [];
-    $('#kawah-soal .box-soal').each(function(){
+    $('#kawah-soal .box-soal').each(function() {
       var jenis = $(this).find('#soal').data('jenis');
-      if(jenis === 'pilgan'){
-        $(this).find('.row .col .card .card-body').each(function(){
-        var pilbenar = $(this).find('.row .col label input:checked').val();
+      if (jenis === 'pilgan') {
+        $(this).find('.row .col .card .card-body').each(function() {
+          var pilbenar = $(this).find('.row .col label input:checked').val();
+          var quizsoal_id = $(this).find('.row .col label').attr('for');
+          var jawaban_pilihan = $(this).find('.row .col label input:checked').data('pilihan');
+          var quizpilihan_id = $(this).find('.row .col label input:checked').data('idpilihan');
+          quizpilihan_id = (quizpilihan_id !== undefined) ? quizpilihan_id : 0; 
+          quizsoal_id = quizsoal_id.substring(0, quizsoal_id.length - 2);
+          jawaban_pilihan = (jawaban_pilihan !== undefined) ? jawaban_pilihan : 'tidak terjawab';
           dtpilihane.push({
-            "quizsoal_id": $(this).find('.row .col label input:checked').attr('name'),
-            "quizpilihan_id": $(this).find('.row .col label input:checked').data('idpilihan'),
-            "jawaban_pilihan": $(this).find('.row .col label input:checked').data('pilihan'),
-            "is_benar": (pilbenar=='1')?pilbenar:'0'
+            "quizsoal_id": quizsoal_id,
+            "quizpilihan_id": quizpilihan_id,
+            "jawaban_pilihan": jawaban_pilihan,
+            "is_benar": (pilbenar == '1') ? pilbenar : '0'
           });
         });
-      }else{
+      } else {
         var jawabanEssay = $(this).find('.form-control.jawaban-essay').val();
-        if(jawabanEssay.trim().length > 0){
+        if (jawabanEssay.trim().length > 0) {
           dtpilihane.push({
             "quizsoal_id": $(this).find('.form-control.jawaban-essay').attr('name'),
             "quizpilihan_id": $(this).find('.form-control.jawaban-essay').data('idpilihan'),
@@ -120,27 +131,30 @@
           })
         }
       }
-      
+
       //
       dtJawaban.push({
-          "kode_jawaban": kode_jawaban,
-          "pos_id": pos_id,
-          "jenis": jenis,
-          "dtpilihan":dtpilihane
+        "kode_jawaban": kode_jawaban,
+        "pos_id": pos_id,
+        "jenis": jenis,
+        "dtpilihan": dtpilihane
       });
     }); // each lsiting box soal
     inputDatabase(dtJawaban);
   }
-  function inputDatabase(dtJawaban){
+
+  function inputDatabase(dtJawaban) {
     var jawaban = JSON.stringify(dtJawaban);
     $.ajax({
-         type: "POST",
-         url:  urldata+'inputjawaban/',
-         data: {jawaban: jawaban},
-         cache:false,
-         success: function(data){
-            window.location.replace(data);
-          }
+      type: "POST",
+      url: urldata + 'inputjawaban/',
+      data: {
+        jawaban: jawaban
+      },
+      cache: false,
+      success: function(data) {
+        window.location.replace(data);
+      }
     });
   }
 
