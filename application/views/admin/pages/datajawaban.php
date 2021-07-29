@@ -80,7 +80,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 3, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 5, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',

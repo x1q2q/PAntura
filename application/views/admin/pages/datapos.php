@@ -170,7 +170,7 @@
               "type": "POST"
           },
           "deferRender": true,
-          "aLengthMenu": [[10, 15, 25],[ 10, 15, 25]], // Combobox Limit
+          "aLengthMenu": [[5, 15, 30],[ 5, 15, 30]], // Combobox Limit
           "columnDefs": [
               { className: "text-center", "targets": [5] },
             ],

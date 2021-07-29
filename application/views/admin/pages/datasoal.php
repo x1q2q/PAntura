@@ -205,7 +205,8 @@
 
         $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus SOAL");
         $(this).find('.modal-footer a').attr("href",link);
-        $(this).find(".modal-body").html("Yakin Menghapus soal untuk:<br/> <strong>"+soal+"</strong> dari data SOAL?");
+        $(this).find(".modal-body").html("Yakin Menghapus soal untuk:<br/> <strong>"+soal+"</strong> dari data SOAL?<br/><br/><i>"+
+        "*menghapus SOAL berarti menghapus data jawaban siswa yang sudah masuk.</i>");
     });
 
   });

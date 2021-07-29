@@ -39,10 +39,11 @@
         <div class="table-responsive">
           <table class="table table-striped" id="table-skoringesai">
             <thead>
+                <th scope="col" class="sort" data-sort="id_quizsoal">ID soal</th>
                 <th scope="col" class="sort" data-sort="kode_jawaban">Kode - POS</th>
                 <th scope="col" class="sort" data-sort="nm_sekolah">Penjawab - Sekolah</th>
                 <th scope="col" class="sort" data-sort="soal">Soal - Jawaban</th>
-                <th scope="col" class="sort" data-sort="jawaban">JWBN. SISWA</th>
+                <th scope="col" class="sort" data-sort="jawaban">Jwbn. Siswa</th>
                 <th scope="col" class="sort text-center" data-sort"skoring">Skoring</th>
               </tr>
             </thead>
@@ -60,17 +61,19 @@
 <style type="text/css">
   .input-skor{
     width: 80px;
+    background: #eef;
   }
 </style>
 <script type="text/javascript">
   var tabel = null;
   var urldata = "<?php echo base_url('admin/skoringesai/') ?>";
+  var urlUpdate = urldata+'updateSkor/';
   $(document).ready(function() {
       tabel = $('#table-skoringesai').DataTable({
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 3, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 1, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -79,13 +82,18 @@
           "deferRender": true,
           "aLengthMenu": [[10, 15, 25],[ 10, 15, 25]], // Combobox Limit
           "columnDefs": [
-              { className: "text-center", "targets": [4] },
+              { className: "text-center", "targets": [0,1,4] },
             ],
 
           "columns": [
+              { "data": "id_quizsoal",
+              render: function (data, type, row, meta) {
+                var pos = '<br/>'+row.nm_pos;
+                return '<span class="badge badge-danger">'+row.id_quizsoal+'</span>'+pos;
+              }},
               { "data": "kode_jawaban",
               render: function (data, type, row, meta) {
-                var pos = '<br/>'+row.nm_pos+'<br/>'+row.nm_tempat;
+                var pos = '<br/>'+row.nm_tempat;
                 return '<span class="badge badge-dark">'+row.kode_jawaban+'</span>'+pos;
               }},
               { "data": "username",
@@ -101,9 +109,10 @@
               { "data": "jawaban"},
               { "render": function ( data, type, row ) {
 
-                var btn = '<div class="btn-group"> <input type="number" class="input-skor" placeholder="0-100">'+
-                  '<a class="btn btn-success btn-action mr-1" data-toggle="tooltip"'+
-                  ' title="Detail" >Update</a></div>';
+              var btn = '<form class="btn-group" method="post" action="'+urlUpdate+row.id_quizjawaban+'/"> <input type="number" name="skor" '+
+                ' class="input-skor form-control" placeholder="0-100" value='+row.skor +' required min="0" max="100">'+'<button type="submit" '+
+                ' class="btn btn-success btn-action mr-1" title="Detail" >Update</a></form>';
+
                   return btn;
                 }
               },

@@ -62,7 +62,9 @@ class Datasiswa extends CI_Controller {
 				'regu'					=> $this->input->post('regu'),
 				'username'			=> $username,
 				'password'			=> $this->input->post('password'),
-				'jenkel'				=> $jenkel
+				'jenkel'				=> $jenkel,
+				'is_login'			=> '0',
+				'skor_regu'			=> 0
 			);
 			$insert = $this->db->insert('pa_siswa',$dt_input);
 			if($insert){

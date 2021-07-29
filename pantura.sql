@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jul 2021 pada 22.56
+-- Waktu pembuatan: 29 Jul 2021 pada 15.23
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -51,8 +51,8 @@ INSERT INTO `pa_admin` (`id_admin`, `username`, `password`, `role`) VALUES
 CREATE TABLE `pa_notif` (
   `id_notif` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `judul_notif` text NOT NULL,
-  `stts_notif` enum('seen','unseen') NOT NULL
+  `judul_notif` text DEFAULT NULL,
+  `stts_notif` enum('seen','unseen') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,23 +63,28 @@ CREATE TABLE `pa_notif` (
 
 CREATE TABLE `pa_pos` (
   `id_pos` int(11) NOT NULL,
-  `tempat_id` int(11) NOT NULL,
-  `nm_pos` varchar(25) NOT NULL,
-  `lokasi_pos` text NOT NULL,
-  `deskripsi_pos` text NOT NULL
+  `tempat_id` int(11) DEFAULT NULL,
+  `nm_pos` varchar(25) DEFAULT NULL,
+  `lokasi_pos` text DEFAULT NULL,
+  `deskripsi_pos` text DEFAULT NULL,
+  `waktu` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pa_pos`
 --
 
-INSERT INTO `pa_pos` (`id_pos`, `tempat_id`, `nm_pos`, `lokasi_pos`, `deskripsi_pos`) VALUES
-(1, 1, 'Pos A', 'dekat pohon nangkas', 'Banyak orangnya di sini'),
-(2, 1, 'Pos B', 'dekat lapangan', 'banyak daunnya di sini'),
-(3, 3, 'Pos C', 'dekat sungai klawing', 'banyak orangnya di sini heheh'),
-(4, 3, 'Pos D', 'dekat pohon beringin', 'Ada duitnya'),
-(7, 3, 'Pos A', 'dekat sungai selo', 'dekat sekali gan'),
-(8, 4, 'Pos A', 'Dekat rumah bu nyai', '-');
+INSERT INTO `pa_pos` (`id_pos`, `tempat_id`, `nm_pos`, `lokasi_pos`, `deskripsi_pos`, `waktu`) VALUES
+(1, 1, 'POS A', 'deket langit-langit', 'Miniatur pionering', ''),
+(2, 1, 'POS B', 'deket longan', 'pengerahuan kepramukaan dan pengetahuan umum', ''),
+(3, 1, 'POS C', 'dekete amben', 'Tali-temali, morse dan semaphore', ''),
+(4, 1, 'POS D', 'deket jendela', 'Menaksir tinggi', ''),
+(5, 1, 'POS E', 'deket kursi', 'Ketangkasan (jumparingan)', ''),
+(6, 2, 'POS A', 'sebelah kanan jalan', 'Miniatur pionering', ''),
+(7, 2, 'POS B', 'persimpangan jalan', 'pengerahuan kepramukaan dan pengetahuan umum', ''),
+(8, 2, 'POS C', 'pertigaan jalan', 'Tali-temali, morse dan semaphore', ''),
+(9, 2, 'POS D', 'perenaman jalan', 'Menaksir tinggi', ''),
+(10, 2, 'POS E', 'di ujung jalan', 'Ketangkasan (jumparingan)', '');
 
 -- --------------------------------------------------------
 
@@ -88,32 +93,36 @@ INSERT INTO `pa_pos` (`id_pos`, `tempat_id`, `nm_pos`, `lokasi_pos`, `deskripsi_
 --
 
 CREATE TABLE `pa_quiz_jawaban` (
-  `id_quiz_jawaban` int(11) NOT NULL,
-  `pos_id` int(11) NOT NULL,
-  `quizsoal_id` varchar(30) NOT NULL,
+  `id_quizjawaban` int(11) NOT NULL,
+  `pos_id` int(11) DEFAULT NULL,
+  `quizsoal_id` varchar(30) DEFAULT NULL,
+  `quizpilihan_id` int(11) DEFAULT NULL,
   `kode_jawaban` varchar(10) NOT NULL,
-  `quizpilihan_id` int(11) NOT NULL,
-  `jenis_jawaban` enum('esai','pilgan') NOT NULL,
-  `jawaban` text NOT NULL,
-  `siswa_id` int(11) NOT NULL,
-  `is_jawaban_benar` enum('1','0') NOT NULL,
-  `submited_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `jenis_jawaban` enum('esai','pilgan') DEFAULT NULL,
+  `jawaban` text DEFAULT NULL,
+  `siswa_id` int(11) DEFAULT NULL,
+  `is_jawaban_benar` enum('1','0') DEFAULT NULL,
+  `submited_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pa_quiz_jawaban`
 --
 
-INSERT INTO `pa_quiz_jawaban` (`id_quiz_jawaban`, `pos_id`, `quizsoal_id`, `kode_jawaban`, `quizpilihan_id`, `jenis_jawaban`, `jawaban`, `siswa_id`, `is_jawaban_benar`, `submited_at`) VALUES
-(1, 1, 'QZ199043', 'PA-4M12D9D', 46, 'pilgan', '-', 1, '0', '2021-07-20 08:42:25'),
-(2, 1, 'QZ210626', 'PA-4M12D9D', 41, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 08:44:32'),
-(3, 1, 'QZ506281', 'PA-4M12D9D', 40, 'pilgan', '-', 2, '1', '2021-07-20 08:45:28'),
-(4, 1, 'QZ506281', 'PA-4M12D9D', 40, 'pilgan', '-', 1, '1', '2021-07-20 14:45:32'),
-(5, 1, 'QZ199043', 'PA-4M12D9D', 45, 'pilgan', '-', 2, '1', '2021-07-20 14:53:53'),
-(6, 1, 'QZ210626', 'PA-4M12D9D', 41, 'esai', 'sudah diisikan bosq', 2, '1', '2021-07-20 14:53:53'),
-(7, 3, 'QZ136977', 'PA-RX859YG', 78, 'pilgan', '-', 1, '0', '2021-07-20 15:00:11'),
-(8, 3, 'QZ118570', 'PA-RX859YG', 74, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 15:00:11'),
-(9, 3, 'QZ152026', 'PA-RX859YG', 73, 'esai', 'sudah diisikan bosq', 1, '1', '2021-07-20 15:00:11');
+INSERT INTO `pa_quiz_jawaban` (`id_quizjawaban`, `pos_id`, `quizsoal_id`, `quizpilihan_id`, `kode_jawaban`, `jenis_jawaban`, `jawaban`, `siswa_id`, `is_jawaban_benar`, `submited_at`) VALUES
+(64, 3, 'QZ140251', 98, 'PA-TEF7LEU', 'esai', 'ya sudah benar', 7, '1', '2021-07-29 08:13:19'),
+(65, 3, 'QZ113098', 102, 'PA-TEF7LEU', 'esai', 'ya benar itu ', 7, '1', '2021-07-29 08:13:19'),
+(66, 3, 'QZ198665', 100, 'PA-TEF7LEU', 'esai', 'say rasa benar', 7, '1', '2021-07-29 08:13:19'),
+(67, 2, 'QZ554438', 21, 'PA-H3S8L2H', 'pilgan', 'Antarmuka', 7, '1', '2021-07-29 08:13:52'),
+(68, 2, 'QZ269279', 34, 'PA-H3S8L2H', 'pilgan', 'Gampang Dibobol', 7, '0', '2021-07-29 08:13:52'),
+(69, 2, 'QZ174025', 90, 'PA-H3S8L2H', 'pilgan', '1 dan 2', 7, '0', '2021-07-29 08:13:52'),
+(70, 2, 'QZ674018', 43, 'PA-H3S8L2H', 'pilgan', 'Design yang flexible', 7, '0', '2021-07-29 08:13:52'),
+(71, 2, 'QZ872581', 85, 'PA-H3S8L2H', 'pilgan', 'New Java Package', 7, '0', '2021-07-29 08:13:52'),
+(72, 2, 'QZ155610', 68, 'PA-H3S8L2H', 'pilgan', 'Assembly', 7, '1', '2021-07-29 08:13:52'),
+(73, 2, 'QZ640249', 53, 'PA-H3S8L2H', 'pilgan', 'Non-document Based', 7, '0', '2021-07-29 08:13:52'),
+(74, 2, 'QZ133477', 29, 'PA-H3S8L2H', 'pilgan', 'Layar Program', 7, '0', '2021-07-29 08:13:52'),
+(75, 2, 'QZ756344', 61, 'PA-H3S8L2H', 'pilgan', 'Notepad++', 7, '1', '2021-07-29 08:13:52'),
+(76, 2, 'QZ191347', 75, 'PA-H3S8L2H', 'pilgan', 'New Project->Java->Java Class Library', 7, '0', '2021-07-29 08:13:52');
 
 -- --------------------------------------------------------
 
@@ -123,9 +132,9 @@ INSERT INTO `pa_quiz_jawaban` (`id_quiz_jawaban`, `pos_id`, `quizsoal_id`, `kode
 
 CREATE TABLE `pa_quiz_pilihan` (
   `id_quizpilihan` int(11) NOT NULL,
-  `quizsoal_id` varchar(30) NOT NULL,
-  `pilihan` text NOT NULL,
-  `is_pilihan_benar` enum('1','0') NOT NULL
+  `quizsoal_id` varchar(30) DEFAULT NULL,
+  `pilihan` text DEFAULT NULL,
+  `is_pilihan_benar` enum('1','0') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -133,28 +142,96 @@ CREATE TABLE `pa_quiz_pilihan` (
 --
 
 INSERT INTO `pa_quiz_pilihan` (`id_quizpilihan`, `quizsoal_id`, `pilihan`, `is_pilihan_benar`) VALUES
-(37, 'QZ506281', 'bapak LBP', '0'),
-(38, 'QZ506281', 'pak luhut binsar', '0'),
-(39, 'QZ506281', 'opung luhut', '0'),
-(40, 'QZ506281', 'semua benar', '1'),
-(41, 'QZ210626', 'boden powell', '1'),
-(42, 'QZ210626', 'naruto uzumaki', '0'),
-(43, 'QZ210626', 'monkey d luffy', '0'),
-(44, 'QZ210626', 'roger danuarta', '0'),
-(45, 'QZ199043', 'bidang kemanusiaan', '1'),
-(46, 'QZ199043', 'bidang kesehatan', '0'),
-(47, 'QZ199043', 'bidang olahraga', '0'),
-(48, 'QZ199043', 'semuanya benar', '0'),
-(69, 'QZ962779', 'contoh sj', '0'),
-(70, 'QZ962779', 'contoh 2', '1'),
-(71, 'QZ947861', 'contoh sj', '0'),
-(72, 'QZ947861', 'contoh 2', '1'),
-(73, 'QZ152026', 'tacinpapatrerahedisbersu', '1'),
-(74, 'QZ118570', 'dasar kehidupan; dasar talitemali; dasar survival', '1'),
-(75, 'QZ136977', 'Pak Soekarno', '1'),
-(76, 'QZ136977', 'Bpk. Boden Powell', '0'),
-(77, 'QZ136977', 'Bpk. Luhut Binsar', '0'),
-(78, 'QZ136977', 'Bapak Saya Sendiri', '0');
+(16, 'QZ263497', 'jawaban sesuai peserta pada tempat (dibantu juri)', '1'),
+(17, 'QZ176691', 'jawaban sesuai peserta pada tempat (dibantu juri)', '1'),
+(18, 'QZ554438', 'Pemrograman/Coding', '0'),
+(19, 'QZ554438', 'CPU', '0'),
+(20, 'QZ554438', 'User Experience', '0'),
+(21, 'QZ554438', 'Antarmuka', '1'),
+(22, 'QZ600141', 'Pemrograman/Coding', '0'),
+(23, 'QZ600141', 'CPU', '0'),
+(24, 'QZ600141', 'User Experience', '0'),
+(25, 'QZ600141', 'Antarmuka', '1'),
+(26, 'QZ133477', 'Design Interface', '1'),
+(27, 'QZ133477', 'Design Grafis', '0'),
+(28, 'QZ133477', 'Design Program', '0'),
+(29, 'QZ133477', 'Layar Program', '0'),
+(30, 'QZ170033', 'Design Interface', '1'),
+(31, 'QZ170033', 'Design Grafis', '0'),
+(32, 'QZ170033', 'Design Program', '0'),
+(33, 'QZ170033', 'Layar Program', '0'),
+(34, 'QZ269279', 'Gampang Dibobol', '0'),
+(35, 'QZ269279', 'User Friendly', '1'),
+(36, 'QZ269279', 'Susah Dibuat', '0'),
+(37, 'QZ269279', 'Lebih Berfungsi', '0'),
+(38, 'QZ787757', 'Gampang Dibobol', '0'),
+(39, 'QZ787757', 'User Friendly', '1'),
+(40, 'QZ787757', 'Susah Dibuat', '0'),
+(41, 'QZ787757', 'Lebih Berfungsi', '0'),
+(42, 'QZ674018', 'Kemonotonan', '0'),
+(43, 'QZ674018', 'Design yang flexible', '0'),
+(44, 'QZ674018', 'Pengguna', '1'),
+(45, 'QZ674018', 'Artistik', '0'),
+(46, 'QZ166989', 'Kemonotonan', '0'),
+(47, 'QZ166989', 'Design yang flexible', '0'),
+(48, 'QZ166989', 'Pengguna', '1'),
+(49, 'QZ166989', 'Artistik', '0'),
+(50, 'QZ640249', 'Layout Utilitas', '0'),
+(51, 'QZ640249', 'Graphical User Interface', '1'),
+(52, 'QZ640249', 'Text Based', '0'),
+(53, 'QZ640249', 'Non-document Based', '0'),
+(54, 'QZ146498', 'Layout Utilitas', '0'),
+(55, 'QZ146498', 'Graphical User Interface', '1'),
+(56, 'QZ146498', 'Text Based', '0'),
+(57, 'QZ146498', 'Non-document Based', '0'),
+(58, 'QZ756344', 'Netbeans', '0'),
+(59, 'QZ756344', 'Visual Studio Code', '0'),
+(60, 'QZ756344', 'Eclipse', '0'),
+(61, 'QZ756344', 'Notepad++', '1'),
+(62, 'QZ143471', 'Netbeans', '0'),
+(63, 'QZ143471', 'Visual Studio Code', '0'),
+(64, 'QZ143471', 'Eclipse', '0'),
+(65, 'QZ143471', 'Notepad++', '1'),
+(66, 'QZ155610', 'Java', '0'),
+(67, 'QZ155610', 'PHP', '0'),
+(68, 'QZ155610', 'Assembly', '1'),
+(69, 'QZ155610', 'C/C++', '0'),
+(70, 'QZ636345', 'Java', '0'),
+(71, 'QZ636345', 'PHP', '0'),
+(72, 'QZ636345', 'Assembly', '1'),
+(73, 'QZ636345', 'C/C++', '0'),
+(74, 'QZ191347', 'New Project->Java->Java Application', '1'),
+(75, 'QZ191347', 'New Project->Java->Java Class Library', '0'),
+(76, 'QZ191347', 'Open Project->Java->Java Application', '0'),
+(77, 'QZ191347', 'New Project->Maven->POM Project', '0'),
+(78, 'QZ170065', 'New Project->Java->Java Application', '1'),
+(79, 'QZ170065', 'New Project->Java->Java Class Library', '0'),
+(80, 'QZ170065', 'Open Project->Java->Java Application', '0'),
+(81, 'QZ170065', 'New Project->Maven->POM Project', '0'),
+(82, 'QZ872581', 'New Folder', '0'),
+(83, 'QZ872581', 'New Java Class', '0'),
+(84, 'QZ872581', 'New Jframe Form', '1'),
+(85, 'QZ872581', 'New Java Package', '0'),
+(86, 'QZ384683', 'New Folder', '0'),
+(87, 'QZ384683', 'New Java Class', '0'),
+(88, 'QZ384683', 'New Jframe Form', '1'),
+(89, 'QZ384683', 'New Java Package', '0'),
+(90, 'QZ174025', '1 dan 2', '0'),
+(91, 'QZ174025', '2, 3 dan 4', '1'),
+(92, 'QZ174025', '2 dan 3', '0'),
+(93, 'QZ174025', '1 dan 4', '0'),
+(94, 'QZ109443', '1 dan 2', '0'),
+(95, 'QZ109443', '2, 3 dan 4', '1'),
+(96, 'QZ109443', '2 dan 3', '0'),
+(97, 'QZ109443', '1 dan 4', '0'),
+(98, 'QZ140251', 'point ditentukan juri di tempat', '1'),
+(99, 'QZ836323', 'point ditentukan juri di tempat', '1'),
+(100, 'QZ198665', 'jawaban pada juri di tempat', '1'),
+(101, 'QZ348018', 'jawaban pada juri di tempat', '1'),
+(102, 'QZ113098', 'jawaban pada juri di tempat', '1'),
+(103, 'QZ144018', 'jawaban pada juri di tempat', '1'),
+(104, 'QZ946248', 'IKAN NEMO', '1'),
+(105, 'QZ104677', 'IKAN NEMO', '1');
 
 -- --------------------------------------------------------
 
@@ -164,12 +241,12 @@ INSERT INTO `pa_quiz_pilihan` (`id_quizpilihan`, `quizsoal_id`, `pilihan`, `is_p
 
 CREATE TABLE `pa_quiz_soal` (
   `id_quizsoal` varchar(30) NOT NULL,
-  `pos_id` int(11) NOT NULL,
-  `kode` varchar(10) NOT NULL,
-  `soal` text NOT NULL,
-  `jenis` enum('pilgan','esai') NOT NULL,
+  `pos_id` int(11) DEFAULT NULL,
+  `kode` varchar(10) DEFAULT NULL,
+  `soal` text DEFAULT NULL,
+  `jenis` enum('pilgan','esai') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `img_path` text NOT NULL
+  `img_path` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -177,14 +254,36 @@ CREATE TABLE `pa_quiz_soal` (
 --
 
 INSERT INTO `pa_quiz_soal` (`id_quizsoal`, `pos_id`, `kode`, `soal`, `jenis`, `created_at`, `img_path`) VALUES
-('QZ118570', 3, 'PA-RX859YG', '<p>sebutkan dasar-dasar pramuka</p>', 'esai', '2021-07-18 07:20:32', ''),
-('QZ136977', 3, 'PA-RX859YG', '<p>siapakah bapak presiden RI ke-1</p>', 'pilgan', '2021-07-18 07:20:32', ''),
-('QZ152026', 3, 'PA-RX859YG', '<p><span style=\"color: rgb(25, 29, 33); font-size: 20px; background-color: rgb(255, 255, 255);\">Sebutkan 5 dasadarma pramuka...&nbsp; &nbsp;&nbsp;</span><br></p>', 'esai', '2021-07-18 07:20:32', ''),
-('QZ199043', 1, 'PA-4M12D9D', '<p>Bergerak di bidang apakah pramuka?</p>', 'pilgan', '2021-07-15 13:58:12', ''),
-('QZ210626', 1, 'PA-4M12D9D', '<p>Siapakah bapakpramuka sedunia?</p>', 'pilgan', '2021-07-15 13:58:12', ''),
-('QZ506281', 1, 'PA-4M12D9D', '<p>Siapa dalang pembunuhan munir?</p>', 'pilgan', '2021-07-15 13:58:12', ''),
-('QZ947861', 4, 'PA-BHLACYR', '<p>Ini contoh</p>', 'pilgan', '2021-07-16 08:01:51', ''),
-('QZ962779', 2, 'PA-BHLACYR', '<p>Ini contoh</p>', 'pilgan', '2021-07-16 08:01:51', '');
+('QZ104677', 9, 'PA-89196IL', '<p><img src=\"nemo.jpg\" style=\"width: 25%;\"></p><p>Jenis ikan apakah di samping?</p>', 'esai', '2021-07-28 22:51:18', 'nemo.jpg'),
+('QZ109443', 7, 'PA-H3S8L2H', '<p>Perhatikan contoh komponen palette GUI pada Java Netbeans berikut ini :</p><ol><li>Loader, Switch Button, Combo Box.</li><li>Radio Button, Button, Toggle Button.</li><li>Text Area, Text Field, Text Pane.</li><li>Progress Bar, Check Box, Label</li></ol><p><br></p><p>Manakah dari contoh di atas yang merupakan ada pada palette controller…</p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ113098', 3, 'PA-TEF7LEU', '<p>Perhatiikan sandi morse oleh temanmu sendiri...</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ133477', 2, 'PA-H3S8L2H', '<p>Jendela antara muka yang menghubungkan program dengan pengguna disebut?<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ140251', 3, 'PA-TEF7LEU', '<p>Perhatikan semaphore yang dilakukan panitia...</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ143471', 7, 'PA-H3S8L2H', '<p>Contoh Software/tools yang Biasa digunakan dalam pembuatan program aplikasi berbasis GUI adalah, Kecuali..<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ144018', 8, 'PA-TEF7LEU', '<p>Perhatiikan sandi morse oleh temanmu sendiri...</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ146498', 7, 'PA-H3S8L2H', '<p>Model aplikasi yang cenderung menekankan style dibandingkan dengan fitur aplikasi adalah..<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ155610', 2, 'PA-H3S8L2H', '<p>Netbeans merupakan software (IDE) yang biasa digunakan dalam pembuatan program berbasis GUI, berikut adalah bahasa yang bisa digunakan</p><p>dalam software tersebut, kecuali…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ166989', 7, 'PA-H3S8L2H', '<p>Pembuatan desain interface harus dlihat dari berbagai macam aspek salah satunya…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ170033', 7, 'PA-H3S8L2H', '<p>Jendela antara muka yang menghubungkan program dengan pengguna disebut?<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ170065', 7, 'PA-H3S8L2H', '<p>Berikut urutan dalam membuat projek program baru pada Netbeans untuk java adalah…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ174025', 2, 'PA-H3S8L2H', '<p>Perhatikan contoh komponen palette GUI pada Java Netbeans berikut ini :</p><ol><li>Loader, Switch Button, Combo Box.</li><li>Radio Button, Button, Toggle Button.</li><li>Text Area, Text Field, Text Pane.</li><li>Progress Bar, Check Box, Label</li></ol><p><br></p><p>Manakah dari contoh di atas yang merupakan ada pada palette controller…</p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ176691', 6, 'PA-BAUWE96', '<p>Berapakah tiang yang anda taksir?</p>', 'esai', '2021-07-28 22:34:09', ''),
+('QZ191347', 2, 'PA-H3S8L2H', '<p>Berikut urutan dalam membuat projek program baru pada Netbeans untuk java adalah…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ198665', 3, 'PA-TEF7LEU', '<p>Perhatiikan macam tali-temali berikut..</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ263497', 1, 'PA-BAUWE96', '<p>Berapakah tiang yang anda taksir?</p>', 'esai', '2021-07-28 22:34:09', ''),
+('QZ269279', 2, 'PA-H3S8L2H', '<p>Sebuah desain interface yang baik harus membuat sebuah program menjadi…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ348018', 8, 'PA-TEF7LEU', '<p>Perhatiikan macam tali-temali berikut..</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ384683', 7, 'PA-H3S8L2H', '<p>Opsi Setelah membuat project baru agar bisa menampilkan form design untuk Java GUI pada Netbeans adalah …<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ554438', 2, 'PA-H3S8L2H', 'Komunikasi antara pengguna dengan sistem disebut?', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ600141', 7, 'PA-H3S8L2H', 'Komunikasi antara pengguna dengan sistem disebut?', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ636345', 7, 'PA-H3S8L2H', '<p>Netbeans merupakan software (IDE) yang biasa digunakan dalam pembuatan program berbasis GUI, berikut adalah bahasa yang bisa digunakan</p><p>dalam software tersebut, kecuali…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ640249', 2, 'PA-H3S8L2H', '<p>Model aplikasi yang cenderung menekankan style dibandingkan dengan fitur aplikasi adalah..<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ674018', 2, 'PA-H3S8L2H', '<p>Pembuatan desain interface harus dlihat dari berbagai macam aspek salah satunya…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ756344', 2, 'PA-H3S8L2H', '<p>Contoh Software/tools yang Biasa digunakan dalam pembuatan program aplikasi berbasis GUI adalah, Kecuali..<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ787757', 7, 'PA-H3S8L2H', '<p>Sebuah desain interface yang baik harus membuat sebuah program menjadi…<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ836323', 8, 'PA-TEF7LEU', '<p>Perhatikan semaphore yang dilakukan panitia...</p>', 'esai', '2021-07-28 22:48:00', ''),
+('QZ872581', 2, 'PA-H3S8L2H', '<p>Opsi Setelah membuat project baru agar bisa menampilkan form design untuk Java GUI pada Netbeans adalah …<br></p>', 'pilgan', '2021-07-28 22:43:08', ''),
+('QZ946248', 4, 'PA-89196IL', '<p><img src=\"nemo.jpg\" style=\"width: 25%;\"></p><p>Jenis ikan apakah di samping?</p>', 'esai', '2021-07-28 22:51:18', 'nemo.jpg');
 
 -- --------------------------------------------------------
 
@@ -194,8 +293,8 @@ INSERT INTO `pa_quiz_soal` (`id_quizsoal`, `pos_id`, `kode`, `soal`, `jenis`, `c
 
 CREATE TABLE `pa_sekolah` (
   `id_sekolah` int(11) NOT NULL,
-  `nm_sekolah` varchar(30) NOT NULL,
-  `deskripsi_sekolah` varchar(25) NOT NULL
+  `nm_sekolah` varchar(30) DEFAULT NULL,
+  `deskripsi_sekolah` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -203,13 +302,10 @@ CREATE TABLE `pa_sekolah` (
 --
 
 INSERT INTO `pa_sekolah` (`id_sekolah`, `nm_sekolah`, `deskripsi_sekolah`) VALUES
-(1, 'SMKN 1 Purbalingga', 'pembina = Bpk. Sumardis'),
+(1, 'SMKN 1 Purbalingga', 'pembina = Bpk. Sumardi'),
 (2, 'SMAN 1 Purbalingga', 'pembina = Bpk. Sukardi'),
-(3, 'SMAN 2 Purbalingga', 'pembina = Bpk. Sakiruns'),
-(6, 'SMAN 1 Padamara', 'pembina = Ibu. Lilis'),
-(7, 'SMK YPLP Purbalingga', 'pembina = Bpk. Satyo'),
-(16, 'SMK JATENG', 'pembina = Bpk. Solihun'),
-(19, 'SMK YPLP 1 Purbalingga', '-');
+(3, 'SMAN 2 Purbalingga', 'pembina = Bpk. Sakirun'),
+(4, 'SMAN 1 Padamara', 'pembina = Ibu. Lilis');
 
 -- --------------------------------------------------------
 
@@ -219,13 +315,13 @@ INSERT INTO `pa_sekolah` (`id_sekolah`, `nm_sekolah`, `deskripsi_sekolah`) VALUE
 
 CREATE TABLE `pa_siswa` (
   `id_siswa` int(11) NOT NULL,
-  `regu` varchar(30) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `jenkel` enum('laki-laki','perempuan') NOT NULL,
-  `sekolah_id` int(11) NOT NULL,
-  `is_login` enum('1','0') NOT NULL,
-  `skor_regu` float NOT NULL
+  `regu` varchar(30) DEFAULT NULL,
+  `username` varchar(25) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `jenkel` enum('laki-laki','perempuan') DEFAULT NULL,
+  `sekolah_id` int(11) DEFAULT NULL,
+  `is_login` enum('1','0') DEFAULT NULL,
+  `skor_regu` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -233,12 +329,13 @@ CREATE TABLE `pa_siswa` (
 --
 
 INSERT INTO `pa_siswa` (`id_siswa`, `regu`, `username`, `password`, `jenkel`, `sekolah_id`, `is_login`, `skor_regu`) VALUES
-(1, 'barongsai', 'rafikbojes', 'bojes123', 'laki-laki', 1, '0', 0),
-(2, 'yakuza', 'zakie', 'zakie123', 'laki-laki', 7, '0', 0),
-(4, 'muay thai', 'rendi', 'rendi123', 'laki-laki', 19, '0', 0),
-(5, 'gajahduduks', 'ibnuarya', 'ibnu123', 'laki-laki', 2, '1', 0),
-(7, 'teratai', 'hafsani', 'hafsani123', 'perempuan', 2, '1', 0),
-(8, 'Kambing Jantan', 'rafik', 'rafik123', 'laki-laki', 16, '1', 0);
+(1, 'Scorpion', 'Royan Gagas', 'royangagas123', 'laki-laki', 2, '0', 0),
+(2, 'Itik', 'Khabib Malik', 'khabib123', 'laki-laki', 1, '0', 0),
+(3, 'Garuda', 'Liza Rifan', 'rifan123', 'laki-laki', 1, '0', 0),
+(4, 'Barongsai', 'Rafik Bojes', 'rafikbojes', 'laki-laki', 3, '0', 0),
+(5, 'Teratai', 'Nausica', 'nausica123', 'perempuan', 4, '0', 0),
+(7, 'Kanthil', 'Mei', 'mei123', 'perempuan', 3, '0', 0),
+(9, 'Makcongcang', 'Mahesa', 'mahesa123', 'laki-laki', 3, '0', 0);
 
 -- --------------------------------------------------------
 
@@ -248,13 +345,30 @@ INSERT INTO `pa_siswa` (`id_siswa`, `regu`, `username`, `password`, `jenkel`, `s
 
 CREATE TABLE `pa_skoring` (
   `id_skor` int(11) NOT NULL,
-  `pos_id` int(11) NOT NULL,
-  `regu_id` int(11) NOT NULL,
-  `skor` float NOT NULL,
-  `tipe` enum('manual','otomatis') NOT NULL,
-  `deskripsi` text NOT NULL,
+  `quizjawaban_id` int(11) NOT NULL,
+  `skor` float DEFAULT NULL,
+  `tipe` enum('manual','otomatis') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pa_skoring`
+--
+
+INSERT INTO `pa_skoring` (`id_skor`, `quizjawaban_id`, `skor`, `tipe`, `created_at`) VALUES
+(37, 64, 80, 'otomatis', '2021-07-29 09:59:41'),
+(38, 65, 90, 'manual', '2021-07-29 10:18:58'),
+(39, 66, 100, 'manual', '2021-07-29 10:16:09'),
+(40, 67, 2, 'otomatis', '2021-07-29 08:13:52'),
+(41, 68, 0, 'otomatis', '2021-07-29 08:13:52'),
+(42, 69, 0, 'otomatis', '2021-07-29 08:13:52'),
+(43, 70, 0, 'otomatis', '2021-07-29 08:13:52'),
+(44, 71, 0, 'otomatis', '2021-07-29 08:13:52'),
+(45, 72, 2, 'otomatis', '2021-07-29 08:13:52'),
+(46, 73, 0, 'otomatis', '2021-07-29 08:13:52'),
+(47, 74, 0, 'otomatis', '2021-07-29 08:13:52'),
+(48, 75, 2, 'otomatis', '2021-07-29 08:13:52'),
+(49, 76, 0, 'otomatis', '2021-07-29 08:13:52');
 
 -- --------------------------------------------------------
 
@@ -264,8 +378,8 @@ CREATE TABLE `pa_skoring` (
 
 CREATE TABLE `pa_tempat` (
   `id_tempat` int(11) NOT NULL,
-  `nm_tempat` varchar(30) NOT NULL,
-  `lokasi_tempat` text NOT NULL
+  `nm_tempat` varchar(30) DEFAULT NULL,
+  `lokasi_tempat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -273,9 +387,12 @@ CREATE TABLE `pa_tempat` (
 --
 
 INSERT INTO `pa_tempat` (`id_tempat`, `nm_tempat`, `lokasi_tempat`) VALUES
-(1, 'Bumi Perkemahan', 'Limbangan, Rt02/Rw12, Kec. Kutasari'),
-(3, 'Lapangan Selakambang', 'Desa Selakambang, RT11/RW2, Kec. Kaligondang'),
-(4, 'Rumah Kurcaci', 'Desa Serang');
+(1, 'SANGGA LANGIT', 'gemuruh, rt xx/rw xx'),
+(2, 'WATU KAMBANG', 'selakambang, rt xx/rw xx'),
+(3, 'RUMAH KURCACI', 'Serang, pratin, rt xx/rw xx'),
+(4, 'SEFA GARDEN', 'Bukateja, rt xx/rw xx'),
+(5, 'CURUG DHUWUR', 'Bumisari, rt xx/rw xx'),
+(6, 'CURUG SUMBA', 'Karangreja, rt xx/rw xx');
 
 --
 -- Indexes for dumped tables
@@ -304,10 +421,8 @@ ALTER TABLE `pa_pos`
 -- Indeks untuk tabel `pa_quiz_jawaban`
 --
 ALTER TABLE `pa_quiz_jawaban`
-  ADD PRIMARY KEY (`id_quiz_jawaban`),
-  ADD KEY `FK_siswaid2` (`siswa_id`),
-  ADD KEY `FK_quizsoalid2` (`quizsoal_id`),
-  ADD KEY `FK_quizpilihanid2` (`quizpilihan_id`);
+  ADD PRIMARY KEY (`id_quizjawaban`),
+  ADD KEY `FK_quizsoalid2` (`quizsoal_id`);
 
 --
 -- Indeks untuk tabel `pa_quiz_pilihan`
@@ -337,6 +452,13 @@ ALTER TABLE `pa_siswa`
   ADD KEY `FK_sekolahid` (`sekolah_id`);
 
 --
+-- Indeks untuk tabel `pa_skoring`
+--
+ALTER TABLE `pa_skoring`
+  ADD PRIMARY KEY (`id_skor`),
+  ADD KEY `FK_quizjawaban` (`quizjawaban_id`);
+
+--
 -- Indeks untuk tabel `pa_tempat`
 --
 ALTER TABLE `pa_tempat`
@@ -362,37 +484,43 @@ ALTER TABLE `pa_notif`
 -- AUTO_INCREMENT untuk tabel `pa_pos`
 --
 ALTER TABLE `pa_pos`
-  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_quiz_jawaban`
 --
 ALTER TABLE `pa_quiz_jawaban`
-  MODIFY `id_quiz_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_quizjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_quiz_pilihan`
 --
 ALTER TABLE `pa_quiz_pilihan`
-  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id_quizpilihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_sekolah`
 --
 ALTER TABLE `pa_sekolah`
-  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_siswa`
 --
 ALTER TABLE `pa_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `pa_skoring`
+--
+ALTER TABLE `pa_skoring`
+  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_tempat`
 --
 ALTER TABLE `pa_tempat`
-  MODIFY `id_tempat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tempat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -402,15 +530,13 @@ ALTER TABLE `pa_tempat`
 -- Ketidakleluasaan untuk tabel `pa_pos`
 --
 ALTER TABLE `pa_pos`
-  ADD CONSTRAINT `FK_tempatid` FOREIGN KEY (`tempat_id`) REFERENCES `pa_tempat` (`id_tempat`);
+  ADD CONSTRAINT `FK_tempatid` FOREIGN KEY (`tempat_id`) REFERENCES `pa_tempat` (`id_tempat`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `pa_quiz_jawaban`
 --
 ALTER TABLE `pa_quiz_jawaban`
-  ADD CONSTRAINT `FK_quizpilihanid2` FOREIGN KEY (`quizpilihan_id`) REFERENCES `pa_quiz_pilihan` (`id_quizpilihan`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_quizsoalid2` FOREIGN KEY (`quizsoal_id`) REFERENCES `pa_quiz_soal` (`id_quizsoal`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_siswaid2` FOREIGN KEY (`siswa_id`) REFERENCES `pa_siswa` (`id_siswa`);
+  ADD CONSTRAINT `FK_quizsoalid2` FOREIGN KEY (`quizsoal_id`) REFERENCES `pa_quiz_soal` (`id_quizsoal`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `pa_quiz_pilihan`
@@ -422,13 +548,19 @@ ALTER TABLE `pa_quiz_pilihan`
 -- Ketidakleluasaan untuk tabel `pa_quiz_soal`
 --
 ALTER TABLE `pa_quiz_soal`
-  ADD CONSTRAINT `FK_posid` FOREIGN KEY (`pos_id`) REFERENCES `pa_pos` (`id_pos`);
+  ADD CONSTRAINT `FK_posid` FOREIGN KEY (`pos_id`) REFERENCES `pa_pos` (`id_pos`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `pa_siswa`
 --
 ALTER TABLE `pa_siswa`
-  ADD CONSTRAINT `FK_sekolahid` FOREIGN KEY (`sekolah_id`) REFERENCES `pa_sekolah` (`id_sekolah`);
+  ADD CONSTRAINT `FK_sekolahid` FOREIGN KEY (`sekolah_id`) REFERENCES `pa_sekolah` (`id_sekolah`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pa_skoring`
+--
+ALTER TABLE `pa_skoring`
+  ADD CONSTRAINT `FK_quizjawaban` FOREIGN KEY (`quizjawaban_id`) REFERENCES `pa_quiz_jawaban` (`id_quizjawaban`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

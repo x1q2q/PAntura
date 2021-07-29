@@ -159,6 +159,7 @@ class Datasoal extends CI_Controller {
 			foreach($val->posid as $dtposid){
 				$unik_id = strtoupper(substr('QZ'.mt_rand().time(),0,8));
 				$created = get_timestamp('Y-m-d H:i:s');
+				$imgpath = $val->imgpath == ''? '': replace_url($val->imgpath); // jika ada image path maka ganti
 				$dt_insoal = array(
 					'id_quizsoal' => $unik_id,
 					'pos_id'			=> $dtposid,
@@ -166,7 +167,7 @@ class Datasoal extends CI_Controller {
 					'soal'				=> replace_url($val->soal),
 					'jenis'				=> $val->jenis,
 					'created_at' 	=> $created,
-					'img_path'		=> replace_url($val->imgpath)
+					'img_path'		=> $imgpath
 				);
 				//insert into soal
 				$insert_soal = $this->db->insert('pa_quiz_soal',$dt_insoal);
@@ -195,17 +196,24 @@ class Datasoal extends CI_Controller {
 	public function hapusdata($id){
 		$query = $this->m_global->get_detail('pa_quiz_soal',array('kode' => $id));
 		foreach($query->result() as $val){
-			$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
-	  	if(unlink($file_name)){
-				$where = array('kode' => $id);
-				$delete = $this->db->delete('pa_quiz_soal', $where);
-				if($delete){
+			$where = array('id_quizsoal' => $val->id_quizsoal);
+			if($val->img_path != ''){
+				$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
+		  	if(unlink($file_name)){
+					if($this->db->delete('pa_quiz_soal', $where)){
+						$this->session->set_flashdata('merah','Data Quiz Soal berhasil dihapus');
+					}else{
+						$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
+					}
+				}else{
+					$this->session->set_flashdata('merah','Data Image gagal dihapus + data Quiz Soal gagal dihapus');
+				}
+			}else{
+				if($this->db->delete('pa_quiz_soal', $where)){
 					$this->session->set_flashdata('merah','Data Quiz Soal berhasil dihapus');
 				}else{
 					$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
 				}
-			}else{
-				$this->session->set_flashdata('merah','Data Image gagal dihapus + data Quiz Soal gagal dihapus');
 			}
 		}
 

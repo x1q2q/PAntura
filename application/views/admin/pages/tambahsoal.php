@@ -495,7 +495,7 @@
           "jenis":jenis,
           "posid":dtPosId,
           "kode":kodeSoal,
-          "imgpath": imge,
+          "imgpath": (imge == undefined)? '':imge,
           "dtpilihan":dtpilihane
       });
     }); // each lsiting box soal

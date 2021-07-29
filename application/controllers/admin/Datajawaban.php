@@ -49,22 +49,17 @@ class Datajawaban extends CI_Controller {
 	public function detail($idsiswa,$kode){
 		$q_infjawaban = $this->m_jawaban->get_info_jawaban($idsiswa,$kode);
 		$dt_infjawaban = array();
+		$tot_skor = array();
 
-		$dt_jawabanpil = array();
-		$dt_jawabanbnr = array();
     foreach($q_infjawaban as $val){
       $dtinf_jawaban['username'] = $val->username;
       $dtinf_jawaban['regu'] = $val->regu;
       $dtinf_jawaban['pos'] = $val->nm_pos;
       $dtinf_jawaban['tempat'] = $val->nm_tempat;
       $dtinf_jawaban['submited_at'] = $val->submited_at;
-			// array_push($dt_jawabanpil,$val->quizpilihan_id);
-			if($val->is_jawaban_benar == '1'){
-				array_push($dt_jawabanbnr,'x');
-			}
+			array_push($tot_skor,$val->skor);
     }
-		$dtinf_jawaban['skor'] = count($dt_jawabanbnr) * 2;
-
+		$dtinf_jawaban['skor'] = array_sum($tot_skor);
 		$data_jawaban = array();
 		$q_dtjawaban  = $this->m_jawaban->get_soal_detail($idsiswa,$kode);
 		$soal_data = array();
