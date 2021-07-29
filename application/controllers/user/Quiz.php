@@ -96,10 +96,24 @@ class Quiz extends CI_Controller
 							"jawaban"				=> $ans->jawaban_pilihan,
 							"is_jawaban_benar"=> $ans->is_benar
 				);
-			$this->db->insert('pa_quiz_jawaban', $dt_jawaban);
+				$this->insertDB($dt_jawaban,$jawaban[0]->jenis,$ans->is_benar);
+			}
+			echo base_url('user');
 		}
-		echo base_url('user/home/success');
-	}
+		public function insertDB($jawaban,$jenis,$isbenar){
+			$this->db->insert('pa_quiz_jawaban', $jawaban);
+			$id_qjawaban = $this->db->insert_id();
+			$created_at = get_timestamp('Y-m-d H:i:s');
+			if(!empty($id_qjawaban)){
+				$dt_skor = array(
+					'quizjawaban_id'	=> $id_qjawaban,
+					'skor'						=> ($jenis == 'esai') ? "100" : (($isbenar == '1') ? "2" : "0"),
+					'tipe'						=> 'otomatis',
+					'created_at'			=> $created_at
+				);
+				$this->db->insert('pa_skoring',$dt_skor);
+			}
+		}
 	public function error()
 	{
 	}

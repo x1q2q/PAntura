@@ -8,8 +8,12 @@
             <div class="col-lg-5 col-sm-12 mt-5">
                 <form action="<?= base_url('/')?>user/kode/confirm" method="POST">
                     <div class="card text-center lengkung-20">
+
+                        <div class="card-header mt-5 d-inline">
+                            <h3 class="text-primary">Masukkan Kode</h3>
+                        </div>
                         <?php if ($this->session->flashdata('merah')) { ?>
-                            <div class="m-2 alert alert-danger alert-dismissible show fade alert-has-icon lengkung-20">
+                            <div class="mx-5 alert alert-danger alert-dismissible show fade alert-has-icon lengkung-20">
                                 <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
                                 <div class="alert-body">
                                     <div class="alert-title">Peringatan </div>
@@ -20,9 +24,6 @@
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="card-header mt-5 d-inline">
-                            <h3 class="text-primary">Masukkan Kode</h3>
-                        </div>
                         <div class="card-body px-5">
                             <div class="form-group">
                                 <input type="text" name="kode" id="kode" class="form-control py-4 lengkung-15 font-24">

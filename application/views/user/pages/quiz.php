@@ -103,13 +103,15 @@
                     $nopil++;
                   endforeach; ?>
                   <?php else:?>
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                            <textarea class="form-control lengkung-15 jawaban-essay" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                    <?php foreach ($value["dt_pilihan"] as $ans) :  ?>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                              <textarea class="form-control lengkung-15 jawaban-essay" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    <?php endforeach; ?>
                   <?php endif;?>
                 </div>
               </div>
