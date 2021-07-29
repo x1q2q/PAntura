@@ -27,6 +27,10 @@ class Quiz extends CI_Controller
 		$pos_data  = $this->m_pos->get_join_detail($kode);
 		$soal_asal = $this->m_soal->get_soal_detail($kode, $pos_data[0]["pos_id"]);
 		$soal_data = array();
+		$done = $this->m_jawaban->get_soal_detail($sesi, $kode);
+		if($done){
+			redirect('user/home/success');
+		}
 		foreach ($soal_asal as $val) {
 			$soal_data[$val["id_quizsoal"]][] = $val;
 		}

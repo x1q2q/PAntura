@@ -47,7 +47,7 @@
           <div class="card lengkung-20 bg-primary my-5">
             <div class="card-header d-inline">
               <h1 class="text-center mt-5">
-                SELAMAT TUGAS POS 1 <br />
+                SELAMAT TUGAS POS <br />
                 SELESAI
               </h1>
             </div>
