@@ -6,6 +6,7 @@ class M_skoring extends CI_Model {
     $this->db->select("*");
     $this->db->from('pa_quiz_jawaban jwb');
     $this->db->join('pa_quiz_soal qs','jwb.quizsoal_id=qs.id_quizsoal');
+    $this->db->join('pa_skoring skr','skr.quizjawaban_id=jwb.id_quizjawaban');
     $this->db->join('pa_quiz_pilihan qp','jwb.quizpilihan_id=qp.id_quizpilihan');
     $this->db->join('pa_siswa sw','jwb.siswa_id=sw.id_siswa');
     $this->db->join('pa_sekolah sk','sw.sekolah_id=sk.id_sekolah');
@@ -31,6 +32,7 @@ class M_skoring extends CI_Model {
     $this->db->select("*");
     $this->db->from('pa_quiz_jawaban jwb');
     $this->db->join('pa_quiz_soal qs','jwb.quizsoal_id=qs.id_quizsoal');
+    $this->db->join('pa_skoring skr','skr.quizjawaban_id=jwb.id_quizjawaban');
     $this->db->join('pa_quiz_pilihan qp','jwb.quizpilihan_id=qp.id_quizpilihan');
     $this->db->join('pa_siswa sw','jwb.siswa_id=sw.id_siswa');
     $this->db->join('pa_sekolah sk','sw.sekolah_id=sk.id_sekolah');

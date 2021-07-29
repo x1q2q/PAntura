@@ -34,7 +34,7 @@ class M_global extends CI_Model {
         'jenkel' => $user->jenkel,
         'sekolah_id' => $user->sekolah_id,
         'password' => $user->password
-      ); 
+      );
     }
     return $data;
   }

@@ -52,6 +52,7 @@ class M_jawaban extends CI_Model {
   public function get_info_jawaban($idsiswa,$kode){
     $this->db->select("*");
     $this->db->from('pa_quiz_jawaban jwb');
+    $this->db->join('pa_skoring sk','sk.quizjawaban_id=jwb.id_quizjawaban');
     $this->db->join('pa_siswa sw','jwb.siswa_id=sw.id_siswa');
     $this->db->join('pa_pos p','jwb.pos_id=p.id_pos');
     $this->db->join('pa_tempat t','p.tempat_id=t.id_tempat');
