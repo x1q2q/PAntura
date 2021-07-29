@@ -119,7 +119,7 @@
       <section class="mb-5">
         <div class="row">
           <div class="col">
-            <button type="button" id="submit" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15" onclick="submitAll()">Kirim</a>
+            <button type="button" data-toggle="modal" data-target="#exampleModalCenter" id="submit" class="btn btn-success d-block w-100 py-3 font-32 lengkung-15">Kirim</a>
           </div>
         </div>
       </section>
@@ -127,3 +127,23 @@
   </div>
 </main>
 <!-- Main -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body font-24">
+        Apakah Anda yakin sudah selesai?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger font-24 p-3" data-dismiss="modal">Tidak</button>
+        <button type="button" class="btn btn-success font-24 p-3" onclick="submitAll()">Ya, kirim</button>
+      </div>
+    </div>
+  </div>
+</div>

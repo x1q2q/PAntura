@@ -59,10 +59,10 @@
     let percent
     let bar = document.getElementById("progressbar");
     let loop = function loop(progress) {
-      if (progress > time + 1) {
-        clearTimeout(timer);
-        document.getElementById('submit').click()
+      if (progress >= time) {
+        submitAll();
         localStorage.removeItem('waktu')
+        clearTimeout(timer);
       } else {
         // let lah
         percent = progress * (100 / 60);

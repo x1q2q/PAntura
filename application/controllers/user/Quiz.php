@@ -94,7 +94,7 @@ class Quiz extends CI_Controller
 				);
 			$this->db->insert('pa_quiz_jawaban', $dt_jawaban);
 		}
-		// redirect('user/');
+		echo base_url('user/home/success');
 	}
 	public function error()
 	{
