@@ -100,7 +100,7 @@ class Quiz extends CI_Controller
 			);
 			$this->insertDB($dt_jawaban, $jawaban[0]->jenis, $ans->is_benar);
 		}
-		echo base_url('user');
+		echo base_url('user/home/success');
 	}
 	public function insertDB($jawaban, $jenis, $isbenar)
 	{
