@@ -46,6 +46,7 @@
                 <th scope="col" class="sort" data-sort="nm_pos">Nama POS</th>
                 <th scope="col" class="sort" data-sort="nm_tempat">Nama Tempat</th>
                 <th scope="col" class="sort" data-sort="lokasi_pos">Lokasi POS</th>
+                <th scope="col" class="sort" data-sort="waktu">Waktu</th>
                 <th scope="col" class="sort" data-sort="deskripsi">Deskripsi</th>
                 <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
               </tr>
@@ -114,6 +115,16 @@
                 "id"          => $value."-deskripsi",
                 "addClass"    => "",
                 "required"    => false,
+          	 )),array(
+          	   array(
+                "form"        => "input", // input, textarea, select
+                "type"        => "number", // text, number, dll
+                "label"       => "WAKTU",
+                "name"        => "waktu",
+                "placeholder" => "Waktu Pengerjaan(dalam detik)",
+                "id"          => $value."-waktu",
+                "addClass"    => "",
+                "required"    => true,
           	 )));
     $dt_input[$value] = $dt_form;
   }
@@ -172,7 +183,7 @@
           "deferRender": true,
           "aLengthMenu": [[5, 15, 30],[ 5, 15, 30]], // Combobox Limit
           "columnDefs": [
-              { className: "text-center", "targets": [5] },
+              { className: "text-center", "targets": [6] },
             ],
 
           "columns": [
@@ -183,6 +194,10 @@
               { "data": "nm_pos"},
               { "data": "nm_tempat"},
               { "data": "lokasi_pos"},
+              {"data": "id_pos",
+              render: function (data, type, row, meta) {
+                  return row.waktu+' detik';
+              }},
               { "data": "deskripsi_pos"},
               { "render": function ( data, type, row ) {
                 var dtedit = ' data-tempat="'+row.tempat_id+'" data-lokasi="'+row.lokasi_pos+'" '+

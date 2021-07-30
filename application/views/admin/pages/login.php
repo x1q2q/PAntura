@@ -44,7 +44,7 @@
               <label for="username">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"> <i class="fa fa-user"></i> </div>
+                  <div class="input-group-text bg-info"> <i class="fa fa-user text-white"></i> </div>
                 </div>
                 <input id="username" type="text" class="form-control" name="username"
                 tabindex="1" required autofocus placeholder="masukkan username anda">
@@ -58,7 +58,7 @@
               <label for="password" class="control-label">Password</label>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"> <i class="fa fa-eye"></i> </div>
+                  <div class="input-group-text bg-info"> <i class="fa fa-eye text-white"></i> </div>
                 </div>
                 <input id="password" type="password" class="form-control" name="password"
                 tabindex="2" required placeholder="masukkan password anda">

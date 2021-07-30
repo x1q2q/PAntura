@@ -121,16 +121,5 @@
               },
           ],
       });
-    //
-    //  $("#modal-delete").on('show.bs.modal', function (e) {
-    //     let trgL = $(e.relatedTarget);
-    //     let link = trgL.data("link");
-    //     let jawaban = trgL.data("jawaban");
-    //
-    //     $(this).find(".modal-header .modal-title").text("Konfirmasi Hapus JAWABAN");
-    //     $(this).find('.modal-footer a').attr("href",link);
-    //     $(this).find(".modal-body").html("Yakin Menghapus jawban untuk:<br/> <strong>"+jawaban+"</strong> dari data Jawaban?");
-    // });
-
   });
   </script>

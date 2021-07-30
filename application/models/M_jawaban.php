@@ -21,7 +21,7 @@ class M_jawaban extends CI_Model {
   }
   public function count_all(){
     $this->db->from('pa_quiz_jawaban');
-    $this->db->group_by('siswa_id');
+    $this->db->group_by(array('siswa_id','kode_jawaban'));
     return $this->db->count_all_results();
   }
   public function count_filter($search){

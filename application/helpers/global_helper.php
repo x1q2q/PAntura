@@ -52,7 +52,7 @@ function my_input($val,$param){ // generate input type to form group generate
 			if($val2['required']){ $dt_group['required'] = true; }
 			switch ($val2['form']) {
 				case 'textarea':
-					$dt_group['rows'] = '3';
+					$dt_group['rows'] = '2';
 					$dt_group['resize'] = 'none';
 					$html .= form_textarea($dt_group);
 					break;
@@ -87,5 +87,8 @@ function replace_img($soal,$imgname){ // mengganti src dbase ke untuk fullpath
 }
 function replace_url($imgpath){ // mengganti src imgpath ke hanya nama saja
 	return str_replace(base_url(PATH_IMGSOAL),"",$imgpath);
+}
+function rep_pos($str_pos){
+	return str_replace(' ','_',$str_pos);
 }
 ?>

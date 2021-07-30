@@ -43,7 +43,7 @@ class Skoringesai extends CI_Controller {
         'data'						=>$sql_data
     );
     header('Content-Type: application/json');
-    echo json_encode($callback);;
+    echo json_encode($callback);
   }
 	public function updateSkor($id_qjawab){
 		$skor = $this->input->post('skor');
@@ -56,9 +56,9 @@ class Skoringesai extends CI_Controller {
 		$dt_updated = $this->m_global->get_detail('pa_quiz_jawaban',array('id_quizjawaban' => $id_qjawab))->result();
 		$id_soal = $dt_updated[0]->quizsoal_id;
 		if($this->db->update('pa_skoring',$dt_upd,$where)){
-			$this->session->set_flashdata('hijau','Data SKOR ID soal <b>('.$id_soal.')</b> berhasil diupdate!');
+			$this->session->set_flashdata('hijau','Skoring esai untuk ID soal <b>('.$id_soal.')</b> berhasil diupdate!');
 		}else{
-			$this->session->set_flashdata('merah','Gagal mengupdate Data SKOR kode Jawaban ID soal <b>('.$kd_jawaban.')</b>');
+			$this->session->set_flashdata('merah','Gagal mengupdate skoring esai untuk ID soal <b>('.$kd_jawaban.')</b>');
 		}
 		redirect(base_url('admin/skoringesai'));
 	}
