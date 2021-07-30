@@ -93,7 +93,8 @@
     loop(progress);
   }
 
-  progressBar(60);
+  let waktu = $('#waktu').val();
+  progressBar(waktu);
 
   var urldata = "<?php echo base_url('user/quiz/') ?>";
 

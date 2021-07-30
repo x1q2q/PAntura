@@ -45,6 +45,7 @@
       ?>
         <input type="text" name="pos_id" id="pos_id" value="<?= $res['pos_id'];?>" hidden>
         <input type="text" name="kode_jawaban" id="kode_jawaban" value="<?= $res['kode'];?>" hidden>
+        <input type="text" name="waktu" id="waktu" value="<?= $waktu;?>" hidden>
       <?php
         }
       ?>
@@ -107,7 +108,7 @@
                       <div class="row">
                         <div class="col">
                           <div class="form-group">
-                              <textarea class="form-control lengkung-15 jawaban-essay" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>" placeholder="isi disini" style="height: 240px !important;"></textarea>
+                              <textarea class="form-control lengkung-15 jawaban-essay" data-idpilihan="<?= $ans["id_quizpilihan"] ?>" data-pilihan="<?= $ans["pilihan"]; ?>" name="<?= $value["id_soal"] ?>" placeholder="isi disini" style="height: 100px !important;"></textarea>
                           </div>
                         </div>
                       </div>
