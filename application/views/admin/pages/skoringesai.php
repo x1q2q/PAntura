@@ -66,6 +66,7 @@
 </style>
 <script type="text/javascript">
   var tabel = null;
+  var imgPath = "<?php echo base_url(PATH_IMGSOAL) ?>";
   var urldata = "<?php echo base_url('admin/skoringesai/') ?>";
   var urlUpdate = urldata+'updateSkor/';
   $(document).ready(function() {
@@ -73,7 +74,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 1, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 2, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -104,14 +105,15 @@
               { "data": "username",
               render: function (data, type, row, meta) {
                 var jwbn = '(Jawaban: '+row.pilihan+')';
-                  return row.soal+jwbn;
+                var soal = row.soal;
+                  return soal.replace('src="'+row.img_path+'"','src="'+imgPath+row.img_path+'"')+jwbn;
               }},
               { "data": "jawaban"},
               { "render": function ( data, type, row ) {
 
               var btn = '<form class="btn-group" method="post" action="'+urlUpdate+row.id_quizjawaban+'/"> <input type="number" name="skor" '+
                 ' class="input-skor form-control" placeholder="0-100" value='+row.skor +' required min="0" max="100">'+'<button type="submit" '+
-                ' class="btn btn-success btn-action mr-1" title="Detail" >Update</a></form>';
+                ' class="btn btn-success btn-action mr-1" title="update skor" >Update</a></form>';
 
                   return btn;
                 }

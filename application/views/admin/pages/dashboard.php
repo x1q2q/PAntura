@@ -63,7 +63,6 @@
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-        <form method="post" class="needs-validation" novalidate="">
           <div class="card">
             <div class="card-header">
               <h4>NOTIFIKASI</h4>
@@ -88,7 +87,6 @@
               <button class="btn btn-primary">Buka Notifikasi Lainnya</button>
             </div>
           </div>
-        </form>
       </div>
     </div>
   </section>

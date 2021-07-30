@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Jul 2021 pada 15.23
+-- Waktu pembuatan: 30 Jul 2021 pada 12.10
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -58,6 +58,20 @@ CREATE TABLE `pa_notif` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `pa_papanskor`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pa_papanskor` (
+`username` varchar(25)
+,`nm_sekolah` varchar(30)
+,`regu` varchar(30)
+,`pos_selesai` bigint(21)
+,`total_skor` double
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pa_pos`
 --
 
@@ -67,7 +81,7 @@ CREATE TABLE `pa_pos` (
   `nm_pos` varchar(25) DEFAULT NULL,
   `lokasi_pos` text DEFAULT NULL,
   `deskripsi_pos` text DEFAULT NULL,
-  `waktu` text NOT NULL
+  `waktu` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -75,16 +89,16 @@ CREATE TABLE `pa_pos` (
 --
 
 INSERT INTO `pa_pos` (`id_pos`, `tempat_id`, `nm_pos`, `lokasi_pos`, `deskripsi_pos`, `waktu`) VALUES
-(1, 1, 'POS A', 'deket langit-langit', 'Miniatur pionering', ''),
-(2, 1, 'POS B', 'deket longan', 'pengerahuan kepramukaan dan pengetahuan umum', ''),
-(3, 1, 'POS C', 'dekete amben', 'Tali-temali, morse dan semaphore', ''),
-(4, 1, 'POS D', 'deket jendela', 'Menaksir tinggi', ''),
-(5, 1, 'POS E', 'deket kursi', 'Ketangkasan (jumparingan)', ''),
-(6, 2, 'POS A', 'sebelah kanan jalan', 'Miniatur pionering', ''),
-(7, 2, 'POS B', 'persimpangan jalan', 'pengerahuan kepramukaan dan pengetahuan umum', ''),
-(8, 2, 'POS C', 'pertigaan jalan', 'Tali-temali, morse dan semaphore', ''),
-(9, 2, 'POS D', 'perenaman jalan', 'Menaksir tinggi', ''),
-(10, 2, 'POS E', 'di ujung jalan', 'Ketangkasan (jumparingan)', '');
+(1, 1, 'POS A', 'deket langit-langit', 'Miniatur pionering', 1800),
+(2, 1, 'POS B', 'deket longan', 'pengerahuan kepramukaan dan pengetahuan umum', 4800),
+(3, 1, 'POS C', 'dekete amben', 'Tali-temali, morse dan semaphore', 2400),
+(4, 1, 'POS D', 'deket jendela', 'Menaksir tinggi', 2400),
+(5, 1, 'POS E', 'deket kursi', 'Ketangkasan (jumparingan)', 1800),
+(6, 2, 'POS A', 'sebelah kanan jalan', 'Miniatur pionering', 1800),
+(7, 2, 'POS B', 'persimpangan jalan', 'pengerahuan kepramukaan dan pengetahuan umum', 4800),
+(8, 2, 'POS C', 'pertigaan jalan', 'Tali-temali, morse dan semaphore', 2400),
+(9, 2, 'POS D', 'perenaman jalan', 'Menaksir tinggi', 2400),
+(10, 2, 'POS E', 'di ujung jalan', 'Ketangkasan (jumparingan)', 1800);
 
 -- --------------------------------------------------------
 
@@ -122,7 +136,32 @@ INSERT INTO `pa_quiz_jawaban` (`id_quizjawaban`, `pos_id`, `quizsoal_id`, `quizp
 (73, 2, 'QZ640249', 53, 'PA-H3S8L2H', 'pilgan', 'Non-document Based', 7, '0', '2021-07-29 08:13:52'),
 (74, 2, 'QZ133477', 29, 'PA-H3S8L2H', 'pilgan', 'Layar Program', 7, '0', '2021-07-29 08:13:52'),
 (75, 2, 'QZ756344', 61, 'PA-H3S8L2H', 'pilgan', 'Notepad++', 7, '1', '2021-07-29 08:13:52'),
-(76, 2, 'QZ191347', 75, 'PA-H3S8L2H', 'pilgan', 'New Project->Java->Java Class Library', 7, '0', '2021-07-29 08:13:52');
+(76, 2, 'QZ191347', 75, 'PA-H3S8L2H', 'pilgan', 'New Project->Java->Java Class Library', 7, '0', '2021-07-29 08:13:52'),
+(77, 3, 'QZ140251', 98, 'PA-TEF7LEU', 'esai', 'sudah bener bor', 9, '1', '2021-07-29 16:24:55'),
+(78, 3, 'QZ113098', 102, 'PA-TEF7LEU', 'esai', 'iya udah bener bor', 9, '1', '2021-07-29 16:24:55'),
+(79, 3, 'QZ198665', 100, 'PA-TEF7LEU', 'esai', 'sesuai juri', 9, '1', '2021-07-29 16:24:55'),
+(80, 2, 'QZ554438', 18, 'PA-H3S8L2H', 'pilgan', 'Pemrograman/Coding', 9, '0', '2021-07-29 16:25:44'),
+(81, 2, 'QZ269279', 35, 'PA-H3S8L2H', 'pilgan', 'User Friendly', 9, '1', '2021-07-29 16:25:44'),
+(82, 2, 'QZ174025', 90, 'PA-H3S8L2H', 'pilgan', '1 dan 2', 9, '0', '2021-07-29 16:25:44'),
+(83, 2, 'QZ674018', 43, 'PA-H3S8L2H', 'pilgan', 'Design yang flexible', 9, '0', '2021-07-29 16:25:44'),
+(84, 2, 'QZ872581', 83, 'PA-H3S8L2H', 'pilgan', 'New Java Class', 9, '0', '2021-07-29 16:25:44'),
+(85, 2, 'QZ155610', 66, 'PA-H3S8L2H', 'pilgan', 'Java', 9, '0', '2021-07-29 16:25:44'),
+(86, 2, 'QZ640249', 51, 'PA-H3S8L2H', 'pilgan', 'Graphical User Interface', 9, '1', '2021-07-29 16:25:44'),
+(87, 2, 'QZ133477', 28, 'PA-H3S8L2H', 'pilgan', 'Design Program', 9, '0', '2021-07-29 16:25:44'),
+(88, 2, 'QZ756344', 60, 'PA-H3S8L2H', 'pilgan', 'Eclipse', 9, '0', '2021-07-29 16:25:44'),
+(89, 2, 'QZ191347', 74, 'PA-H3S8L2H', 'pilgan', 'New Project->Java->Java Application', 9, '1', '2021-07-29 16:25:44'),
+(90, 1, 'QZ263497', 16, 'PA-BAUWE96', 'esai', 'sudah 12m', 9, '1', '2021-07-29 17:07:43'),
+(91, 2, 'QZ554438', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(92, 2, 'QZ269279', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(93, 2, 'QZ174025', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(94, 2, 'QZ674018', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(95, 2, 'QZ872581', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(96, 2, 'QZ155610', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(97, 2, 'QZ640249', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(98, 2, 'QZ133477', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(99, 2, 'QZ756344', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(100, 2, 'QZ191347', 0, 'PA-H3S8L2H', 'pilgan', 'tidak terjawab', 3, '0', '2021-07-30 03:41:19'),
+(101, 4, 'QZ946248', 104, 'PA-89196IL', 'esai', 'nemodong bor', 3, '1', '2021-07-30 03:50:51');
 
 -- --------------------------------------------------------
 
@@ -356,9 +395,9 @@ CREATE TABLE `pa_skoring` (
 --
 
 INSERT INTO `pa_skoring` (`id_skor`, `quizjawaban_id`, `skor`, `tipe`, `created_at`) VALUES
-(37, 64, 80, 'otomatis', '2021-07-29 09:59:41'),
-(38, 65, 90, 'manual', '2021-07-29 10:18:58'),
-(39, 66, 100, 'manual', '2021-07-29 10:16:09'),
+(37, 64, 80, 'manual', '2021-07-30 06:30:31'),
+(38, 65, 94, 'manual', '2021-07-30 06:30:31'),
+(39, 66, 70, 'manual', '2021-07-30 06:30:31'),
 (40, 67, 2, 'otomatis', '2021-07-29 08:13:52'),
 (41, 68, 0, 'otomatis', '2021-07-29 08:13:52'),
 (42, 69, 0, 'otomatis', '2021-07-29 08:13:52'),
@@ -368,7 +407,32 @@ INSERT INTO `pa_skoring` (`id_skor`, `quizjawaban_id`, `skor`, `tipe`, `created_
 (46, 73, 0, 'otomatis', '2021-07-29 08:13:52'),
 (47, 74, 0, 'otomatis', '2021-07-29 08:13:52'),
 (48, 75, 2, 'otomatis', '2021-07-29 08:13:52'),
-(49, 76, 0, 'otomatis', '2021-07-29 08:13:52');
+(49, 76, 0, 'otomatis', '2021-07-29 08:13:52'),
+(50, 77, 80, 'manual', '2021-07-30 09:22:54'),
+(51, 78, 85, 'manual', '2021-07-30 09:22:54'),
+(52, 79, 70, 'manual', '2021-07-30 09:22:54'),
+(53, 80, 0, 'otomatis', '2021-07-29 16:25:44'),
+(54, 81, 2, 'otomatis', '2021-07-29 16:25:44'),
+(55, 82, 0, 'otomatis', '2021-07-29 16:25:44'),
+(56, 83, 0, 'otomatis', '2021-07-29 16:25:44'),
+(57, 84, 0, 'otomatis', '2021-07-29 16:25:44'),
+(58, 85, 0, 'otomatis', '2021-07-29 16:25:44'),
+(59, 86, 2, 'otomatis', '2021-07-29 16:25:44'),
+(60, 87, 0, 'otomatis', '2021-07-29 16:25:44'),
+(61, 88, 0, 'otomatis', '2021-07-29 16:25:44'),
+(62, 89, 2, 'otomatis', '2021-07-29 16:25:44'),
+(63, 90, 100, 'manual', '2021-07-30 09:22:54'),
+(64, 91, 0, 'otomatis', '2021-07-30 03:41:19'),
+(65, 92, 0, 'otomatis', '2021-07-30 03:41:19'),
+(66, 93, 0, 'otomatis', '2021-07-30 03:41:19'),
+(67, 94, 0, 'otomatis', '2021-07-30 03:41:19'),
+(68, 95, 0, 'otomatis', '2021-07-30 03:41:19'),
+(69, 96, 0, 'otomatis', '2021-07-30 03:41:19'),
+(70, 97, 0, 'otomatis', '2021-07-30 03:41:19'),
+(71, 98, 0, 'otomatis', '2021-07-30 03:41:19'),
+(72, 99, 0, 'otomatis', '2021-07-30 03:41:19'),
+(73, 100, 0, 'otomatis', '2021-07-30 03:41:19'),
+(74, 101, 90, 'manual', '2021-07-30 04:20:50');
 
 -- --------------------------------------------------------
 
@@ -393,6 +457,15 @@ INSERT INTO `pa_tempat` (`id_tempat`, `nm_tempat`, `lokasi_tempat`) VALUES
 (4, 'SEFA GARDEN', 'Bukateja, rt xx/rw xx'),
 (5, 'CURUG DHUWUR', 'Bumisari, rt xx/rw xx'),
 (6, 'CURUG SUMBA', 'Karangreja, rt xx/rw xx');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pa_papanskor`
+--
+DROP TABLE IF EXISTS `pa_papanskor`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pa_papanskor`  AS  select `sw`.`username` AS `username`,`s`.`nm_sekolah` AS `nm_sekolah`,`sw`.`regu` AS `regu`,count(distinct `qj`.`kode_jawaban`) AS `pos_selesai`,sum(`sk`.`skor`) AS `total_skor` from (((`pa_quiz_jawaban` `qj` join `pa_siswa` `sw` on(`qj`.`siswa_id` = `sw`.`id_siswa`)) join `pa_sekolah` `s` on(`sw`.`sekolah_id` = `s`.`id_sekolah`)) join `pa_skoring` `sk` on(`qj`.`id_quizjawaban` = `sk`.`quizjawaban_id`)) group by `qj`.`siswa_id` ;
 
 --
 -- Indexes for dumped tables
@@ -490,7 +563,7 @@ ALTER TABLE `pa_pos`
 -- AUTO_INCREMENT untuk tabel `pa_quiz_jawaban`
 --
 ALTER TABLE `pa_quiz_jawaban`
-  MODIFY `id_quizjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_quizjawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_quiz_pilihan`
@@ -514,7 +587,7 @@ ALTER TABLE `pa_siswa`
 -- AUTO_INCREMENT untuk tabel `pa_skoring`
 --
 ALTER TABLE `pa_skoring`
-  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT untuk tabel `pa_tempat`

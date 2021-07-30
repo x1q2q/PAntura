@@ -131,4 +131,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('m_global','m_sekolah','m_tempat','m_pos','m_siswa','m_soal','m_jawaban','m_skoring');
+$autoload['model'] = array('m_global','m_sekolah','m_tempat','m_pos','m_siswa','m_soal','m_jawaban','m_skoring','m_dataskor','m_papanskor');

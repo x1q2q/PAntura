@@ -60,7 +60,8 @@ class Datapos extends CI_Controller {
 				'tempat_id'		=> $tempat,
 				'nm_pos' 			=> $this->input->post('pos'),
 				'lokasi_pos'	=> $this->input->post('lokasi'),
-				'deskripsi_pos'		=> $desk == null?'-':$desk
+				'deskripsi_pos'		=> $desk == null?'-':$desk,
+				'waktu'				=> $this->input->post('waktu')
 			);
 			$insert = $this->db->insert('pa_pos',$dt_input);
 			if($insert){
@@ -85,7 +86,8 @@ class Datapos extends CI_Controller {
 				'tempat_id'		=> $this->input->post('tempat'),
 				'nm_pos' 			=> $this->input->post('pos'),
 				'lokasi_pos'	=> $this->input->post('lokasi'),
-				'deskripsi_pos'		=> $desk == null?'-':$desk
+				'deskripsi_pos'		=> $desk == null?'-':$desk,
+				'waktu'				=> $this->input->post('waktu')
 			);
 			$where = array('id_pos' => $id);
 			$update = $this->db->update('pa_pos',$dt_input,$where);
