@@ -115,16 +115,6 @@
                 "id"          => $value."-deskripsi",
                 "addClass"    => "",
                 "required"    => false,
-          	 )),array(
-          	   array(
-                "form"        => "input", // input, textarea, select
-                "type"        => "number", // text, number, dll
-                "label"       => "WAKTU",
-                "name"        => "waktu",
-                "placeholder" => "Waktu Pengerjaan(dalam detik)",
-                "id"          => $value."-waktu",
-                "addClass"    => "",
-                "required"    => true,
           	 )));
     $dt_input[$value] = $dt_form;
   }
@@ -174,7 +164,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 0, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 1, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',

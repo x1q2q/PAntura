@@ -17,11 +17,11 @@ define('PATH_IMGSOAL','./assets/img/datasoal/');
 define('RULES_SKORING',array('pilgan' => '2', 'esai1' => '100', 'esai2' => '60'));
 
 define('DATAPOS',array(
-  array('ID' => '1','NAMA' => 'POS A'),
-  array('ID' => '2','NAMA' => 'POS B'),
-  array('ID' => '3','NAMA' => 'POS C'),
-  array('ID' => '4','NAMA' => 'POS D'),
-  array('ID' => '5','NAMA' => 'POS E')
+  array('ID' => '1','NAMA' => 'POS 1'),
+  array('ID' => '2','NAMA' => 'POS 2'),
+  array('ID' => '3','NAMA' => 'POS 3'),
+  array('ID' => '4','NAMA' => 'POS 4'),
+  array('ID' => '5','NAMA' => 'POS 5')
 ));
 
 /*

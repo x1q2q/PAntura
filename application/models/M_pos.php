@@ -25,10 +25,11 @@ class M_pos extends CI_Model {
     $this->db->or_like('t.nm_tempat', $search); // Untuk menambahkan query where OR LIKE
     return $this->db->get()->num_rows(); // Untuk menghitung jumlah data sesuai dengan filter pada textbox pencarian
   }
-  public function get_join_array(){
+  public function get_join_array($posid_digunakan){
     $this->db->select("*");
     $this->db->from('pa_pos p');
     $this->db->join('pa_tempat t','p.tempat_id=t.id_tempat');
+    $this->db->where_not_in('p.id_pos', $posid_digunakan);
     $this->db->order_by('p.nm_pos','asc');
     return $this->db->get()->result_array();
   }

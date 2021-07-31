@@ -32,7 +32,7 @@
         </div>
         <div class="modal-footer justify-content-center bg-whitesmoke br">
           <a onclick="submitSkor()" class="btn btn-lg btn-round btn-success btn-shadow">SUBMIT SKOR
-          <i class="fas fa-check" ></i> </a>
+          <i class="fas fa-check-circle" ></i> </a>
         </div>
   </div>
 </div>

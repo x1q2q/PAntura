@@ -6,6 +6,9 @@
           <h4>Semua Data</h4>
         </div>
         <div class="col-auto">
+          <a href="<?= base_url('admin/datasiswa/superaktivasi/'); ?>" class="btn btn-info">
+            Aktivasi Semua <i class="fa fa-user"></i>
+          </a>
           <button data-toggle="modal" data-target="#modal-add" class="btn btn-action btn-success">
             Tambah Data <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
           </button>
@@ -48,6 +51,7 @@
                 <th scope="col" class="sort" data-sort="nm_sekolah">Sekolah Asal</th>
                 <th scope="col" class="sort" data-sort="nm_regu">REGU Asal</th>
                 <th scope="col" class="sort" data-sort="jenkel">Jns.Kelamin</th>
+                <th scope="col" class="sort" data-sort="is_login">Stts.Login</th>
                 <th scope="col" class="sort text-center" data-sort"aksi">Aksi</th>
               </tr>
             </thead>
@@ -173,6 +177,7 @@
 <script type="text/javascript">
   var tabel = null;
   var urldata = "<?php echo base_url('admin/datasiswa/') ?>";
+  var urlAktivasi = urldata+"aktivasi/";
   $(document).ready(function() {
 
 
@@ -205,6 +210,12 @@
                   return '<span class="badge badge-dark">'+row.regu+'</span>';
               }},
               { "data": "jenkel"},
+              {"data": "is_login",
+              render: function (data, type, row, meta) {
+                var status = (row.is_login == '1')?'Sudah Login':'Belum Login';
+                var warna = (row.is_login == '1')?'text-success':'text-danger';
+                  return '<p class="'+warna+'">'+status+'</p>';
+              }},
               { "render": function ( data, type, row ) {
                 var dtedit = ' data-username="'+row.username+'" data-password="'+row.password+'" '+
                     ' data-sekolah="'+row.id_sekolah+'" data-regu="'+row.regu+'" '+
@@ -212,7 +223,11 @@
                 var linkedit = ' data-link="'+urldata+'editdata/'+row.id_siswa+'" ';
                 var linkdel = ' data-link="'+urldata+'hapusdata/'+row.id_siswa+'" ';
 
-                var btn = '<a data-toggle="modal" data-target="#modal-edit"'+
+                var btn = '<a href="'+urlAktivasi+row.id_siswa+'"'+
+                ' class="btn btn-info btn-action mr-1" data-toggle="tooltip"'+
+                ' title="Aktivasi">Aktivasi <i class="fas fa-user"></i></a>'+
+
+                '<a data-toggle="modal" data-target="#modal-edit"'+
                 ' class="btn btn-warning btn-action mr-1" data-toggle="tooltip"'+
                 ' title="Edit" '+linkedit+dtedit+' >Edit <i class="fas fa-pencil-alt"></i></a>'+
 

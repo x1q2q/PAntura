@@ -43,6 +43,7 @@
                 <th scope="col" class="sort" data-sort="nm_sekolah">Sekolah</th>
                 <th scope="col" class="sort" data-sort="pos_selesai">Pos Status</th>
                 <th scope="col" class="sort" data-sort="tot_skor">Total Skor</th>
+                <th scope="col" class="sort" data-sort="created_at">Last Update</th>
                 <th scope="col" class="sort" data-sort="aksi">Aksi</th>
               </tr>
             </thead>
@@ -61,14 +62,13 @@
 <script type="text/javascript">
   var tabel = null;
   var urldata = "<?php echo base_url('admin/dataskor/') ?>";
-  var urlUpdate = urldata+'updateSkor/';
   var totPos = "<?= count(DATAPOS); ?>";
   $(document).ready(function() {
       tabel = $('#table-dataskor').DataTable({
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 0,'desc']], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 4,'desc']], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -96,6 +96,10 @@
               { "data": "tot_skor",
               render: function (data, type, row, meta) {
                   return row.tot_skor+' Point';
+              }},
+              { "data": "created_at",
+              render: function (data, type, row, meta) {
+                  return row.created_at;
               }},
               { "render": function ( data, type, row ) {
 

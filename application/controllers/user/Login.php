@@ -25,23 +25,33 @@ class Login extends CI_Controller
         } else {
             $nama     = $this->input->post('username');
             $passwd = $this->input->post('password');
-            $where = array(
+            $whereSuper = array(
                 'username' => $nama,
-                'password' => $passwd
+                'password' => $passwd,
+                'is_login'  => '0' // ketika belum login
+            );
+            $whereBiasa = array(
+                'username' => $nama,
+                'password' => $passwd,
             );
             if (!empty($nama) && !empty($passwd)) {
-                $login = $this->m_global->get_detail('pa_siswa', $where);
-                $row = $this->m_global->cek_row($login);
-                foreach ($login->result() as $profil) {
+                $loginSuper = $this->m_global->get_detail('pa_siswa', $whereSuper);
+                $loginBiasa = $this->m_global->get_detail('pa_siswa', $whereBiasa);
+                foreach ($loginSuper->result() as $profil) {
                     $getid        = $profil->id_siswa;
                     $uname        = $profil->username;
                 }
-                if ($row > 0) {
+                if($this->m_global->cek_row($loginSuper) > 0) {
+                    $this->db->update('pa_siswa',array('is_login' => '1'),array('id_siswa' => $getid));
                     $this->session->set_flashdata('login_sukses', strtoupper('Selamat datang ' . $uname));
                     $this->session->set_userdata(array('user' => $getid));
                     redirect('user/');
                 } else {
-                    $this->session->set_flashdata('login_gagal', strtoupper('Login Gagal <br/> username atau password salah'));
+                    if($this->m_global->cek_row($loginBiasa) > 0) { // jika uname & pwd benar tpi mental
+                        $this->session->set_flashdata('login_gagal', strtoupper('Login Gagal. Anda sudah pernah login <br/> Silakan hub. panitia untuk konfigurasi ulang'));
+                    }else{
+                        $this->session->set_flashdata('login_gagal', strtoupper('Login Gagal. <br/> Username atau password yang anda masukkan salah'));
+                    }
                     redirect('user/login');
                 }
             }

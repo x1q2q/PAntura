@@ -114,4 +114,23 @@ class Datasiswa extends CI_Controller {
 		}
 		redirect('admin/datasiswa');
 	}
+	public function aktivasi($id){
+		$where = array('id_siswa' => $id);
+		$update = $this->db->update('pa_siswa',array('is_login' => '0'), $where);
+		if($update){
+			$this->session->set_flashdata('hijau','Aktivasi user siswa berhasil!');
+		}else{
+			$this->session->set_flashdata('merah','Aktivasi user siswa gagal!');
+		}
+		redirect('admin/datasiswa');
+	}
+	public function superaktivasi(){
+		$update = $this->db->update('pa_siswa',array('is_login' => '0'));
+		if($update){
+			$this->session->set_flashdata('hijau','Aktivasi untuk semua user siswa telah berhasil!');
+		}else{
+			$this->session->set_flashdata('merah','Aktivasi untuk semua user siswa telah gagal!');
+		}
+		redirect('admin/datasiswa');
+	}
 }

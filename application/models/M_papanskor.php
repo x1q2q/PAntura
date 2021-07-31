@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_papanskor extends CI_Model {
   public function filter($search, $limit, $start, $order_field, $order_ascdesc){
-    $this->db->select("*");
+    $this->db->select("*, DENSE_RANK() OVER(ORDER BY total_skor DESC) peringkat");
     $this->db->from('pa_papanskor');
     $this->db->like('username', $search); // Untuk menambahkan query where LIKE
     $this->db->or_like('nm_sekolah', $search); // Untuk menambahkan query where OR LIKE

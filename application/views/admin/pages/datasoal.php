@@ -63,7 +63,13 @@
 </div>
 
 <?php
-  $query = $this->m_pos->get_join_array();
+  $blm_digunakan  = array();
+  $q_posid = $this->m_soal->get_posid_digunakan();
+  foreach($q_posid as $valposid){
+    $posid = (int)$valposid["pos_id"];
+    array_push($blm_digunakan,$posid);
+  }
+  $query = $this->m_pos->get_join_array($blm_digunakan);
   $dt_pos = array();
   foreach ($query as $value) {
     $dt_pos[$value['id_pos']] = $value['nm_pos'].'-'.$value['nm_tempat'];

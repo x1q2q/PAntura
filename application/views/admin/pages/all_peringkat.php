@@ -43,6 +43,7 @@
                 <th scope="col" class="sort" data-sort="nm_sekolah">Sekolah</th>
                 <th scope="col" class="sort" data-sort="pos_selesai">POS Status</th>
                 <th scope="col" class="sort" data-sort="total_skor">Total Skor</th>
+                <th scope="col" class="sort" data-sort="peringkat">Peringkat</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -84,7 +85,10 @@
                   return meta.row + meta.settings._iDisplayStart + 1;
               }},
               { "data": "username"},
-              { "data": "regu"},
+              {"data": "regu",
+              render: function (data, type, row, meta) {
+                  return '<span class="badge badge-dark">'+row.regu+'</span>';
+              }},
               { "data": "nm_sekolah"},
               {"data": "pos_selesai",
               render: function (data, type, row, meta) {
@@ -93,6 +97,12 @@
               {"data": "total_skor",
               render: function (data, type, row, meta) {
                   return row.total_skor+' Point';
+              }},
+              {"data": "peringkat",
+              render: function (data, type, row, meta) {
+                // 5 besar berwarna hijau, 10 besar berwarna biru & selanjutnya kuning
+                var warna = (row.peringkat <= '5')?'success':((row.peringkat <= '10' && row.peringkat >= '6' ) ? 'primary' :'warning');
+                  return '<span class="badge badge-'+warna+'">'+'Peringkat ke-'+ row.peringkat+'</span>';
               }},
           ],
       });

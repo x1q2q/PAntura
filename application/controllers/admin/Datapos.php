@@ -56,12 +56,13 @@ class Datapos extends CI_Controller {
 			alert("YOU CANT ATTACK ME WITH THAT. BUNG! ");
 		}else{
 			$desk = $this->input->post('deskripsi');
+			$nm_pos = strtoupper($this->input->post('pos'));
 			$dt_input = array(
 				'tempat_id'		=> $tempat,
-				'nm_pos' 			=> $this->input->post('pos'),
+				'nm_pos' 			=> $nm_pos,
 				'lokasi_pos'	=> $this->input->post('lokasi'),
-				'deskripsi_pos'		=> $desk == null?'-':$desk,
-				'waktu'				=> $this->input->post('waktu')
+				'deskripsi_pos'=> $desk == null?'-':$desk,
+				'waktu'				=> $this->milihWaktu($nm_pos),
 			);
 			$insert = $this->db->insert('pa_pos',$dt_input);
 			if($insert){
@@ -82,12 +83,13 @@ class Datapos extends CI_Controller {
 			alert("SORRY BOR. YOU CAN'T ATTACK ME WITH THAT :( ");
 		}else{
 			$desk = $this->input->post('deskripsi');
+			$nm_pos = strtoupper($this->input->post('pos'));
 			$dt_input = array(
 				'tempat_id'		=> $this->input->post('tempat'),
-				'nm_pos' 			=> $this->input->post('pos'),
+				'nm_pos' 			=> $nm_pos,
 				'lokasi_pos'	=> $this->input->post('lokasi'),
-				'deskripsi_pos'		=> $desk == null?'-':$desk,
-				'waktu'				=> $this->input->post('waktu')
+				'deskripsi_pos'=> $desk == null?'-':$desk,
+				'waktu'				=> $this->milihWaktu($nm_pos),
 			);
 			$where = array('id_pos' => $id);
 			$update = $this->db->update('pa_pos',$dt_input,$where);
@@ -108,5 +110,34 @@ class Datapos extends CI_Controller {
 			$this->session->set_flashdata('merah','Data Tempat gagal dihapus');
 		}
 		redirect('admin/datapos');
+	}
+	public function milihWaktu($pos){
+		$waktu;
+		switch ($pos) {
+			case DATAPOS[0]["NAMA"]: // jika pos 1
+				$waktu = 1800;
+				break;
+
+			case DATAPOS[1]["NAMA"]: // jika pos 2
+					$waktu = 1800;
+					break;
+
+			case DATAPOS[2]["NAMA"]: // jika pos 3
+					$waktu = 2400;
+					break;
+
+			case DATAPOS[3]["NAMA"]: // jika pos 4
+					$waktu = 900;
+					break;
+
+			case DATAPOS[4]["NAMA"]: // jika pos 5
+					$waktu = 7200;
+					break;
+
+			default:
+				$waktu = 1800; // jaga-jaga
+				break;
+		}
+		return $waktu;
 	}
 }

@@ -105,53 +105,60 @@ class Datasoal extends CI_Controller {
 		}
 	}
 	public function detail($jml,$kode){
-		$pos_data  = $this->m_pos->get_join_detail($kode);
-		$soal_asal = $this->m_soal->get_soal_detail($kode,$pos_data[0]["pos_id"]);
-		$soal_data = array();
-		foreach($soal_asal as $val){
-			$soal_data[$val["id_quizsoal"]][] = $val;
-		}
-
-		$dt_new = array();
-		foreach($soal_data as $key => $res){
-			$dt_push = array('dt_pilihan' => []);
-			foreach($res as $val){
-				$dt_push["soal"]	= replace_img($val["soal"],$val["img_path"]);
-				$dt_push["jenis"]	= $val["jenis"];
-			}
-			foreach($soal_asal as $res2){
-				if($key == $res2["quizsoal_id"]){
-					array_push(
-						$dt_push["dt_pilihan"],
-							array(
-								"pilihan" => $res2["pilihan"],
-								"is_benar" => $res2["is_pilihan_benar"]
-							)
-					);
-				}
-			}
-			array_push($dt_new,$dt_push);
-		}
-		//
 		$where = array('id_admin' =>  $this->session->userdata('user_admin'));
 		$data = array(
 			'nm_admin'		=> $this->m_global->get_profil($where,'nama'),
-      'template'		=> 'admin/pages/detailsoal',
-      'for'					=> 'datasoal',
+			'for'					=> 'datasoal',
 			'dropdown'		=> '',
-			'jml_soal'		=> $jml,
-			'kode'				=> $kode,
-			'dt_pos'			=> $pos_data,
-			'dt_soal'			=> $dt_new,
-      'titlebread'	=> 'Detail Soal',
+			'titlebread'	=> 'Detail Soal',
 			'contentbread'=> array(
 					array(base_url('admin/'),'Dashboard'),
 					array(base_url('admin/datasoal/'),'Data Soal'),
 					array('#','Detail Soal')),
-      );
-			$this->load->view('admin/template/navigation',$data);
-			$this->load->view('admin/template/sidebar',$data);
-			$this->load->view('admin/template/content',$data);
+			);
+
+		$pos_data  = $this->m_pos->get_join_detail($kode);
+		if(!empty($pos_data)){
+			$soal_asal = $this->m_soal->get_soal_detail($kode,$pos_data[0]["pos_id"]);
+			$soal_data = array();
+			foreach($soal_asal as $val){
+				$soal_data[$val["id_quizsoal"]][] = $val;
+			}
+
+			$dt_new = array();
+			foreach($soal_data as $key => $res){
+				$dt_push = array('dt_pilihan' => []);
+				foreach($res as $val){
+					$dt_push["soal"]	= replace_img($val["soal"],$val["img_path"]);
+					$dt_push["jenis"]	= $val["jenis"];
+				}
+				foreach($soal_asal as $res2){
+					if($key == $res2["quizsoal_id"]){
+						array_push(
+							$dt_push["dt_pilihan"],
+								array(
+									"pilihan" => $res2["pilihan"],
+									"is_benar" => $res2["is_pilihan_benar"]
+								)
+						);
+					}
+				}
+				array_push($dt_new,$dt_push);
+			}
+			//
+			$data['template']		= 'admin/pages/detailsoal';
+			$data['jml_soal']		= $jml;
+			$data['kode']				= $kode;
+			$data['dt_pos']			= $pos_data;
+			$data['dt_soal']		= $dt_new;
+
+		}else{
+			$data['template']		= 'admin/pages/error_info';
+		}
+		
+		$this->load->view('admin/template/navigation',$data);
+		$this->load->view('admin/template/sidebar',$data);
+		$this->load->view('admin/template/content',$data);
 	}
 	public function inputsoal(){
 		$soal = json_decode($_POST['soal']);
@@ -197,16 +204,18 @@ class Datasoal extends CI_Controller {
 		$query = $this->m_global->get_detail('pa_quiz_soal',array('kode' => $id));
 		foreach($query->result() as $val){
 			$where = array('id_quizsoal' => $val->id_quizsoal);
+			$msg = "";
 			if($val->img_path != ''){
-				$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
-		  	if(unlink($file_name)){
-					if($this->db->delete('pa_quiz_soal', $where)){
-						$this->session->set_flashdata('merah','Data Quiz Soal berhasil dihapus');
+					$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
+			  	if(unlink($file_name)){
+						$msg = "Data Quiz Soal & Image Attachment ";
 					}else{
-						$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
+						$msg = "Data Quiz Soal ";
 					}
+				if($this->db->delete('pa_quiz_soal', $where)){
+					$this->session->set_flashdata('merah',$msg.'berhasil dihapus');
 				}else{
-					$this->session->set_flashdata('merah','Data Image gagal dihapus + data Quiz Soal gagal dihapus');
+					$this->session->set_flashdata('merah','Data Quiz Soal gagal dihapus');
 				}
 			}else{
 				if($this->db->delete('pa_quiz_soal', $where)){

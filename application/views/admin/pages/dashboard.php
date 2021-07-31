@@ -1,60 +1,126 @@
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-primary">
-            <i class="far fa-user"></i>
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-success">
+            <i class="fas fa-university"></i>
           </div>
           <div class="card-wrap">
             <div class="card-header">
-              <h4>Total Admin</h4>
+              <h4>Total Sekolah</h4>
             </div>
             <div class="card-body">
-              10
+              <?= $this->m_global->get_summary1('totalSekolah'); ?>
+            </div>
+          </div>
+          <div class="card-stats py-2 bg-success">
+            <div class="card-stats-items">
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary1('totalTempat'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Total Tempat</div>
+              </div>
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary1('totalPOS'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Total POS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-info">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4>Total Siswa/Regu</h4>
+            </div>
+            <div class="card-body">
+              <?= $this->m_global->get_summary2('totalSiswa'); ?>
+            </div>
+          </div>
+          <div class="card-stats py-2 bg-info">
+            <div class="card-stats-items">
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary2('telahLogin'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Telah Login</div>
+              </div>
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary2('belumLogin'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Belum Login</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-warning bg-warning">
+            <i class="fas fa-newspaper"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4>Total SOAL</h4>
+            </div>
+            <div class="card-body">
+              <?= $this->m_global->get_summary3('totalSoal'); ?>
+            </div>
+          </div>
+          <div class="card-stats py-2 bg-warning">
+            <div class="card-stats-items">
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary3('totalPilgan'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Total PILGAN</div>
+              </div>
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                    <?= $this->m_global->get_summary3('totalEsai'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Total ESAI</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="far fa-newspaper"></i>
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-danger">
+            <i class="fas fa-clipboard-check"></i>
           </div>
           <div class="card-wrap">
             <div class="card-header">
-              <h4>News</h4>
+              <h4>Regu Selesai </h4>
             </div>
             <div class="card-body">
-              42
+              <?= $this->m_global->get_summary4('reguSelesai'); ?>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-warning">
-            <i class="far fa-file"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Reports</h4>
-            </div>
-            <div class="card-body">
-              1,201
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-success">
-            <i class="fas fa-circle"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Online Users</h4>
-            </div>
-            <div class="card-body">
-              47
+          <div class="card-stats py-2 bg-danger">
+            <div class="card-stats-items">
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                  <?= $this->m_global->get_summary4('jawabanMasuk'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Jawaban Masuk</div>
+              </div>
+              <div class="card-stats-item">
+                <div class="card-stats-item-count text-white">
+                  <?= $this->m_global->get_summary4('belumDiskoring'); ?>
+                </div>
+                <div class="card-stats-item-label text-white">Belum Diskoring</div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,3 +157,8 @@
     </div>
   </section>
 </div>
+<style type="text/css">
+.card .card-stats .card-stats-item {
+  width: calc(100% / 2)!important;
+}
+</style>

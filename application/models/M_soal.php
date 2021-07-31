@@ -42,5 +42,11 @@ class M_soal extends CI_Model {
     $this->db->order_by('qs.soal', 'desc');
     return $this->db->get()->result_array();
   }
+  public function get_posid_digunakan(){
+    $this->db->select("pos_id");
+    $this->db->from('pa_quiz_soal');
+    $this->db->group_by('pos_id');
+    return $this->db->get()->result_array();
+  }
 }
 ?>
