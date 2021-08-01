@@ -96,5 +96,6 @@
     <!-- Template JS File -->
     <script src="<?= base_url('assets/'); ?>js/scripts.js"></script>
     <script src="<?= base_url('assets/'); ?>js/custom.js"></script>
+    <script>localStorage.removeItem('waktu');</script>
   </body>
 </html>

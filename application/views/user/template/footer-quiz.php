@@ -99,6 +99,7 @@
   var urldata = "<?php echo base_url('user/quiz/') ?>";
 
   function submitAll() {
+    localStorage.removeItem('waktu')
     var dtJawaban = [];
     var pos_id = $('#pos_id').val();
     var kode_jawaban = $('#kode_jawaban').val();
