@@ -64,13 +64,13 @@
                                 <div class="col text-center">
                                     <h2 class="mt-3">NILAI</h2>
                                     <button class="btn btn-success font-32 p-3 px-5 lengkung-15">
-                                        <?= $skor;?>
+                                        <?= ($skor == null) ? '0' : $skor;?>
                                     </button>
                                 </div>
                                 <div class="col">
                                     <h2 class="mt-3">MISI</h2>
                                     <button class="btn btn-danger font-32 p-3 px-5 lengkung-15">
-                                        <?= $pos;?>/5
+                                        <?= ($pos == null) ? '0' : $pos;?>/5
                                     </button>
                                 </div>
                             </div>
