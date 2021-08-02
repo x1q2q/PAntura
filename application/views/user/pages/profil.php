@@ -58,22 +58,19 @@
                         <div class="card-header d-inline">
                             <ion-icon name="person-circle-outline" style="width: 100px; height: 100px" class="mt-3"></ion-icon>
                             <h3 class="text-white text-uppercase">regu <?= $user['regu'];?></h3>
-                            <a href="profile.html" class="text-white text-decoration-none">
-                                <p>EDIT PROFILE</p>
-                            </a>
                         </div>
                         <div class="card-body text-center mb-3 px-5">
                             <div class="row my-3">
                                 <div class="col text-center">
                                     <h2 class="mt-3">NILAI</h2>
                                     <button class="btn btn-success font-32 p-3 px-5 lengkung-15">
-                                        120
+                                        <?= $skor;?>
                                     </button>
                                 </div>
                                 <div class="col">
                                     <h2 class="mt-3">MISI</h2>
                                     <button class="btn btn-danger font-32 p-3 px-5 lengkung-15">
-                                        2/5
+                                        <?= $pos;?>/5
                                     </button>
                                 </div>
                             </div>

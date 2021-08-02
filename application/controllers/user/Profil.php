@@ -16,6 +16,13 @@ class Profil extends CI_Controller {
     $wheres = array('id_sekolah' => $user['sekolah_id']);
     $sekulnama = '';
     $sekolah = $this->m_global->get_detail($tabel, $wheres);
+    $detailSkor = $this->db->select('total_skor, pos_selesai')->where('username', $user['username'])->get('pa_papanskor')->result();
+    $skor = '';
+    $posselesai = '';
+    foreach($detailSkor as $d){
+      $skor = $d->total_skor;
+      $posselesai = $d->pos_selesai;
+    }
     foreach($sekolah->result() as $s){
       $sekulnama = $s->nm_sekolah;
     }
@@ -24,6 +31,8 @@ class Profil extends CI_Controller {
       'for'					=> 'profil',
       'user'        => $user,
       'sekolah'     => $sekulnama,
+      'skor'        => $skor,
+      'pos'        => $posselesai,
 			'dropdown'		=> '',
       'titlebread'	=> 'Profil',
       );
