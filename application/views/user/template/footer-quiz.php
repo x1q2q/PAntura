@@ -20,6 +20,43 @@
 <script src="<?= base_url('assets/'); ?>js/custom.js"></script>
 
 <script>
+  // NOBACK
+  (function(global) {
+
+    if (typeof(global) === "undefined") {
+      throw new Error("window is undefined");
+    }
+
+    var _hash = "!";
+    var noBackPlease = function() {
+      global.location.href += "#";
+
+      // Making sure we have the fruit available for juice (^__^)
+      global.setTimeout(function() {
+        global.location.href += "!";
+      }, 50);
+    };
+
+    global.onhashchange = function() {
+      if (global.location.hash !== _hash) {
+        global.location.hash = _hash;
+      }
+    };
+
+    global.onload = function() {
+      noBackPlease();
+
+      // Disables backspace on page except on input fields and textarea..
+      document.body.onkeydown = function(e) {
+        var elm = e.target.nodeName.toLowerCase();
+        if (e.which === 8 && (elm !== 'input' && elm !== 'textarea')) {
+          e.preventDefault();
+        }
+        // Stopping the event bubbling up the DOM tree...
+        e.stopPropagation();
+      };
+    }
+  })(window);
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       console.log("hidden")
@@ -87,7 +124,7 @@
             localStorage.setItem('waktu', waktu)
           }
         })
-        
+
       }
     };
     loop(progress);
@@ -112,7 +149,7 @@
           var quizsoal_id = $(this).find('.row .col label').attr('for');
           var jawaban_pilihan = $(this).find('.row .col label input:checked').data('pilihan');
           var quizpilihan_id = $(this).find('.row .col label input:checked').data('idpilihan');
-          quizpilihan_id = (quizpilihan_id !== undefined) ? quizpilihan_id : 0; 
+          quizpilihan_id = (quizpilihan_id !== undefined) ? quizpilihan_id : 0;
           quizsoal_id = quizsoal_id.substring(0, quizsoal_id.length - 2);
           jawaban_pilihan = (jawaban_pilihan !== undefined) ? jawaban_pilihan : 'tidak terjawab';
           dtpilihane.push({

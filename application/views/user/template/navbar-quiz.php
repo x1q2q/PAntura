@@ -33,10 +33,9 @@
     <nav
       class="navbar navbar-expand-lg bg-primary d-flex justify-content-between navbar-user"
     >
-      <a
+      <div
         class="navbar-brand btn-white px-3 lengkung-15 text-primary py-2"
-        href="#"
-        >Kembali</a
+        >PANTURA</div
       >
       <ion-icon
         name="expand-outline"
