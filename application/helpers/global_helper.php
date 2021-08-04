@@ -83,12 +83,9 @@ function my_input($val,$param){ // generate input type to form group generate
 	return $html;
 }
 function replace_img($soal,$imgname){ // mengganti src dbase ke untuk fullpath
-	return str_replace('src="'.$imgname.'"','src="'.base_url(PATH_IMGSOAL).$imgname.'"', $soal);
+	return str_replace('src="'.$imgname.'"','src="'.base_url('assets/img/datasoal/').$imgname.'"', $soal);
 }
 function replace_url($imgpath){ // mengganti src imgpath ke hanya nama saja
-	return str_replace(base_url(PATH_IMGSOAL),"",$imgpath);
-}
-function rep_pos($str_pos){
-	return str_replace(' ','_',$str_pos);
+	return str_replace(base_url('assets/img/datasoal/'),"",$imgpath);
 }
 ?>
