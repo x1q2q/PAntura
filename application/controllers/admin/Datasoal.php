@@ -155,7 +155,7 @@ class Datasoal extends CI_Controller {
 		}else{
 			$data['template']		= 'admin/pages/error_info';
 		}
-		
+
 		$this->load->view('admin/template/navigation',$data);
 		$this->load->view('admin/template/sidebar',$data);
 		$this->load->view('admin/template/content',$data);
@@ -206,7 +206,7 @@ class Datasoal extends CI_Controller {
 			$where = array('id_quizsoal' => $val->id_quizsoal);
 			$msg = "";
 			if($val->img_path != ''){
-					$file_name = str_replace(base_url(), '', base_url(PATH_IMGSOAL).$val->img_path);
+					$file_name = str_replace(base_url(), '', base_url('assets/img/datasoal/').$val->img_path);
 			  	if(unlink($file_name)){
 						$msg = "Data Quiz Soal & Image Attachment ";
 					}else{
@@ -230,8 +230,9 @@ class Datasoal extends CI_Controller {
 	}
 	public function upload_image(){
 		$response  = array('type' => '0','message' => 'error server');
+		$up_path = $_SERVER['DOCUMENT_ROOT'].'/pantura/assets/img/datasoal/'; // jika di server local pakai nama folder, jika di server asli tidak
     if(isset($_FILES["image"]["name"])){
-        $config['upload_path'] = PATH_IMGSOAL;
+        $config['upload_path'] = $up_path;
         $config['allowed_types'] = 'jpg|jpeg|png|JPG|JPEG';
         $this->upload->initialize($config);
         if(!$this->upload->do_upload('image')){
@@ -252,7 +253,7 @@ class Datasoal extends CI_Controller {
 
 						$this->session->set_flashdata('hijau','Image untuk soal berhasil diupload');
             $response['type'] = '1';
-						$response['message'] = base_url().PATH_IMGSOAL.$data['file_name'];
+						$response['message'] = base_url().'assets/img/datasoal/'.$data['file_name'];
         }
     }
 		header('Content-Type: application/json');

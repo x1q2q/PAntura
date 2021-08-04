@@ -574,7 +574,7 @@ function uploadImage(dataSoal,image) {
 
         },
         error: function(data) {
-          showAlertInfo("ERRORR!","<b>Upload Gambar Gagal!</b>:<br/>"+msg);
+          showAlertInfo("ERRORR!","<b>Upload Gambar Gagal!</b>:<br/>");
         }
     });
   }

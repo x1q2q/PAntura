@@ -101,7 +101,7 @@
               {"data": "peringkat",
               render: function (data, type, row, meta) {
                 // 5 besar berwarna hijau, 10 besar berwarna biru & selanjutnya kuning
-                var warna = (row.peringkat <= '5')?'success':((row.peringkat <= '10' && row.peringkat >= '6' ) ? 'primary' :'warning');
+                var warna = (row.peringkat <= 5)?'success':((row.peringkat >= 6 && row.peringkat <= 10 ) ? 'primary' :'warning');
                   return '<span class="badge badge-'+warna+'">'+'Peringkat ke-'+ row.peringkat+'</span>';
               }},
           ],
