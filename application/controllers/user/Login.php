@@ -9,7 +9,7 @@ class Login extends CI_Controller
     }
     public function index()
     {
-        $sesi = $this->session->userdata('user');
+        $sesi = get_cookie('user');
         if (empty($sesi)) {
             $this->load->view('user/pages/login');
         } else {
@@ -44,7 +44,8 @@ class Login extends CI_Controller
                 if($this->m_global->cek_row($loginSuper) > 0) {
                     $this->db->update('pa_siswa',array('is_login' => '1'),array('id_siswa' => $getid));
                     $this->session->set_flashdata('login_sukses', strtoupper('Selamat datang ' . $uname));
-                    $this->session->set_userdata(array('user' => $getid));
+                    // $this->session->set_userdata(array('user' => $getid));
+                    setcookie('user', $getid, time()+172800,"/");
                     redirect('user/');
                 } else {
                     if($this->m_global->cek_row($loginBiasa) > 0) { // jika uname & pwd benar tpi mental
@@ -57,10 +58,10 @@ class Login extends CI_Controller
             }
         }
     }
-    public function logout()
-    {
-        $data = array('user', 'unfilldata');
-        $this->session->unset_userdata($data);
-        redirect('admin/login');
-    }
+    // public function logout()
+    // {
+    //     $data = array('user', 'unfilldata');
+    //     $this->session->unset_userdata($data);
+    //     redirect('admin/login');
+    // }
 }

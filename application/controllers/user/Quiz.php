@@ -20,7 +20,7 @@ class Quiz extends CI_Controller
 	}
 	public function k($kode)
 	{
-		$sesi = $this->session->userdata('user');
+		$sesi = get_cookie('user');
 		if (empty($sesi)) {
 			redirect('user/login');
 		}

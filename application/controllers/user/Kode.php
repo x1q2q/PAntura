@@ -6,7 +6,7 @@ class Kode extends CI_Controller {
     parent::__construct();
   }
   public function index(){
-    $sesi = $this->session->userdata('user');
+    $sesi = get_cookie('user');
     if (empty($sesi)) {
       redirect('user/login');
     }
