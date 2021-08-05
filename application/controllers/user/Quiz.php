@@ -83,7 +83,7 @@ class Quiz extends CI_Controller
 	}
 	public function inputjawaban()
 	{
-		$user = $this->session->userdata('user');
+		$user = get_cookie('user');
 		$submitedat = get_timestamp('Y-m-d H:i:s');
 		$jawaban = json_decode($_POST['jawaban']);
 		foreach ($jawaban[0]->dtpilihan as $ans) {

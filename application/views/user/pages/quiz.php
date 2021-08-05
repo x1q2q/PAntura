@@ -50,6 +50,7 @@
         }
       ?>
       <?php
+      shuffle($dt_soal);
       foreach ($dt_soal as $value) :
       ?>
         <section class="box-soal">
