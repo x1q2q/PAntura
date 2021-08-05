@@ -83,24 +83,24 @@ class Quiz extends CI_Controller
 	}
 	public function inputjawaban()
 	{
-		$user = get_cookie('user');
-		$submitedat = get_timestamp('Y-m-d H:i:s');
-		$jawaban = json_decode($_POST['jawaban']);
-		foreach ($jawaban[0]->dtpilihan as $ans) {
-			$dt_jawaban = array(
-				"pos_id" 				=> $jawaban[0]->pos_id,
-				"siswa_id"			=> $user,
-				"submited_at"		=> $submitedat,
-				"jenis_jawaban" => $jawaban[0]->jenis,
-				"kode_jawaban"	=> $jawaban[0]->kode_jawaban,
-				"quizsoal_id"		=> $ans->quizsoal_id,
-				"quizpilihan_id" => $ans->quizpilihan_id,
-				"jawaban"				=> $ans->jawaban_pilihan,
-				"is_jawaban_benar" => $ans->is_benar
-			);
-			$this->insertDB($dt_jawaban, $jawaban[0]->jenis, $ans->is_benar);
-		}
-		echo base_url('user/home/success');
+	  $user = get_cookie('user');
+	  $submitedat = get_timestamp('Y-m-d H:i:s');
+	  $jawaban = json_decode($_POST['jawaban']);
+	  foreach ($jawaban[0]->dtpilihan as $ans) {
+	    $dt_jawaban = array(
+	      "pos_id" 				=> $jawaban[0]->pos_id,
+	      "siswa_id"			=> $user,
+	      "submited_at"		=> $submitedat,
+	      "jenis_jawaban" => $ans->jenis,
+	      "kode_jawaban"	=> $jawaban[0]->kode_jawaban,
+	      "quizsoal_id"		=> $ans->quizsoal_id,
+	      "quizpilihan_id" => $ans->quizpilihan_id,
+	      "jawaban"				=> $ans->jawaban_pilihan,
+	      "is_jawaban_benar" => $ans->is_benar
+	    );
+	    $this->insertDB($dt_jawaban, $ans->jenis, $ans->is_benar);
+	  }
+	  echo base_url('user/home/success');
 	}
 	public function insertDB($jawaban, $jenis, $isbenar)
 	{

@@ -6,9 +6,9 @@ class Home extends CI_Controller {
     parent::__construct();
   }
   public function index(){
-    echo "hello";
+    $this->load->view('home');
   }
   public function error(){
-
+		$this->load->view('error_page');
   }
 }

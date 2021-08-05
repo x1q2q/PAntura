@@ -156,7 +156,8 @@
             "quizsoal_id": quizsoal_id,
             "quizpilihan_id": quizpilihan_id,
             "jawaban_pilihan": jawaban_pilihan,
-            "is_benar": (pilbenar == '1') ? pilbenar : '0'
+            "is_benar": (pilbenar == '1') ? pilbenar : '0',
+            "jenis":"pilgan"
           });
         });
       } else {
@@ -166,7 +167,8 @@
             "quizsoal_id": $(this).find('.form-control.jawaban-essay').attr('name'),
             "quizpilihan_id": $(this).find('.form-control.jawaban-essay').data('idpilihan'),
             "jawaban_pilihan": jawabanEssay,
-            "is_benar": '1'
+            "is_benar": '1',
+            "jenis":"esai"
           })
         }
       }
@@ -175,7 +177,6 @@
       dtJawaban.push({
         "kode_jawaban": kode_jawaban,
         "pos_id": pos_id,
-        "jenis": jenis,
         "dtpilihan": dtpilihane
       });
     }); // each lsiting box soal

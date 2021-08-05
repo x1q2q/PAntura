@@ -66,7 +66,7 @@
 </style>
 <script type="text/javascript">
   var tabel = null;
-  var imgPath = "<?php echo base_url(PATH_IMGSOAL) ?>";
+  var imgPath = "<?php echo base_url('assets/img/datasoal/') ?>";
   var urldata = "<?php echo base_url('admin/skoringesai/') ?>";
   var urlUpdate = urldata+'updateSkor/';
   $(document).ready(function() {
@@ -74,7 +74,7 @@
           "processing": true,
           "serverSide": true,
           "ordering": true, // Set true agar bisa di sorting
-          "order": [[ 2, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+          "order": [[ 0, 'desc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
           "ajax":
           {
               "url": urldata+'alldata/',
@@ -87,7 +87,7 @@
             ],
 
           "columns": [
-              { "data": "id_quizsoal",
+              { "data": "submited_at",
               render: function (data, type, row, meta) {
                 var pos = '<br/>'+row.nm_pos;
                 return '<span class="badge badge-danger">'+row.id_quizsoal+'</span>'+pos;
@@ -102,7 +102,7 @@
                 var sekolah = '<br/>'+row.nm_sekolah;
                   return '<b>('+row.username+' - '+row.regu+')</b>'+sekolah;
               }},
-              { "data": "username",
+              { "data": "soal",
               render: function (data, type, row, meta) {
                 var jwbn = '(Jawaban: '+row.pilihan+')';
                 var soal = row.soal;
