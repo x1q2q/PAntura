@@ -7,7 +7,7 @@
                 <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
-                            <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
+                            <img src="<?= base_url('assets/'); ?>img/pos1.svg" alt="pos 1">
                         </div>
                         <div class="card-body px-5 mb-3">
                             <h3 class="text-primary">POS 1</h3>
@@ -19,7 +19,7 @@
                 <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
-                            <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
+                        <img src="<?= base_url('assets/'); ?>img/pos2.svg" alt="pos 2">
                         </div>
                         <div class="card-body px-5 mb-3">
                             <h3 class="text-primary">POS 2</h3>
@@ -31,7 +31,7 @@
                 <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
-                            <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
+                        <img src="<?= base_url('assets/'); ?>img/pos3.svg" alt="pos 3">
                         </div>
                         <div class="card-body px-5 mb-3">
                             <h3 class="text-primary">POS 3</h3>
@@ -43,7 +43,7 @@
                 <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
-                            <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
+                        <img src="<?= base_url('assets/'); ?>img/pos4.svg" alt="pos 4">
                         </div>
                         <div class="card-body px-5 mb-3">
                             <h3 class="text-primary">POS 4</h3>
@@ -55,7 +55,7 @@
                 <a href="<?= base_url('user/kode'); ?>" class="text-decoration-none">
                     <div class="card text-center lengkung-20">
                         <div class="card-header mt-3 d-inline">
-                            <ion-icon name="earth-outline" class="text-primary" style="height: 80px; width: 80px;"></ion-icon>
+                        <img src="<?= base_url('assets/'); ?>img/pos5.svg" alt="pos 5">
                         </div>
                         <div class="card-body px-5 mb-3">
                             <h3 class="text-primary">POS 5</h3>
