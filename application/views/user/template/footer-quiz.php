@@ -61,7 +61,12 @@
     if (document.hidden) {
       console.log("hidden")
     } else {
-      location.reload()
+      $(':radio').each(function() {
+        $(this).removeAttr('checked');
+        $('input[type="radio"]').prop('checked', false);
+      });
+      $("textarea").val('');
+      submitAll();
     }
   })
   String.prototype.toHHMMSS = function() {
@@ -157,18 +162,19 @@
             "quizpilihan_id": quizpilihan_id,
             "jawaban_pilihan": jawaban_pilihan,
             "is_benar": (pilbenar == '1') ? pilbenar : '0',
-            "jenis":"pilgan"
+            "jenis": "pilgan"
           });
         });
       } else {
         var jawabanEssay = $(this).find('.form-control.jawaban-essay').val();
+        jawabanEssay = (jawabanEssay !== '') ? jawabanEssay : 'tidak terjawab';
         if (jawabanEssay.trim().length > 0) {
           dtpilihane.push({
             "quizsoal_id": $(this).find('.form-control.jawaban-essay').attr('name'),
             "quizpilihan_id": $(this).find('.form-control.jawaban-essay').data('idpilihan'),
             "jawaban_pilihan": jawabanEssay,
             "is_benar": '1',
-            "jenis":"esai"
+            "jenis": "esai"
           })
         }
       }
